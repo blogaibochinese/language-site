@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中文学习资源中心 - Chinese Learning Resources Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.5em;
+            font-weight: normal;
+        }
+
+        .resource-group {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .resource-label {
+            font-weight: 700;
+            color: #495057;
+            margin-bottom: 12px;
+            display: block;
+            font-size: 1.1em;
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .highlight-red {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .highlight-blue {
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .highlight-yellow {
+            background: #ffc107;
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .note-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe5a0 100%);
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin-top: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+        }
+
+        .note-box strong {
+            color: #d63031;
+        }
+
+        .test-papers {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+
+        .subsection {
+            margin: 20px 0;
+        }
+
+        .subsection-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 15px;
+            padding-left: 15px;
+            border-left: 3px solid #667eea;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            header {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .intro-section p {
+            font-size: 1.1em;
+            color: #2e7d32;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>aibochinese</h1>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="library.html" class="nav-link active">Library</a>
+                </li>
+                <li class="nav-item">
+                    <a href="groups.html" class="nav-link">Join Groups</a>
+                </li>
+                <li class="nav-item">
+                    <a href="payments.html" class="nav-link">Payments</a>
+                </li>
+                <li class="nav-item">
+                    <a href="download.html" class="nav-link">Client Download</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <header>
+            <h1>📚 中文学习资源中心</h1>
+            <p class="subtitle">Chinese Learning Resources Hub</p>
+        </header>
+
+        <div class="content">
+            <div class="intro-section">
+                <p>🎓 全面的中文学习资料库 | Comprehensive Chinese Learning Materials</p>
+                <p>📖 从零基础到高级 | From Beginner to Advanced</p>
+            </div>
+
+            <!-- Easy Peasy -->
+            <div class="section">
+                <h2 class="section-title">🌟 入门教材 <span class="badge">Beginner</span></h2>
+                <div class="resource-group">
+                    <div class="links">
+                        <a href="https://drive.google.com/uc?export=download&id=1RcEa-0D1r3AraSaBMbhtUQOndfZkLXJp">Easy Peasy Chinese - Mandarin for Beginners</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HSK Materials -->
+            <div class="section">
+                <h2 class="section-title">📝 HSK 标准教程 <span class="badge">Standard Course</span></h2>
+                <div class="grid-2">
+                    <div class="resource-group">
+                        <span class="resource-label">HSK 1</span>
+                        <div class="links">
+                            <a href="https://drive.aibochinese.com/s/qvacw">📘 Textbook</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1GqFUJ70V1oCDwQGYpNpwqBVIbp8UyyG3">📓 Workbook</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-group">
+                        <span class="resource-label">HSK 2</span>
+                        <div class="links">
+                            <a href="https://drive.aibochinese.com/s/PbYsv">📘 Textbook</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1b2oieWbqqqvUe7iLlUieU34n_HBcL2ci">📓 Workbook</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-group">
+                        <span class="resource-label">HSK 3</span>
+                        <div class="links">
+                            <a href="https://drive.aibochinese.com/s/19osv">📘 Textbook</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1zlkgvWqzFKVYfXxQ0Oghyp1y7j9DuSth">📓 Workbook</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-group">
+                        <span class="resource-label">HSK 4 上册 (Part 1)</span>
+                        <div class="links">
+                            <a href="https://drive.aibochinese.com/s/83zhq">📘 Textbook</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1uos2jPwwFHTUAPQDxOlul8_IfnN9m18l">📓 Workbook</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-group">
+                        <span class="resource-label">HSK 4 下册 (Part 2)</span>
+                        <div class="links">
+                            <a href="https://drive.aibochinese.com/s/Zo4SM">📘 Textbook</a>
+                            <a href="https://drive.google.com/uc?export=download&id=114wepFqAbj0_NDs5tkrfWOHeejQoS1Q0">📓 Workbook</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-group">
+                        <span class="resource-label">HSK 5 上册 (Part 1)</span>
+                        <div class="links">
+                            <a href="https://drive.aibochinese.com/s/aZjio">📘 Textbook</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1dA5pCK5uBt5IuZIyd-P1gDOHbAmYIxgx">📓 Workbook</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-group">
+                        <span class="resource-label">HSK 5 下册 (Part 2)</span>
+                        <div class="links">
+                            <a href="https://drive.aibochinese.com/s/OyruA">📘 Textbook</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1_zsHscwKuHA9NZAwwMghIqlobRsJgoig">📓 Workbook</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-group">
+                        <span class="resource-label">HSK 6 上册 (Part 1)</span>
+                        <div class="links">
+                            <a href="https://drive.aibochinese.com/s/YQktr">📘 Textbook</a>
+                            <a href="https://drive.google.com/file/d/1aFCfuRiqLyNBToT-n1uUfVuFI0wHG5IH/view?usp=drive_link">📓 Workbook</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-group">
+                        <span class="resource-label">HSK 6 下册 (Part 2)</span>
+                        <div class="links">
+                            <a href="https://drive.aibochinese.com/s/nwRh7">📘 Textbook</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1J92BR2DS7Oy9gAe_34kcjUU_4PNAUAIu">📓 Workbook</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reference Books -->
+            <div class="section">
+                <h2 class="section-title">📖 参考书籍 <span class="badge">Reference Books</span></h2>
+                <div class="resource-group">
+                    <div class="links">
+                        <a href="https://drive.google.com/uc?export=download&id=1ExZZvfV1-trKeImTLDFnE7W-Gv5cHb-I">Modern Mandarin Chinese Grammar</a>
+                        <a href="https://drive.google.com/uc?export=download&id=17RPLFd9heZ837u_AF7MZn3QlLtv0ELst">Learn 800 Basic Characters</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1IfeGhSevXnL3JutKTcujtZk7pv1clpDR">Character Reading & Writing Practice</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HSK Test Papers -->
+            <div class="section test-papers">
+                <h2 class="section-title">✍️ HSK 模拟试卷 <span class="badge">Test Papers</span></h2>
+                
+                <div class="subsection">
+                    <div class="subsection-title">HSK 1</div>
+                    <div class="links">
+                        <a href="https://drive.google.com/uc?export=download&id=1n8wGYdMAVM2wf4vGDuHVbPT572HWLaBb">卷1 PDF</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1k1unjW4OnhswpBHZGltbYNKPt4GPaN6T">卷1 MP3</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1umlyvnY-maerlj-TZ_d33FlcNkrIBGXh">卷2 PDF</a>
+                        <a href="https://drive.google.com/file/d/1SgBIt-O7WcMAGgS6SLr9qQTK0ry4aYE4/view?usp=drive_link">卷2 MP3</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1umlLATWdgZ2r6akjhsWDVGQa3uLzJL8l">卷3 PDF</a>
+                        <a href="https://drive.google.com/uc?export=download&id=18wDwbJJPjlKTeZW-yULi9MEnZ1mkMurm">卷3 MP3</a>
+                        <a href="https://drive.google.com/uc?export=download&id=103KeWUgvnfzprioxnATLPrQxJGgzVPG0">卷4 PDF</a>
+                        <a href="https://drive.google.com/file/d/1UumxLkaiqfeN-RWF6570BeMDzPWpg32m/view?usp=drive_link">卷4 MP3</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1i7blbZ2OBUFA3GZutvsw7aGMaK5oHJnD">卷5 PDF</a>
+                        <a href="https://drive.google.com/file/d/1FDMJu7qlyfF26GeHOUp7fgTa4xogQpac/view?usp=drive_link">卷5 MP3</a>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">HSK 2</div>
+                    <div class="links">
+                        <a href="https://drive.google.com/uc?export=download&id=1Yx9IsPmB3JfD0GrUubXbklcilpNujQIB">卷1 PDF</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1WBUj37bYsBvsDkjv0WbRyLFM0U5y610v">卷1 MP3</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1Kg3SKRU3HQa8_SE3EiO0KbFH-CSvIFYg">卷2 PDF</a>
+                        <a href="https://drive.google.com/uc?export=download&id=127m2UEUHuW4NNT0TvCBARBVAJxWUzisq">卷2 MP3</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1An6K7NQbU0_zxTpVPTEVIhJ6WGnlBIw1">卷3 PDF</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1UWH5KoOL-qHkjZg2BnhS6nTZ0ti_NvuK">卷3 MP3</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1qVjcPpGsSUxhuprTJ1JEYmf3iC0YqbBH">卷4 PDF</a>
+                        <a href="https://drive.google.com/file/d/1u8zjc_zN2UywrjAfaUEol7eVVZE3LGWE/view?usp=drive_link">卷4 MP3</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1w8faJUEkTfi9fxfeLUry02Z4uBwURzNq">卷5 PDF</a>
+                        <a href="https://drive.google.com/file/d/13W0aTLptERRzRbORTnzMp10j9ntYM0lD/view?usp=drive_link">卷5 MP3</a>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">HSK 3-6</div>
+                    <p style="color: #666; padding: 10px;">Similar test paper structure available for HSK 3, 4, 5, and 6...</p>
+                </div>
+            </div>
+
+            <!-- YCT -->
+            <div class="section">
+                <h2 class="section-title">👶 YCT 青少年汉语 <span class="badge">Youth Chinese Test</span></h2>
+                <div class="grid-2">
+                    <div class="resource-group">
+                        <span class="resource-label">📚 Textbooks</span>
+                        <div class="links">
+                            <a href="https://drive.google.com/uc?export=download&id=1MnUqk3RHQOsOdW6sO_Umm0jKYsWnMnae">Level 1</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1JJ_nBw0gght38E0o7l0aBSmOD8MobqL-">Level 2</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1IssMKQEkP6zwxwaWFnaTPFe98ZI8Hi5w">Level 3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1u4JzApOcWJJ0xSASsXBF4ekWOvc3roWM">Level 4</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1caMjV9SogFRzbY8wcxK4znvonSdiek_d">Level 5</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1jRBzAwMeCRasYjZ596XLOdpcIU1P-n17">Level 6</a>
+                        </div>
+                    </div>
+
+                    <div class="resource-group">
+                        <span class="resource-label">📝 Activity Books</span>
+                        <div class="links">
+                            <a href="https://drive.google.com/uc?export=download&id=16YhBwyo5irjnHtV4RS2plRnjX_6kBTgQ">Level 1</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1MvEMC5fBxK9yqI95_SyR8v_NZq_XObvT">Level 2</a>
+                            <a href="https://drive.google.com/uc?export=download&id=14ge0HzCiX-IudVbsMgyviOHA3kkshX2p">Level 3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1ZTWGA4n3urfKmThOw7nbc1prnXIhCYEn">Level 4</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1kc7Y0jCieM2jKOHb9HDHv66tPy7LwMj7">Level 5</a>
+                            <a href="https://drive.google.com/uc?export=download&id=12I_JvTm61y0C7mEmHYKcFsAfgpuUtr6U">Level 6</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Chinese -->
+            <div class="section">
+                <h2 class="section-title">💼 <span class="highlight-red">商务汉语 Business Chinese</span></h2>
+                
+                <div class="subsection">
+                    <div class="subsection-title">New Silk Road Business Chinese</div>
+                    <div class="links">
+                        <a href="https://drive.google.com/uc?export=download&id=1_EFNU1MbyeqJOqw-gmDK5Si6T03GghT3">Elementary 1</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1sEnFDxXE9gkEViocgMm5XMuFabQx_mCB">Elementary 2</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1qYgxduKjvDCfb8q9jBQQqgkHJXBXNZCI">Intermediate 1</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1nOMolndeijgvKjmSw1-ktRgDQStE4u_R">Intermediate 2</a>
+                        <a href="https://drive.google.com/uc?export=download&id=1rfPA-yB4xSV7hFcCsFy6h4_Zk3l4dfQF">Advanced 1</a>
+                        <a href="https://drive.google.com/uc?export=download&id=134x7loM0F3LRn3lgpiNswgEz3NVoDHVV">Advanced 2</a>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">求实商务汉语 经理人汉语</div>
+                    <div class="links">
+                        <a href="https://drive.google.com/uc?export=download&id=1GUtgkPMcQURU95q5K3sndWz0Lvumdyq0">商务篇·上</a>
+                        <a href="https://drive.google.com/uc?export=download&id=16px-hbObreFwN4rwPX8-N7ZsjAODwqal">商务篇·下</a>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <div class="links">
+                        <a href="https://drive.google.com/uc?export=download&id=1M2abmLXNAlUta4T45_yLqgwoX7EHNQxo">The Routledge Course in Business Chinese</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hanyu Jiaocheng -->
+            <div class="section">
+                <h2 class="section-title">📚 汉语教程 Hanyu Jiaocheng</h2>
+                <div class="links">
+                    <a href="https://drive.google.com/uc?export=download&id=1NNJ8pSUb8Q7XK6nas_VRx2Kti1KU6qV0">第1册-上</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1uyw2xyk0cwQc-iv7-KtNWshdGmmACp8K">第1册-下</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1tt9rg1TN55PYAIisNkVJXkAUKS3Z7bX7">第2册-上</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1LERm4c4wKFATYa01RH5Kc2B2BO5MCcg6">第2册-下</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1_8tNzUdncmU-I6ZMrkjFBFHabIn11Jjk">第3册-上</a>
+                    <a href="https://drive.google.com/file/d/16W9EchXiSlP-XsBEc2Oi_qlYf3GtGDdc/view?usp=drive_link">第3册-下</a>
+                </div>
+            </div>
+
+            <!-- Easy to Learn Chinese -->
+            <div class="section">
+                <h2 class="section-title"><span class="highlight-red">轻松学中文 Easy to Learn Chinese</span></h2>
+                <div class="links">
+                    <a href="https://drive.google.com/uc?export=download&id=1Qv_WvpY7Ca61S9IbPuAvsBpI41q3ieTK">Level 1</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1jzEOeSM67arY4g-b7gU9vjvMcThXVX9A">Level 2</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1zYYTm_SSOiEZDR0ijKaYlmffu8GmWgza">Level 3</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1bNqtMu1YQXcsi7fFc7JdioO69PhcuCXw">Level 4</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1LCvVxV8fWKXJFko-KLEpewc3nErJ_oem">Level 5</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1vzHLaGunnIxbRKWw8QpHQKTjLUsyzNtz">Level 6</a>
+                    <a href="https://drive.google.com/uc?export=download&id=15rm83g7pSdQH1PDTjjAWVg04p-Scoqux">Level 7</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1CAtpNg7HWqRrYWC_ujPiiTTRJx0QG_eP">Level 8</a>
+                </div>
+            </div>
+
+            <!-- New Target Spoken Chinese -->
+            <div class="section">
+                <h2 class

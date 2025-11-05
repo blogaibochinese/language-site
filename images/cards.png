@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="50" viewBox="0 0 80 50">
+  <rect width="80" height="50" rx="5" fill="#2c3e50"/>
+  <rect x="5" y="10" width="70" height="30" rx="3" fill="#ecf0f1"/>
+  <text x="10" y="30" font-family="Arial" font-size="8" fill="#2c3e50">Credit Card</text>
+</svg>

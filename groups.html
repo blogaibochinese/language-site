@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HSK Chinese Learning Community</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .hsk-widget {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Language Toggle */
+    .language-toggle {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .lang-btn.active {
+      background: #fff;
+      color: #667eea;
+      border-color: #fff;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 32px;
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+    }
+
+    .facebook-icon {
+      width: 56px;
+      height: 56px;
+      background: #1877f2;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 6px 16px rgba(24, 119, 242, 0.4);
+      font-size: 28px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .title {
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.05rem;
+    }
+
+    /* Main Card */
+    .main-card {
+      background: linear-gradient(135deg, #1877f2, #42a5f5);
+      color: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 10px 30px rgba(24, 119, 242, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .main-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .main-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .main-card p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    .follow-btn {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .follow-btn:hover {
+      background: #fff;
+      color: #1877f2;
+      transform: scale(1.05);
+    }
+
+    /* Groups Section */
+    .groups-title {
+      text-align: center;
+      color: #fff;
+      font-size: 1.6rem;
+      margin: 24px 0 28px;
+      font-weight: 700;
+    }
+
+    .groups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    /* Group Card */
+    .group-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .group-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .level-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      height: 6px;
+    }
+
+    .hsk-level-1 .level-bar { background: linear-gradient(90deg, #ff6b6b, #ee5a24); }
+    .hsk-level-2 .level-bar { background: linear-gradient(90deg, #ffa726, #ff7043); }
+    .hsk-level-3 .level-bar { background: linear-gradient(90deg, #ffeb3b, #ffc107); }
+    .hsk-level-4 .level-bar { background: linear-gradient(90deg, #66bb6a, #4caf50); }
+    .hsk-level-5 .level-bar { background: linear-gradient(90deg, #42a5f5, #2196f3); }
+    .hsk-level-6 .level-bar { background: linear-gradient(90deg, #ab47bc, #9c27b0); }
+
+    .group-header {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .level-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .group-info h3 {
+      font-size: 1.15rem;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .group-level {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .feature {
+      background: rgba(0, 0, 0, 0.05);
+      padding: 6px 12px;
+      border-radius: 18px;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .group-description {
+      margin: 12px 0;
+      color: #666;
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    .join-btn {
+      width: 100%;
+      padding: 10px;
+      border-radius: 25px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .join-btn a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+    }
+
+    .hsk-level-1 .join-btn { background: linear-gradient(90deg, #ff6b6b, #ee5a24); }
+    .hsk-level-2 .join-btn { background: linear-gradient(90deg, #ffa726, #ff7043); }
+    .hsk-level-3 .join-btn { background: linear-gradient(90deg, #ffeb3b, #ffc107); }
+    .hsk-level-4 .join-btn { background: linear-gradient(90deg, #66bb6a, #4caf50); }
+    .hsk-level-5 .join-btn { background: linear-gradient(90deg, #42a5f5, #2196f3); }
+    .hsk-level-6 .join-btn { background: linear-gradient(90deg, #ab47bc, #9c27b0); }
+
+    .join-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      color: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      line-height: 1.8;
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    .footer a:hover {
+      color: #ffd700;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .title {
+        font-size: 1.8rem;
+      }
+
+      .groups-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>aibochinese</h1>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="library.html" class="nav-link">Library</a>
+                </li>
+                <li class="nav-item">
+                    <a href="groups.html" class="nav-link active">Join Groups</a>
+                </li>
+                <li class="nav-item">
+                    <a href="payments.html" class="nav-link">Payments</a>
+                </li>
+                <li class="nav-item">
+                    <a href="download.html" class="nav-link">Client Download</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+  <div class="hsk-widget">
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+      <button class="lang-btn active" data-lang="en">English</button>
+      <button class="lang-btn" data-lang="zh">中文</button>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+      <div class="facebook-icon">f</div>
+      <h1 class="title" id="main-title">HSK Chinese Learning Community</h1>
+      <p class="subtitle" id="main-subtitle">Join our Facebook groups and connect with Chinese learners worldwide</p>
+    </div>
+
+    <!-- Main Card -->
+    <div class="main-card">
+      <h2 id="page-title">🏠 HSK Chinese Learning Main Page</h2>
+      <p id="page-description">Get the latest HSK exam information, learning resources and community updates. Follow our page and don't miss any important news!</p>
+      <a href="https://www.facebook.com/site.aibochinese" class="follow-btn" id="follow-btn" target="_blank" rel="noopener noreferrer">👍 Follow Page</a>
+    </div>
+
+    <!-- Groups Section -->
+    <h2 class="groups-title" id="groups-title">📚 HSK Learning Groups</h2>
+    <div class="groups-grid">
+      <!-- HSK 1 -->
+      <div class="group-card hsk-level-1">
+        <div class="level-bar"></div>
+        <div class="group-header">
+          <div class="level-icon" style="background:linear-gradient(90deg,#ff6b6b,#ee5a24)">HSK1</div>
+          <div class="group-info">
+            <h3 id="group1-title">HSK Level 1 Group</h3>
+            <div class="group-level" id="group1-level">Beginner · 150 Vocabulary</div>
+          </div>
+        </div>
+        <div class="features">
+          <span class="feature" id="group1-feature1">📝 Basic Characters</span>
+          <span class="feature" id="group1-feature2">🗣️ Daily Conversation</span>
+          <span class="feature" id="group1-feature3">📖 Pinyin Learning</span>
+        </div>
+        <p class="group-description" id="group1-description">Perfect for beginners, learn basic characters and daily expressions.</p>
+        <button class="join-btn"><a href="https://www.facebook.com/groups/aibohsk1" target="_blank" rel="noopener noreferrer">Join Group</a></button>
+      </div>
+
+      <!-- HSK 2 -->
+      <div class="group-card hsk-level-2">
+        <div class="level-bar"></div>
+        <div class="group-header">
+          <div class="level-icon" style="background:linear-gradient(90deg,#ffa726,#ff7043)">HSK2</div>
+          <div class="group-info">
+            <h3 id="group2-title">HSK Level 2 Group</h3>
+            <div class="group-level" id="group2-level">Elementary · 300 Vocabulary</div>
+          </div>
+        </div>
+        <div class="features">
+          <span class="feature" id="group2-feature1">🏪 Daily Scenarios</span>
+          <span class="feature" id="group2-feature2">👨‍👩‍👧‍👦 Family Topics</span>
+          <span class="feature" id="group2-feature3">🕐 Time Expression</span>
+        </div>
+        <p class="group-description" id="group2-description">Expand your vocabulary, learn more daily scenarios and simple communication.</p>
+        <button class="join-btn"><a href="https://www.facebook.com/groups/aibochinesehhsk2" target="_blank" rel="noopener noreferrer">Join Group</a></button>
+      </div>
+
+      <!-- HSK 3 -->
+      <div class="group-card hsk-level-3">
+        <div class="level-bar"></div>
+        <div class="group-header">
+          <div class="level-icon" style="background:linear-gradient(90deg,#ffeb3b,#ffc107)">HSK3</div>
+          <div class="group-info">
+            <h3 id="group3-title">HSK Level 3 Group</h3>
+            <div class="group-level" id="group3-level">Intermediate · 600 Vocabulary</div>
+          </div>
+        </div>
+        <div class="features">
+          <span class="feature" id="group3-feature1">📚 Reading Practice</span>
+          <span class="feature" id="group3-feature2">✍️ Writing Basics</span>
+          <span class="feature" id="group3-feature3">🎧 Listening Skills</span>
+        </div>
+        <p class="group-description" id="group3-description">Step into intermediate Chinese with reading, writing and listening training.</p>
+        <button class="join-btn"><a href="https://www.facebook.com/groups/aibochinesehsk3" target="_blank" rel="noopener noreferrer">Join Group</a></button>
+      </div>
+
+      <!-- HSK 4 -->
+      <div class="group-card hsk-level-4">
+        <div class="level-bar"></div>
+        <div class="group-header">
+          <div class="level-icon" style="background:linear-gradient(90deg,#66bb6a,#4caf50)">HSK4</div>
+          <div class="group-info">
+            <h3 id="group4-title">HSK Level 4 Group</h3>
+            <div class="group-level" id="group4-level">Upper-Intermediate · 1200 Vocabulary</div>
+          </div>
+        </div>
+        <div class="features">
+          <span class="feature" id="group4-feature1">📰 News Reading</span>
+          <span class="feature" id="group4-feature2">💬 Complex Dialogue</span>
+          <span class="feature" id="group4-feature3">🖊️ Short Essays</span>
+        </div>
+        <p class="group-description" id="group4-description">Improve fluency, read news and practice short essays.</p>
+        <button class="join-btn"><a href="https://www.facebook.com/groups/aibochinesehsk4" target="_blank" rel="noopener noreferrer">Join Group</a></button>
+      </div>
+
+      <!-- HSK 5 -->
+      <div class="group-card hsk-level-5">
+        <div class="level-bar"></div>
+        <div class="group-header">
+          <div class="level-icon" style="background:linear-gradient(90deg,#42a5f5,#2196f3)">HSK5</div>
+          <div class="group-info">
+            <h3 id="group5-title">HSK Level 5 Group</h3>
+            <div class="group-level" id="group5-level">Advanced · 2500 Vocabulary</div>
+          </div>
+        </div>
+        <div class="features">
+          <span class="feature" id="group5-feature1">📖 Literature</span>
+          <span class="feature" id="group5-feature2">🎬 Movies & TV</span>
+          <span class="feature" id="group5-feature3">📝 Advanced Writing</span>
+        </div>
+        <p class="group-description" id="group5-description">Explore literature, films and practice advanced writing.</p>
+        <button class="join-btn"><a href="https://www.facebook.com/groups/mandarinhsk5" target="_blank" rel="noopener noreferrer">Join Group</a></button>
+      </div>
+
+      <!-- HSK 6 -->
+      <div class="group-card hsk-level-6">
+        <div class="level-bar"></div>
+        <div class="group-header">
+          <div class="level-icon" style="background:linear-gradient(90deg,#ab47bc,#9c27b0)">HSK6</div>
+          <div class="group-info">
+            <h3 id="group6-title">HSK Level 6 Group</h3>
+            <div class="group-level" id="group6-level">Proficiency · 5000+ Vocabulary</div>
+          </div>
+        </div>
+        <div class="features">
+          <span class="feature" id="group6-feature1">📰 Academic Articles</span>
+          <span class="feature" id="group6-feature2">🎤 Public Speaking</span>
+          <span class="feature" id="group6-feature3">📑 Research Papers</span>
+        </div>
+        <p class="group-description" id="group6-description">Reach near-native level with academic and research Chinese.</p>
+        <button class="join-btn"><a href="https://www.facebook.com/groups/mandarinhsk6" target="_blank" rel="noopener noreferrer">Join Group</a></button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div id="footer1">🌟 Join our learning community and progress together!</div>
+      <div id="footer2">📞 Have questions? <a href="https://aibochinese.com/author/1/" target="_blank" rel="noopener noreferrer">Contact our admins</a></div>
+    </div>
+  </div>
+
+  <script>
+    const content = {
+      en: {
+        'main-title': 'HSK Chinese Learning Community',
+        'main-subtitle': 'Join our Facebook groups and connect with Chinese learners worldwide',
+        'page-title': '🏠 HSK Chinese Learning Main Page',
+        'page-description': 'Get the latest HSK exam information, learning resources and community updates. Follow our page and don\'t miss any important news!',
+        'follow-btn': '👍 Follow Page',
+        'groups-title': '📚 HSK Learning Groups',
+        'group1-title': 'HSK Level 1 Group',
+        'group1-level': 'Beginner · 150 Vocabulary',
+        'group1-feature1': '📝 Basic Characters',
+        'group1-feature2': '🗣️ Daily Conversation',
+        'group1-feature3': '📖 Pinyin Learning',
+        'group1-description': 'Perfect for beginners, learn basic characters and daily expressions.',
+        'group2-title': 'HSK Level 2 Group',
+        'group2-level': 'Elementary · 300 Vocabulary',
+        'group2-feature1': '🏪 Daily Scenarios',
+        'group2-feature2': '👨‍👩‍👧‍👦 Family Topics',
+        'group2-feature3': '🕐 Time Expression',
+        'group2-description': 'Expand your vocabulary, learn more daily scenarios and simple communication.',
+        'group3-title': 'HSK Level 3 Group',
+        'group3-level': 'Intermediate · 600 Vocabulary',
+        'group3-feature1': '📚 Reading Practice',
+        'group3-feature2': '✍️ Writing Basics',
+        'group3-feature3': '🎧 Listening Skills',
+        'group3-description': 'Step into intermediate Chinese with reading, writing and listening training.',
+        'group4-title': 'HSK Level 4 Group',
+        'group4-level': 'Upper-Intermediate · 1200 Vocabulary',
+        'group4-feature1': '📰 News Reading',
+        'group4-feature2': '💬 Complex Dialogue',
+        'group4-feature3': '🖊️ Short Essays',
+        'group4-description': 'Improve fluency, read news and practice short essays.',
+        'group5-title': 'HSK Level 5 Group',
+        'group5-level': 'Advanced · 2500 Vocabulary',
+        'group5-feature1': '📖 Literature',
+        'group5-feature2': '🎬 Movies & TV',
+        'group5-feature3': '📝 Advanced Writing',
+        'group5-description': 'Explore literature, films and practice advanced writing.',
+        'group6-title': 'HSK Level 6 Group',
+        'group6-level': 'Proficiency · 5000+ Vocabulary',
+        'group6-feature1': '📰 Academic Articles',
+        'group6-feature2': '🎤 Public Speaking',
+        'group6-feature3': '📑 Research Papers',
+        'group6-description': 'Reach near-native level with academic and research Chinese.',
+        'footer1': '🌟 Join our learning community and progress together!',
+        'footer2': '📞 Have questions? <a href="https://aibochinese.com/author/1/" target="_blank" rel="noopener noreferrer">Contact our admins</a>'
+      },
+      zh: {
+        'main-title': 'HSK中文学习社区',
+        'main-subtitle': '加入我们的Facebook群组，与全球中文学习者交流',
+        'page-title': '🏠 HSK中文学习主页',
+        'page-description': '获取最新的HSK考试资讯、学习资源和社区动态。关注我们的主页，不错过任何重要信息！',
+        'follow-btn': '👍 关注主页',
+        'groups-title': '📚 HSK学习群组',
+        'group1-title': 'HSK1级学习群',
+        'group1-level': '初级入门 · 150词汇',
+        'group1-feature1': '📝 基础汉字',
+        'group1-feature2': '🗣️ 日常对话',
+        'group1-feature3': '📖 拼音学习',
+        'group1-description': '适合零基础学习者,学习基本汉字和日常用语。',
+        'group2-title': 'HSK2级学习群',
+        'group2-level': '初级 · 300词汇',
+        'group2-feature1': '🏪 日常场景',
+        'group2-feature2': '👨‍👩‍👧‍👦 家庭话题',
+        'group2-feature3': '🕐 时间表达',
+        'group2-description': '扩大词汇量，掌握更多日常交流场景。',
+        'group3-title': 'HSK3级学习群',
+        'group3-level': '中级 · 600词汇',
+        'group3-feature1': '📚 阅读练习',
+        'group3-feature2': '✍️ 写作基础',
+        'group3-feature3': '🎧 听力训练',
+        'group3-description': '进入中级中文，训练阅读写作与听力。',
+        'group4-title': 'HSK4级学习群',
+        'group4-level': '中高级 · 1200词汇',
+        'group4-feature1': '📰 新闻阅读',
+        'group4-feature2': '💬 复杂对话',
+        'group4-feature3': '🖊️ 短文写作',
+        'group4-description': '提升流利度，阅读新闻，写作短文。',
+        'group5-title': 'HSK5级学习群',
+        'group5-level': '高级 · 2500词汇',
+        'group5-feature1': '📖 文学作品',
+        'group5-feature2': '🎬 影视剧',
+        'group5-feature3': '📝 高级写作',
+        'group5-description': '学习文学、影视，并进行高级写作练习。',
+        'group6-title': 'HSK6级学习群',
+        'group6-level': '最高级 · 5000+词汇',
+        'group6-feature1': '📰 学术文章',
+        'group6-feature2': '🎤 演讲表达',
+        'group6-feature3': '📑 学术论文',
+        'group6-description': '达到近母语水平，掌握学术与研究中文。',
+        'footer1': '🌟 加入学习社区，与世界各地学习者一起进步！',
+        'footer2': '📞 有问题？<a href="https://aibochinese.com/author/1/" target="_blank" rel="noopener noreferrer">请联系管理员</a>'
+      }
+    };
+
+    // Language switching functionality
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const lang = this.getAttribute('data-lang');
+        
+        // Update active button
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Update content
+        Object.keys(content[lang]).forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            if (el.tagName === 'A' || el.tagName === 'BUTTON' || id === 'footer2') {
+              el.innerHTML = content[lang][id];
+            } else {
+              el.textContent = content[lang][id];
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
