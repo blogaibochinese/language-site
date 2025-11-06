@@ -258,30 +258,30 @@
     </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="nav-brand">
-                <h1><a href="https://aibochinese.com/" target="_blank"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/1-on-1%20logo%20126%2050.png" alt="网站Logo"></a></h1>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link active">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="library.html" class="nav-link">Library</a>
-                </li>
-                <li class="nav-item">
-                    <a href="groups.html" class="nav-link">Join Groups</a>
-                </li>
-                <li class="nav-item">
-                    <a href="payments.html" class="nav-link">Payments</a>
-                </li>
-                <li class="nav-item">
-                    <a href="download.html" class="nav-link">Client Download</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+ <header>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="https://aibochinese.com/" target="_blank">
+          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/1-on-1%20logo%20126%2050.png" alt="网站Logo">
+        </a>
+      </div>
+
+      <div class="nav-toggle" id="nav-toggle">
+        ☰
+      </div>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="library.html" class="nav-link active">Library</a></li>
+        <li class="nav-item"><a href="groups.html" class="nav-link">Join Groups</a></li>
+        <li class="nav-item"><a href="payments.html" class="nav-link">Payments</a></li>
+        <li class="nav-item"><a href="client.html" class="nav-link">Client Download</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
 
     <main>
 
@@ -325,20 +325,6 @@
                     <p><strong><em>Customized learning: </em></strong>Tailored content that is relevant to work and daily life. Students can also provide materials.<strong><em>Pre-class materials</em></strong> sent for preview. Start each class with a <strong><em>3-minute review</em></strong> of the previous lesson's vocabulary. <strong><em>End each class with a brief review</em></strong> of new content. After class, the teacher organizes the lesson content (especially new words, with example sentences), <strong><em>assigns homework</em></strong>, and answers questions post-class.</p>
                     
                     <p>Recommendation:2 lessons per week, <strong><span class="highlight">$82.5</span></strong>,<strong><span class="highlight">15 Lessons</span></strong>「2100 000VND/70.5EUR/61GBP」,  <strong><span class="highlight">$126</span></strong>, <strong><span class="highlight">30 Lessons</span></strong>「3300 000VND/108EUR/93GBP」. <strong><em>For children</em></strong> aged 5-8, one lesson per week is recommended.</p>
-                </div>
-            </div>
-        </section>
-
-        <section
-                <div class="payment-methods">
-                    <h2> Accepted Payment Methods</h2>
-                    <ul>
-                        <li>PayPal</li>
-                        <li>Credit/Debit Cards</li>
-                        <li>Bank Transfer</li>
-                        <li>WeChat Pay</li>
-                        <li>Alipay</li>
-                    </ul>
                 </div>
             </div>
         </section>
@@ -415,5 +401,11 @@
         <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:white" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
     </div>
     </footer>
+    <script>
+document.getElementById('nav-toggle').addEventListener('click', function() {
+  document.getElementById('nav-menu').classList.toggle('show');
+});
+</script>
+
 </body>
 </html>

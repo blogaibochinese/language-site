@@ -27,37 +27,105 @@ header {
     z-index: 100;
 }
 
+/* === 导航栏样式 === */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.nav-brand h1 {
-    color: #2c3e50;
-    font-size: 1.8rem;
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 菜单整体居中 */
+  position: relative;
 }
 
+/* logo 靠近菜单 */
+.nav-brand {
+  position: absolute;
+  left: calc(50% - 350px); /* 控制 logo 靠近菜单中心 */
+}
+
+.nav-brand img {
+  height: 50px;
+}
+
+/* 导航菜单 */
 .nav-menu {
-    display: flex;
-    list-style: none;
-}
-
-.nav-item {
-    margin-left: 30px;
+  list-style: none;
+  display: flex;
+  gap: 40px;
 }
 
 .nav-link {
-    text-decoration: none;
-    color: #34495e;
-    font-weight: 500;
-    transition: color 0.3s;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .nav-link:hover,
 .nav-link.active {
-    color: #3498db;
+  color: #667eea;
+}
+
+/* 移动端三杠按钮 */
+.nav-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 14px;
+}
+
+/* === 响应式样式 === */
+@media (max-width: 768px) {
+  .nav-container {
+    justify-content: center;
+  }
+
+  .nav-brand {
+    position: relative;
+    left: 0;
+    transform: none;
+  }
+
+  .nav-brand img {
+    height: 45px;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 15px 0;
+  }
+
+  .nav-menu.show {
+    display: flex;
+  }
+
+  .nav-item {
+    text-align: center;
+    margin: 10px 0;
+  }
 }
 
 /* Main content sections */

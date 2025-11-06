@@ -95,217 +95,163 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>中文学习资源中心 - Chinese Learning Resources Hub</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+/* 全局样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
-            min-height: 100vh;
-        }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 0;
+}
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
+/* 容器 */
+.container {
+  max-width: 1400px;
+  margin: 80px auto 0;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  overflow: hidden;
+}
 
-        .content {
-            padding: 40px;
-        }
+/* ======== 导航栏 ======== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  padding: 10px 40px;
+  z-index: 999;
+  backdrop-filter: blur(8px);
+}
 
-        .section {
-            margin-bottom: 50px;
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            border-left: 5px solid #667eea;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+.nav-brand img {
+  height: 45px;
+  vertical-align: middle;
+}
 
-        .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 35px;
+}
 
-        .section-title {
-            font-size: 1.8em;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #e9ecef;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  position: relative;
+  font-size: 1em;
+}
 
-        .badge {
-            display: inline-block;
-            padding: 5px 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 20px;
-            font-size: 0.5em;
-            font-weight: normal;
-        }
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 0;
+  bottom: -5px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  transition: 0.3s;
+}
 
-        .resource-group {
-            margin-bottom: 25px;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
 
-        .resource-label {
-            font-weight: 700;
-            color: #495057;
-            margin-bottom: 12px;
-            display: block;
-            font-size: 1.1em;
-        }
+/* ======== 移动端菜单 ======== */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
 
-        .links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
+.menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+}
 
-        a {
-            display: inline-block;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
+@media (max-width: 768px) {
+  .navbar {
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
 
-        a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-        }
+  .nav-brand {
+    flex: 1;
+    text-align: center;
+  }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
-        }
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    background: white;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 15px;
+  }
 
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
+  .nav-menu.active {
+    display: flex;
+  }
 
-        .highlight-red {
-            color: #e74c3c;
-            font-weight: bold;
-        }
+  .menu-toggle {
+    display: flex;
+  }
+}
 
-        .highlight-blue {
-            color: #3498db;
-            font-weight: bold;
-        }
+/* ======== 内容 ======== */
+.content {
+  padding: 40px;
+}
 
-        .highlight-yellow {
-            background: #ffc107;
-            color: #000;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
+/* ======== 页脚 ======== */
+footer {
+  background: #2c3e50;
+  color: #fff;
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 60px;
+}
 
-        .note-box {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffe5a0 100%);
-            border-left: 5px solid #ffc107;
-            padding: 20px;
-            margin-top: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
-        }
+footer p {
+  margin: 5px 0;
+  font-size: 0.95em;
+  opacity: 0.8;
+}
 
-        .note-box strong {
-            color: #d63031;
-        }
+footer a {
+  color: #fff;
+  text-decoration: underline;
+  opacity: 0.8;
+}
 
-        .test-papers {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-        }
-
-        .subsection {
-            margin: 20px 0;
-        }
-
-        .subsection-title {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #495057;
-            margin-bottom: 15px;
-            padding-left: 15px;
-            border-left: 3px solid #667eea;
-        }
-
-        footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 30px;
-            margin-top: 50px;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            .content {
-                padding: 20px;
-            }
-
-            header {
-                padding: 40px 20px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            .section {
-                padding: 20px;
-            }
-
-            .grid-2, .grid-3 {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .intro-section {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .intro-section p {
-            font-size: 1.1em;
-            color: #2e7d32;
-            margin: 10px 0;
-        }
-    </style>
+footer a:hover {
+  opacity: 1;
+}
+</style>
 </head>
 <body>
     <header>
@@ -314,9 +260,6 @@
                 <h1><a href="https://aibochinese.com/" target="_blank"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/1-on-1%20logo%20126%2050.png" alt="网站Logo"></a></h1>
             </div>
             <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link">Home</a>
-                </li>
                 <li class="nav-item">
                     <a href="library.html" class="nav-link active">Library</a>
                 </li>
@@ -327,23 +270,17 @@
                     <a href="payments.html" class="nav-link">Payments</a>
                 </li>
                 <li class="nav-item">
-                    <a href="download.html" class="nav-link">Client Download</a>
+                    <a href="client.html" class="nav-link">Client Download</a>
                 </li>
             </ul>
         </nav>
     </header>
     <div class="container">
         <header>
-            <h1>📚 中文学习资源中心</h1>
             <p class="subtitle">Chinese Learning Resources Hub</p>
         </header>
 
         <div class="content">
-            <div class="intro-section">
-                <p>🎓 全面的中文学习资料库 | Comprehensive Chinese Learning Materials</p>
-                <p>📖 从零基础到高级 | From Beginner to Advanced</p>
-            </div>
-
             <!-- Easy Peasy -->
             <div class="section">
                 <h2 class="section-title">🌟 入门教材 <span class="badge">Beginner</span></h2>
@@ -354,83 +291,138 @@
                 </div>
             </div>
 
-            <!-- HSK Materials -->
-            <div class="section">
-                <h2 class="section-title">📝 HSK 标准教程 <span class="badge">Standard Course</span></h2>
-                <div class="grid-2">
-                    <div class="resource-group">
-                        <span class="resource-label">HSK 1</span>
-                        <div class="links">
-                            <a href="https://drive.aibochinese.com/s/qvacw">📘 Textbook</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1GqFUJ70V1oCDwQGYpNpwqBVIbp8UyyG3">📓 Workbook</a>
-                        </div>
-                    </div>
-
-                    <div class="resource-group">
-                        <span class="resource-label">HSK 2</span>
-                        <div class="links">
-                            <a href="https://drive.aibochinese.com/s/PbYsv">📘 Textbook</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1b2oieWbqqqvUe7iLlUieU34n_HBcL2ci">📓 Workbook</a>
-                        </div>
-                    </div>
-
-                    <div class="resource-group">
-                        <span class="resource-label">HSK 3</span>
-                        <div class="links">
-                            <a href="https://drive.aibochinese.com/s/19osv">📘 Textbook</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1zlkgvWqzFKVYfXxQ0Oghyp1y7j9DuSth">📓 Workbook</a>
-                        </div>
-                    </div>
-
-                    <div class="resource-group">
-                        <span class="resource-label">HSK 4 上册 (Part 1)</span>
-                        <div class="links">
-                            <a href="https://drive.aibochinese.com/s/83zhq">📘 Textbook</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1uos2jPwwFHTUAPQDxOlul8_IfnN9m18l">📓 Workbook</a>
-                        </div>
-                    </div>
-
-                    <div class="resource-group">
-                        <span class="resource-label">HSK 4 下册 (Part 2)</span>
-                        <div class="links">
-                            <a href="https://drive.aibochinese.com/s/Zo4SM">📘 Textbook</a>
-                            <a href="https://drive.google.com/uc?export=download&id=114wepFqAbj0_NDs5tkrfWOHeejQoS1Q0">📓 Workbook</a>
-                        </div>
-                    </div>
-
-                    <div class="resource-group">
-                        <span class="resource-label">HSK 5 上册 (Part 1)</span>
-                        <div class="links">
-                            <a href="https://drive.aibochinese.com/s/aZjio">📘 Textbook</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1dA5pCK5uBt5IuZIyd-P1gDOHbAmYIxgx">📓 Workbook</a>
-                        </div>
-                    </div>
-
-                    <div class="resource-group">
-                        <span class="resource-label">HSK 5 下册 (Part 2)</span>
-                        <div class="links">
-                            <a href="https://drive.aibochinese.com/s/OyruA">📘 Textbook</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1_zsHscwKuHA9NZAwwMghIqlobRsJgoig">📓 Workbook</a>
-                        </div>
-                    </div>
-
-                    <div class="resource-group">
-                        <span class="resource-label">HSK 6 上册 (Part 1)</span>
-                        <div class="links">
-                            <a href="https://drive.aibochinese.com/s/YQktr">📘 Textbook</a>
-                            <a href="https://drive.google.com/file/d/1aFCfuRiqLyNBToT-n1uUfVuFI0wHG5IH/view?usp=drive_link">📓 Workbook</a>
-                        </div>
-                    </div>
-
-                    <div class="resource-group">
-                        <span class="resource-label">HSK 6 下册 (Part 2)</span>
-                        <div class="links">
-                            <a href="https://drive.aibochinese.com/s/nwRh7">📘 Textbook</a>
-                            <a href="https://drive.google.com/uc?export=download&id=1J92BR2DS7Oy9gAe_34kcjUU_4PNAUAIu">📓 Workbook</a>
-                        </div>
-                    </div>
-                </div>
+<!-- HSK Materials -->
+<div class="section">
+    <h2 class="section-title">📝 HSK 标准教程 <span class="badge">Standard Course</span></h2>
+    <div class="grid-2">
+        <div class="resource-group">
+            <span class="resource-label">HSK 1</span>
+            <div class="links">
+                <a href="https://drive.aibochinese.com/s/qvacw">📘 Textbook</a>
+                <a href="https://drive.google.com/uc?export=download&id=1GqFUJ70V1oCDwQGYpNpwqBVIbp8UyyG3">📓 Workbook</a>
             </div>
+        </div>
+
+        <div class="resource-group">
+            <span class="resource-label">HSK 2</span>
+            <div class="links">
+                <a href="https://drive.aibochinese.com/s/PbYsv">📘 Textbook</a>
+                <a href="https://drive.google.com/uc?export=download&id=1b2oieWbqqqvUe7iLlUieU34n_HBcL2ci">📓 Workbook</a>
+            </div>
+        </div>
+
+        <div class="resource-group">
+            <span class="resource-label">HSK 3</span>
+            <div class="links">
+                <a href="https://drive.aibochinese.com/s/19osv">📘 Textbook</a>
+                <a href="https://drive.google.com/uc?export=download&id=1zlkgvWqzFKVYfXxQ0Oghyp1y7j9DuSth">📓 Workbook</a>
+            </div>
+        </div>
+
+        <div class="resource-group">
+            <span class="resource-label">HSK 4 上册 (Part 1)</span>
+            <div class="links">
+                <a href="https://drive.aibochinese.com/s/83zhq">📘 Textbook</a>
+                <a href="https://drive.google.com/uc?export=download&id=1uos2jPwwFHTUAPQDxOlul8_IfnN9m18l">📓 Workbook</a>
+            </div>
+        </div>
+
+        <div class="resource-group">
+            <span class="resource-label">HSK 4 下册 (Part 2)</span>
+            <div class="links">
+                <a href="https://drive.aibochinese.com/s/Zo4SM">📘 Textbook</a>
+                <a href="https://drive.google.com/uc?export=download&id=114wepFqAbj0_NDs5tkrfWOHeejQoS1Q0">📓 Workbook</a>
+            </div>
+        </div>
+
+        <div class="resource-group">
+            <span class="resource-label">HSK 5 上册 (Part 1)</span>
+            <div class="links">
+                <a href="https://drive.aibochinese.com/s/aZjio">📘 Textbook</a>
+                <a href="https://drive.google.com/uc?export=download&id=1dA5pCK5uBt5IuZIyd-P1gDOHbAmYIxgx">📓 Workbook</a>
+            </div>
+        </div>
+
+        <div class="resource-group">
+            <span class="resource-label">HSK 5 下册 (Part 2)</span>
+            <div class="links">
+                <a href="https://drive.aibochinese.com/s/OyruA">📘 Textbook</a>
+                <a href="https://drive.google.com/uc?export=download&id=1_zsHscwKuHA9NZAwwMghIqlobRsJgoig">📓 Workbook</a>
+            </div>
+        </div>
+
+        <div class="resource-group">
+            <span class="resource-label">HSK 6 上册 (Part 1)</span>
+            <div class="links">
+                <a href="https://drive.aibochinese.com/s/YQktr">📘 Textbook</a>
+                <a href="https://drive.google.com/file/d/1aFCfuRiqLyNBToT-n1uUfVuFI0wHG5IH/view?usp=drive_link">📓 Workbook</a>
+            </div>
+        </div>
+
+        <div class="resource-group">
+            <span class="resource-label">HSK 6 下册 (Part 2)</span>
+            <div class="links">
+                <a href="https://drive.aibochinese.com/s/nwRh7">📘 Textbook</a>
+                <a href="https://drive.google.com/uc?export=download&id=1J92BR2DS7Oy9gAe_34kcjUU_4PNAUAIu">📓 Workbook</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.section-title {
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.badge {
+    background: #0078d7;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.8em;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px 32px;
+}
+
+.resource-group {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 14px 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.resource-label {
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.links a {
+    display: inline-block;
+    margin-right: 10px;
+    color: #0078d7;
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+</style>
+
 
             <!-- Reference Books -->
             <div class="section">
@@ -575,6 +567,27 @@
                 </div>
             </div>
 
-            <!-- New Target Spoken Chinese -->
-            <div class="section">
-                <h2 class
+    </main>
+
+    <footer>
+<div class="footer">
+        <p style="margin-bottom: 10px;">感谢🙏订阅我的频道：<a href="https://www.youtube.com/@blog.aibochinese" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
+         style="max-width: 100%; height: auto;" /></a>  <a href="https://x.com/blogaibochinese" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/x%20logo30f1.png" 
+         style="max-width: 100%; height: auto;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
+         style="max-width: 100%; height: auto;" /></a>
+        </p>
+        <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:white" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
+    </div>
+    </footer>
+    <script>
+document.getElementById('nav-toggle').addEventListener('click', function() {
+  document.getElementById('nav-menu').classList.toggle('show');
+});
+</script>
+<script>
+document.getElementById('nav-toggle').addEventListener('click', function() {
+  document.getElementById('nav-menu').classList.toggle('show');
+});
+</script>
+</body>
+</html>
