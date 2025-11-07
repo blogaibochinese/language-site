@@ -1,0 +1,31 @@
+<header>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="https://aibochinese.com/" target="_blank">
+          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/1-on-1%20logo%20126%2050.png" alt="网站Logo">
+        </a>
+      </div>
+
+      <div class="nav-toggle" id="nav-toggle">
+        ☰
+      </div>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item"><a href="library.html" class="nav-link active">Library</a></li>
+        <li class="nav-item"><a href="groups.html" class="nav-link">Join Groups</a></li>
+        <li class="nav-item"><a href="payments.html" class="nav-link">Payments</a></li>
+        <li class="nav-item"><a href="client.html" class="nav-link">Client Download</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+<script>
+document.getElementById('nav-toggle').addEventListener('click', function() {
+  document.getElementById('nav-menu').classList.toggle('show');
+});
+</script>
+
+
