@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-             <style>
+    <!-- 引入Font Awesome图标 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <style>
 /* 人工客服按钮样式 */
 #canCustomerServerBtn, .can-customer-server-btn {
   right: 20px !important;
@@ -96,6 +100,60 @@
     <title>Abel Zou - Chinese Language Tutor</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Tailwind-like utility classes for mobile nav */
+        .fixed { position: fixed; }
+        .bottom-0 { bottom: 0; }
+        .left-0 { left: 0; }
+        .right-0 { right: 0; }
+        .bg-white { background-color: white; }
+        .z-50 { z-index: 50; }
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .justify-around { justify-content: space-around; }
+        .items-center { align-items: center; }
+        .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-xs { font-size: 0.75rem; }
+        .mb-1 { margin-bottom: 0.25rem; }
+        .mt-1 { margin-top: 0.25rem; }
+        .-mt-6 { margin-top: -1.5rem; }
+        .w-12 { width: 3rem; }
+        .h-12 { height: 3rem; }
+        .rounded-full { border-radius: 9999px; }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        .transition-all { transition: all 0.3s; }
+        .duration-300 { transition-duration: 300ms; }
+        .bg-primary { background-color: #3B82F6; }
+        .text-primary { color: #3B82F6; }
+        .text-white { color: white; }
+        .hover\:bg-primary\/90:hover { background-color: rgba(59, 130, 246, 0.9); }
+        
+        .nav-shadow {
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item-active {
+            color: #3B82F6;
+            transform: scale(1.1);
+        }
+        
+        /* Hide on desktop */
+        @media (min-width: 768px) {
+            .md\:hidden {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-shadow {
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            }
+            .nav-item-active {
+                color: #3B82F6;
+                transform: scale(1.1);
+            }
+        }
+        
         /* Custom styles for new sections */
         .video-embed, .teacher-course-info, .course-standards, .additional-videos {
             padding: 60px 0;
@@ -301,9 +359,10 @@
                     <!-- Right Column: Course Information -->
                     <div class="column">
                         <h2>1-on-1 Live Lesson</h2>
+                        <p>Abel Zou,with 6 years of full-time experience in teaching, I specialize in improving oral proficiency and providing intensive training for HSK Tests preparation</p>
                         <p><strong>30-mins, Zoom</strong>, <span class="highlight"><strong>free trial</strong></span>, and if you enjoy it, continue learning.</p>
                         
-                        <p>👉Qualified teacher from🐼中国📚5K+ hours teaching</p>
+                        <p>👉Qualified teacher from🐼中国📚7K+ hours teaching</p>
                         
                         <!-- Payment Button -->
                         <div>
@@ -390,26 +449,63 @@
 
     </main>
 
-     <footer>
-<div class="footer">
-        <p style="margin-bottom: 10px;">感谢🙏订阅我的频道：<a href="https://www.youtube.com/@AiboChinese" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://x.com/Zouhuanglin1" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/x%20logo30f1.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://www.facebook.com/site.aibochinese" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:white" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://v.douyin.com/7UArd_7AX6o/" style="color:white" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
-         style="max-width: 100%; height: auto;" /></a>
-        </p>
-        <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:white" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
-    </div>
+<footer>
+        <div class="footer">
+            <p style="margin-bottom: 10px;">感谢🙏订阅我的频道:<a href="https://www.youtube.com/@AiboChinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/Zouhuanglin1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.facebook.com/site.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="t.me/abelzou" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-%E7%94%B5%E6%8A%A5%E5%BA%94%E7%94%A8-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.tiktok.com/@mr.abelzou" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.instagram.com/aibochinese/" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-instagram-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>
+            </p>
+            <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:white" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
+        <p>_</p>
+        </div>
     </footer>
     <script>
 document.getElementById('nav-toggle').addEventListener('click', function() {
   document.getElementById('nav-menu').classList.toggle('show');
 });
 </script>
+    
+    <!-- 移动端底部导航按钮 - 仅在移动端显示 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white nav-shadow z-50 md:hidden">
+        <div class="flex justify-around items-center py-3">
+            <!-- 首页按钮 -->
+            <a href="https://aibochinese.com/" class="flex flex-col items-center nav-item-active transition-all duration-300">
+                <i class="fa fa-home text-xl mb-1"></i>
+                <span class="text-xs">首页</span>
+            </a>
+            
+            <!-- 资源按钮 -->
+            <a href="https://aibochinese.com/library" class="flex flex-col items-center nav-item-active transition-all duration-300">
+                <i class="fa fa-book text-xl mb-1"></i>
+                <span class="text-xs">Library</span>
+            </a>
 
+            <!-- New - 突出显示 -->
+            <a href="https://www.youtube.com/@AiboChinese/videos" class="flex flex-col items-center">
+                <div class="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg hover:bg-primary/90 transition-all duration-300" style="display: flex; align-items: center; justify-content: center;">
+                    <i class="fa fa-video-camera text-xl" style="display: block; line-height: 1;"></i>
+                </div>
+                <span class="text-xs text-primary mt-1">Newest</span>
+            </a>
+
+            <!-- 社区按钮 -->
+            <a href="https://aibochinese.com/groups" class="flex flex-col items-center nav-item-active transition-all duration-300">
+                <i class="fa fa-users text-xl mb-1"></i>
+                <span class="text-xs">Groups</span>
+            </a>
+
+            <!-- 支付按钮 -->
+            <a href="https://www.aibochinese.com/payments" class="flex flex-col items-center nav-item-active transition-all duration-300">
+                <i class="fa fa-credit-card text-xl mb-1"></i>
+                <span class="text-xs">To Pay</span>
+            </a>
+        </div>
+    </div>
 </body>
 </html>
