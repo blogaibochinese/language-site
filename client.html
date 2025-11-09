@@ -1,180 +1,126 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-           <style>
-/* 人工客服按钮样式 */
-#canCustomerServerBtn, .can-customer-server-btn {
-  right: 20px !important;
-  top: 20px !important;
-  left: auto !important;
-  bottom: auto !important;
-  position: fixed !important;
-  z-index: 9997 !important; /* 低于AI客服按钮，避免覆盖 */
-}
-</style>
-
-<!-- 人工客服脚本 -->
-<script>
-(function() {
-  _s = document.createElement('script');
-  _s.src = "https://kefu.aibochinese.com/customerServer.js";
-  _s.onload = function() {
-    var option = {
-      "authInit": true,
-      openUrl: 'https://kefu.aibochinese.com',
-      token: '7fecd3ce216cc26ebd63bf417c193b41',
-      kefuid: '',
-      isShowTip: true,
-      mobileIcon: '',
-      pcIcon: '',
-      windowStyle: 'center',
-    };
-    
-    var canCustomerServer = new initCustomerServer(option);
-    canCustomerServer.init();
-    
-    // 检查按钮是否生成并设置位置
-    var checkInterval = setInterval(function() {
-      var btn = document.querySelector('#canCustomerServerBtn') || 
-                document.querySelector('.can-customer-server-btn') ||
-                document.querySelector('[class*="customer-service"]') ||
-                document.querySelector('[id*="customer"]');
-      
-      if (btn) {
-        clearInterval(checkInterval);
-        // 强制设置位置和层级
-        btn.style.position = 'fixed';
-        btn.style.right = '20px';
-        btn.style.top = '200px';
-        btn.style.left = 'auto';
-        btn.style.bottom = 'auto';
-        btn.style.zIndex = '9997'; // 与样式保持一致
-        // 添加拖拽功能
-        makeDraggable(btn);
-      }
-    }, 300);
-  };
-  
-  document.head.appendChild(_s);
-  
-  // 拖拽功能实现
-  function makeDraggable(element) {
-    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    element.style.cursor = 'move';
-    
-    element.onmousedown = dragStart;
-    
-    function dragStart(e) {
-      e = e || window.event;
-      e.preventDefault();
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      document.onmouseup = dragEnd;
-      document.onmousemove = dragMove;
-    }
-    
-    function dragMove(e) {
-      e = e || window.event;
-      e.preventDefault();
-      pos1 = pos3 - e.clientX;
-      pos2 = pos4 - e.clientY;
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      element.style.top = (element.offsetTop - pos2) + "px";
-      element.style.left = (element.offsetLeft - pos1) + "px";
-    }
-    
-    function dragEnd() {
-      document.onmouseup = null;
-      document.onmousemove = null;
-    }
-  }
-})();
-
-// 移动端导航栏交互
-document.addEventListener('DOMContentLoaded', function() {
-    // 汉堡菜单功能
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('show');
-        });
-    }
-    
-    // 底部导航栏交互
-    const navItems = document.querySelectorAll('.fixed.bottom-0 a');
-    
-    navItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            // 移除所有项目的激活状态
-            navItems.forEach(navItem => {
-                navItem.classList.remove('nav-item-active');
-            });
-            
-            // 为当前点击的项目添加激活状态
-            this.classList.add('nav-item-active');
-            
-            // 如果有实际的页面跳转需求，可以在这里处理
-            // 例如：window.location.href = this.href;
-        });
-    });
-    
-    // 设置当前页面对应的导航项为激活状态 (Client Download 页面对应第5个导航项)
-    if (navItems.length >= 5) {
-        navItems[4].classList.add('nav-item-active');
-    }
-});
-</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>客户端下载 - Client Downloads</title>
   <!-- 引入 Font Awesome 图标 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
   <style>
-    /* 重置所有可能影响外部的样式 */
-    .client-downloads-component {
-      all: initial;
+    /* 全局重置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       line-height: 1.6;
       color: #333;
-      box-sizing: border-box;
+      background-color: #f8f9fa;
     }
-    
-    .client-downloads-component *,
-    .client-downloads-component *::before,
-    .client-downloads-component *::after {
-      box-sizing: border-box;
+
+    /* 导航栏样式 */
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      width: 100%;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+      position: relative;
+    }
+
+    .nav-brand img {
+      height: 50px;
+      width: auto;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-item {
+      display: inline-block;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      padding: 5px 0;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #3498db;
+    }
+
+    /* 汉堡菜单按钮 */
+    .nav-toggle {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #333;
+      padding: 5px 10px;
+    }
+
+    /* 人工客服按钮样式 */
+    #canCustomerServerBtn, .can-customer-server-btn {
+      right: 20px !important;
+      top: 200px !important;
+      left: auto !important;
+      bottom: auto !important;
+      position: fixed !important;
+      z-index: 9997 !important;
     }
 
     /* 主容器样式 */
     .client-downloads-component {
-      background-color: #f8f9fa;
-      padding: 50px 20px 30px;
+      padding: 120px 20px 100px;
       width: 100%;
-      display: block;
     }
 
-    .client-downloads-component .container {
+    .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 15px;
     }
 
     /* 标题样式 */
-    .client-downloads-component .section-title {
+    .section-title {
       font-size: 2rem;
       margin: 0 0 30px 0;
       color: #34495e;
       font-weight: 600;
       text-align: center;
       position: relative;
-      display: block;
     }
 
-    .client-downloads-component .section-title::after {
+    .section-title::after {
       content: '';
       position: absolute;
       bottom: -10px;
@@ -186,21 +132,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /* 下载区域 */
-    .client-downloads-component .download-section {
+    .download-section {
       margin-bottom: 60px;
     }
 
     /* 卡片网格布局 */
-    .client-downloads-component .cards-grid {
+    .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
       margin-bottom: 30px;
     }
 
-    .client-downloads-component .download-card {
+    .download-card {
       background-color: #fff;
-      border: none;
       border-radius: 12px;
       padding: 30px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
@@ -211,18 +156,18 @@ document.addEventListener('DOMContentLoaded', function() {
       align-items: center;
     }
 
-    .client-downloads-component .download-card:hover {
+    .download-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
     }
 
-    .client-downloads-component .os-icon {
+    .os-icon {
       font-size: 48px;
       margin-bottom: 20px;
       color: #3498db;
     }
 
-    .client-downloads-component .card-title {
+    .card-title {
       font-size: 1.5rem;
       margin: 0 0 20px 0;
       color: #2c3e50;
@@ -230,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /* 下载链接样式 */
-    .client-downloads-component .download-link {
+    .download-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -248,18 +193,18 @@ document.addEventListener('DOMContentLoaded', function() {
       max-width: 250px;
     }
 
-    .client-downloads-component .download-link:hover {
+    .download-link:hover {
       background-color: #2980b9;
       text-decoration: none;
       color: #fff;
     }
 
-    .client-downloads-component .download-link i {
+    .download-link i {
       font-size: 16px;
     }
 
     /* 二维码图片样式 */
-    .client-downloads-component .qr-code {
+    .qr-code {
       margin-top: 15px;
       max-width: 150px;
       height: auto;
@@ -268,93 +213,42 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     /* 页脚样式 */
-    .client-downloads-component .footer {
+    footer {
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding: 30px 20px;
       margin-top: 50px;
-      padding: 20px 0;
-      color: #7f8c8d;
+    }
+
+    .footer {
       text-align: center;
       font-size: 14px;
     }
 
-    .client-downloads-component .footer p {
-      margin: 0;
+    .footer p {
+      margin: 10px 0;
     }
-    
-    /* 移动端底部导航栏样式 */
-    .nav-shadow {
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    .nav-item-active {
+
+    .footer a {
       color: #3498db;
-      transform: scale(1.1);
-    }
-    
-    /* 导航菜单样式 */
-    .nav-menu {
-      list-style: none;
-      display: flex;
-      gap: 40px;
-    }
-    
-    .nav-link {
       text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      transition: color 0.3s ease;
     }
-    
-    .nav-link:hover,
-    .nav-link.active {
-      color: #667eea;
+
+    .footer a:hover {
+      text-decoration: underline;
     }
-    
-    /* 移动端三杠按钮 */
-    .nav-toggle {
+
+    /* 移动端底部导航栏 */
+    .mobile-nav {
       display: none;
-      font-size: 28px;
-      cursor: pointer;
-      position: absolute;
-      right: 20px;
-      top: 14px;
     }
-    
-    /* Hide on desktop */
-    @media (min-width: 768px) {
-      .md\:hidden {
-        display: none;
-      }
-    }
-    
+
+    /* 响应式设计 */
     @media (max-width: 768px) {
-      .nav-shadow {
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-      }
-      .nav-item-active {
-        color: #3498db;
-        transform: scale(1.1);
-      }
-      
-      /* 移动端导航菜单样式 */
-      .nav-container {
-        justify-content: center;
-      }
-      
-      .nav-brand {
-        position: relative;
-        left: 0;
-        transform: none;
-      }
-      
-      .nav-brand img {
-        height: 45px;
-      }
-      
       .nav-toggle {
         display: block;
-        z-index: 1001;
       }
-      
+
       .nav-menu {
         display: none;
         position: absolute;
@@ -363,113 +257,146 @@ document.addEventListener('DOMContentLoaded', function() {
         background: white;
         flex-direction: column;
         width: 200px;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border-radius: 0 0 0 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         padding: 15px 0;
-        z-index: 1000;
+        gap: 0;
       }
-      
+
       .nav-menu.show {
         display: flex;
       }
-      
+
       .nav-item {
         text-align: center;
-        margin: 10px 0;
+        margin: 0;
+        padding: 10px 0;
       }
-      
+
       .nav-link {
         display: block;
         padding: 10px 15px;
       }
-    }
-    
-    /* New button styles */
-    .bg-primary { background-color: #3498db; }
-    .text-primary { color: #3498db; }
-    .text-white { color: white; }
-    .rounded-full { border-radius: 9999px; }
-    .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
-    .transition-all { transition: all 0.3s; }
-    .duration-300 { transition-duration: 300ms; }
-    .hover\:bg-primary\/90:hover { background-color: rgba(52, 152, 219, 0.9); }
-    .w-12 { width: 3rem; }
-    .h-12 { height: 3rem; }
-    .flex { display: flex; }
-    .items-center { align-items: center; }
-    .justify-center { justify-content: center; }
-    .fixed { position: fixed; }
-    .bottom-0 { bottom: 0; }
-    .left-0 { left: 0; }
-    .right-0 { right: 0; }
-    .bg-white { background-color: #fff; }
-    .z-50 { z-index: 50; }
-    .justify-around { justify-content: space-around; }
-    .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
-    .text-xl { font-size: 1.25rem; }
-    .mb-1 { margin-bottom: 0.25rem; }
-    .text-xs { font-size: 0.75rem; }
-    .-mt-6 { margin-top: -1.5rem; }
 
-    /* 响应式设计 */
-    @media (max-width: 768px) {
       .client-downloads-component {
-        padding: 30px 15px 20px;
+        padding: 100px 15px 100px;
       }
-      
-      .client-downloads-component .cards-grid {
+
+      .cards-grid {
         grid-template-columns: 1fr;
         gap: 20px;
       }
-      
-      .client-downloads-component .section-title {
+
+      .section-title {
         font-size: 1.75rem;
       }
-      
-      .client-downloads-component .download-card {
+
+      .download-card {
         padding: 25px 20px;
+      }
+
+      /* 显示移动端底部导航 */
+      .mobile-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+        justify-content: space-around;
+        align-items: center;
+        padding: 12px 0;
+      }
+
+      .mobile-nav a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #666;
+        transition: all 0.3s ease;
+        font-size: 12px;
+      }
+
+      .mobile-nav a i {
+        font-size: 20px;
+        margin-bottom: 4px;
+      }
+
+      .mobile-nav a.active,
+      .mobile-nav a:hover {
+        color: #3498db;
+        transform: scale(1.05);
+      }
+
+      .mobile-nav .highlight {
+        position: relative;
+        margin-top: -24px;
+      }
+
+      .mobile-nav .highlight-btn {
+        background-color: #3498db;
+        color: white;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+      }
+
+      .mobile-nav .highlight i {
+        font-size: 24px;
+        margin-bottom: 0;
+      }
+
+      .mobile-nav .highlight span {
+        color: #3498db;
+        margin-top: 4px;
       }
     }
 
     @media (max-width: 480px) {
-      .client-downloads-component .section-title {
+      .section-title {
         font-size: 1.5rem;
       }
-      
-      .client-downloads-component .os-icon {
+
+      .os-icon {
         font-size: 40px;
       }
-      
-      .client-downloads-component .card-title {
+
+      .card-title {
         font-size: 1.25rem;
       }
     }
   </style>
 </head>
 <body>
-<header>
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="nav-brand">
-        <a href="https://aibochinese.com/" target="_blank">
-          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/1-on-1%20logo%20126%2050.png" alt="网站Logo">
-        </a>
-      </div>
+  <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <a href="https://aibochinese.com/" target="_blank">
+            <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/1-on-1%20logo%20126%2050.png" alt="网站Logo">
+          </a>
+        </div>
 
-      <div class="nav-toggle" id="nav-toggle">
-        ☰
-      </div>
+        <button class="nav-toggle" id="nav-toggle">☰</button>
 
-      <ul class="nav-menu" id="nav-menu">
-        <li class="nav-item"><a href="library.html" class="nav-link active">Library</a></li>
-        <li class="nav-item"><a href="groups.html" class="nav-link">Join Groups</a></li>
-        <li class="nav-item"><a href="payments.html" class="nav-link">Payments</a></li>
-        <li class="nav-item"><a href="client.html" class="nav-link">Client Download</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
-  <!-- 完全隔离的组件容器 -->
+        <ul class="nav-menu" id="nav-menu">
+          <li class="nav-item"><a href="library.html" class="nav-link">Library</a></li>
+          <li class="nav-item"><a href="groups.html" class="nav-link">Join Groups</a></li>
+          <li class="nav-item"><a href="payments.html" class="nav-link">Payments</a></li>
+          <li class="nav-item"><a href="client.html" class="nav-link active">Client Download</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 主要内容 -->
   <div class="client-downloads-component">
     <div class="container">
       
@@ -537,86 +464,171 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
   </div>
-<footer>
-        <div class="footer">
-            <p style="margin-bottom: 10px;">感谢🙏订阅我的频道:<a href="https://www.youtube.com/@AiboChinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/Zouhuanglin1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.facebook.com/site.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="t.me/abelzou" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-%E7%94%B5%E6%8A%A5%E5%BA%94%E7%94%A8-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.tiktok.com/@mr.abelzou" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.instagram.com/aibochinese/" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-instagram-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>
-            </p>
-           <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:white" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留【<a href="https://blog.aibochinese.com/education/tutor%20guide" style="color:white" target="_blank" rel="noopener noreferrer">教师入驻指南</a>】</p>
-        <p>_</p>
-        </div>
-    </footer>
-    
-    <!-- 移动端底部导航按钮 - 仅在移动端显示 -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white nav-shadow z-50 md:hidden">
-        <div class="flex justify-around items-center py-3">
-            <!-- 首页按钮 -->
-            <a href="index.html" class="flex flex-col items-center transition-all duration-300">
-                <i class="fa fa-home text-xl mb-1"></i>
-                <span class="text-xs">Home</span>
-            </a>
-            
-            <!-- 资源按钮 -->
-            <a href="library.html" class="flex flex-col items-center transition-all duration-300">
-                <i class="fa fa-book text-xl mb-1"></i>
-                <span class="text-xs">Library</span>
-            </a>
 
-            <!-- New - 突出显示 -->
-            <a href="newest.html" class="flex flex-col items-center">
-                <div class="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg hover:bg-primary/90 transition-all duration-300" style="display: flex; align-items: center; justify-content: center;">
-                    <i class="fa fa-video-camera text-xl" style="display: block; line-height: 1;"></i>
-                </div>
-                <span class="text-xs text-primary mt-1">Newest</span>
-            </a>
-
-            <!-- 社区按钮 -->
-            <a href="groups.html" class="flex flex-col items-center transition-all duration-300">
-                <i class="fa fa-users text-xl mb-1"></i>
-                <span class="text-xs">Groups</span>
-            </a>
-
-            <!-- 支付按钮 -->
-            <a href="payments.html" class="flex flex-col items-center transition-all duration-300">
-                <i class="fa fa-credit-card text-xl mb-1"></i>
-                <span class="text-xs">To Pay</span>
-            </a>
-        </div>
+  <footer>
+    <div class="footer">
+      <p style="margin-bottom: 10px;">
+        感谢🙏订阅我的频道:
+        <a href="https://www.youtube.com/@AiboChinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://x.com/Zouhuanglin1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://www.facebook.com/site.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="t.me/abelzou" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-%E7%94%B5%E6%8A%A5%E5%BA%94%E7%94%A8-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://www.tiktok.com/@mr.abelzou" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://www.instagram.com/aibochinese/" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-instagram-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+      </p>
+      <p style="font-size: 12px; color: #888;">
+        © 2025 <a href="https://blog.aibochinese.com/" style="color:white" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留【<a href="https://blog.aibochinese.com/education/tutor%20guide" style="color:white" target="_blank" rel="noopener noreferrer">教师入驻指南</a>】
+      </p>
     </div>
-    <script>
-      // 汉堡菜单交互功能
-      document.addEventListener('DOMContentLoaded', function() {
-        const navToggle = document.getElementById('nav-toggle');
-        const navMenu = document.getElementById('nav-menu');
+  </footer>
+
+  <!-- 移动端底部导航栏 -->
+  <div class="mobile-nav">
+    <a href="index.html">
+      <i class="fa fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="library.html">
+      <i class="fa fa-book"></i>
+      <span>Library</span>
+    </a>
+    <a href="https://www.youtube.com/@AiboChinese/videos" class="highlight">
+      <div class="highlight-btn">
+        <i class="fa fa-video-camera"></i>
+      </div>
+      <span>Newest</span>
+    </a>
+    <a href="groups.html">
+      <i class="fa fa-users"></i>
+      <span>Groups</span>
+    </a>
+    <a href="payments.html" class="active">
+      <i class="fa fa-credit-card"></i>
+      <span>To Pay</span>
+    </a>
+  </div>
+
+  <!-- 人工客服脚本 -->
+  <script>
+    (function() {
+      _s = document.createElement('script');
+      _s.src = "https://kefu.aibochinese.com/customerServer.js";
+      _s.onload = function() {
+        var option = {
+          "authInit": true,
+          openUrl: 'https://kefu.aibochinese.com',
+          token: '7fecd3ce216cc26ebd63bf417c193b41',
+          kefuid: '',
+          isShowTip: true,
+          mobileIcon: '',
+          pcIcon: '',
+          windowStyle: 'center',
+        };
         
-        if (navToggle && navMenu) {
-          navToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('show');
-          });
+        var canCustomerServer = new initCustomerServer(option);
+        canCustomerServer.init();
+        
+        var checkInterval = setInterval(function() {
+          var btn = document.querySelector('#canCustomerServerBtn') || 
+                    document.querySelector('.can-customer-server-btn') ||
+                    document.querySelector('[class*="customer-service"]') ||
+                    document.querySelector('[id*="customer"]');
+          
+          if (btn) {
+            clearInterval(checkInterval);
+            btn.style.position = 'fixed';
+            btn.style.right = '20px';
+            btn.style.top = '200px';
+            btn.style.left = 'auto';
+            btn.style.bottom = 'auto';
+            btn.style.zIndex = '9997';
+            makeDraggable(btn);
+          }
+        }, 300);
+      };
+      
+      document.head.appendChild(_s);
+      
+      function makeDraggable(element) {
+        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        element.style.cursor = 'move';
+        
+        element.onmousedown = dragStart;
+        
+        function dragStart(e) {
+          e = e || window.event;
+          e.preventDefault();
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          document.onmouseup = dragEnd;
+          document.onmousemove = dragMove;
         }
         
-        // 移动端底部导航栏交互功能
-        const navItems = document.querySelectorAll('.fixed.bottom-0 a');
-        navItems.forEach(item => {
-          item.addEventListener('click', function() {
-            navItems.forEach(i => i.classList.remove('nav-item-active'));
-            this.classList.add('nav-item-active');
-          });
+        function dragMove(e) {
+          e = e || window.event;
+          e.preventDefault();
+          pos1 = pos3 - e.clientX;
+          pos2 = pos4 - e.clientY;
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          element.style.top = (element.offsetTop - pos2) + "px";
+          element.style.left = (element.offsetLeft - pos1) + "px";
+        }
+        
+        function dragEnd() {
+          document.onmouseup = null;
+          document.onmousemove = null;
+        }
+      }
+    })();
+
+    // 汉堡菜单和导航功能
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.getElementById('nav-toggle');
+      const navMenu = document.getElementById('nav-menu');
+      
+      if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          navMenu.classList.toggle('show');
         });
-        
-        // 默认激活当前页面对应的导航项 (Client Download -> To Pay)
-        const toPayItem = navItems[4]; // 第5个导航项
-        if (toPayItem) {
-          toPayItem.classList.add('nav-item-active');
-        }
+
+        // 点击页面其他地方关闭菜单
+        document.addEventListener('click', function(e) {
+          if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+            navMenu.classList.remove('show');
+          }
+        });
+      }
+      
+      // 移动端底部导航栏交互
+      const mobileNavItems = document.querySelectorAll('.mobile-nav a');
+      mobileNavItems.forEach(item => {
+        item.addEventListener('click', function() {
+          mobileNavItems.forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+        });
       });
-    </script>
+    });
+  </script>
 </body>
 </html>
