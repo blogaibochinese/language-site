@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的网站</title>
+   <style>
+    /* 右侧垂直居中悬浮按钮组 */
+    .floating-contact {
+        position: fixed;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .floating-contact a {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        transition: all 0.3s ease;
+        overflow: hidden; /* 确保图标在hover缩放时不溢出 */
+    }
+
+    .floating-contact a:hover {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .telegram   { background: hsl(200, 40%, 84%); }
+    .whatsapp   { background: hsl(142, 55%, 83%); }
+    .messenger  { background: hsl(198, 17%, 89%); }
+
+    .floating-contact img {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%; /* 让图标也继承圆形裁剪 */
+    }
+
+    @media (max-width: 768px) {
+        .floating-contact {
+            right: 12px;
+            gap: 12px;
+        }
+        .floating-contact a {
+            width: 50px;
+            height: 50px;
+        }
+        .floating-contact img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+</style>
+</head>
+<body>
+
+    <h1>欢迎访问我的网站</h1>
+    <p>这里是页面内容……</p>
+
+    <!-- ==================== 右侧悬浮联系按钮 ==================== -->
+    <div class="floating-contact">
+
+        <!-- Telegram（推荐两种方式任选其一） -->
+        <!-- 方式1：直接跳转到 tg:// 手机会自动打开Telegram -->
+        <a href="https://t.me/abelzou" class="telegram" target="_blank" title="Telegram">
+            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-%E7%94%B5%E6%8A%A5%E5%BA%94%E7%94%A8-60.png" alt="Telegram">
+        </a>
+        <!-- 方式2：网页端通用（手机也会自动唤起） -->
+        <!-- <a href="https://t.me/你的用户名" class="telegram" target="_blank" title="Telegram">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/telegram.svg" alt="Telegram">
+        </a> -->
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/message/QXYAFEGTDWIBE1?text=Hello! I came from the website and would like to consult about..." 
+           class="whatsapp" target="_blank" title="WhatsApp 联系我">
+            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-whatsapp-60.png" alt="WhatsApp">
+        </a>
+
+        <!-- Facebook Messenger -->
+        <!-- 方式1：m.me 短链接（推荐） -->
+        <a href="https://m.me/abelzouhuanglin" 
+           class="messenger" target="_blank" title="Messenger 联系我">
+            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-facebook%E7%9A%84%E4%BF%A1%E4%BB%B6-60.png" alt="Messenger">
+        </a>
+
+        <!-- 方式2：如果你有个人Facebook账号（不推荐用于商业） -->
+        <!-- <a href="https://m.me/你的Facebook个人数字ID" class="messenger" target="_blank">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/messenger.svg" alt="Messenger">
+        </a> -->
+
+    </div>
+    <!-- ==================== 悬浮按钮结束 ==================== -->
+
+</body>
+</html>
