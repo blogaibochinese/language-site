@@ -1,12 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- 引入Font Awesome图标 -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Learning Platform</title>
     <style>
-   /* 右侧垂直居中悬浮按钮组 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .sections-grid {
+            display: block;
+        }
+        @media (min-width: 769px) {
+            .sections-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .teacher-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .teacher-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-right: 20px;
+            object-fit: cover;
+        }
+        .teacher-info h3 {
+            margin: 0;
+            color: #34495e;
+        }
+        .teacher-link {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+        .teacher-link:hover {
+            text-decoration: underline;
+        }
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .course-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .course-btn:hover {
+            transform: translateY(-2px);
+        }
+        .hanzi-btn { background-color: #e74c3c; }
+        .spoken-btn { background-color: #3498db; }
+        .grammar-btn { background-color: #2ecc71; }
+        .entertainment-btn { background-color: #f39c12; }
+        .library-btn, .groups-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #9b59b6;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        .library-btn:hover, .groups-btn:hover {
+            background-color: #8e44ad;
+        }
+        @media (max-width: 768px) {
+            .teacher-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .teacher-avatar {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+    /* 导航栏样式 */
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      width: 100%;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+      position: relative;
+    }
+
+    .nav-brand img {
+      height: 50px;
+      width: auto;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-item {
+      display: inline-block;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      padding: 5px 0;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #3498db;
+    }
+
+    /* 汉堡菜单按钮 */
+    .nav-toggle {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #333;
+      padding: 5px 10px;
+    }
+
+    /* 右侧垂直居中悬浮按钮组 */
     .floating-contact {
         position: fixed;
         right: 20px;
@@ -59,450 +238,425 @@
             height: 50px;
         }
     }
-</style>
 
+    /* 主容器样式（通用示例） */
+    .main-content {
+      padding: 120px 20px 100px;
+      width: 100%;
+    }
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abel Zou - Chinese Language Tutor</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Tailwind-like utility classes for mobile nav */
-        .fixed { position: fixed; }
-        .bottom-0 { bottom: 0; }
-        .left-0 { left: 0; }
-        .right-0 { right: 0; }
-        .bg-white { background-color: white; }
-        .z-50 { z-index: 50; }
-        .flex { display: flex; }
-        .flex-col { flex-direction: column; }
-        .justify-around { justify-content: space-around; }
-        .items-center { align-items: center; }
-        .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
-        .text-xl { font-size: 1.25rem; }
-        .text-xs { font-size: 0.75rem; }
-        .mb-1 { margin-bottom: 0.25rem; }
-        .mt-1 { margin-top: 0.25rem; }
-        .-mt-6 { margin-top: -1.5rem; }
-        .w-12 { width: 3rem; }
-        .h-12 { height: 3rem; }
-        .rounded-full { border-radius: 9999px; }
-        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
-        .transition-all { transition: all 0.3s; }
-        .duration-300 { transition-duration: 300ms; }
-        .bg-primary { background-color: #3B82F6; }
-        .text-primary { color: #3B82F6; }
-        .text-white { color: white; }
-        .hover\:bg-primary\/90:hover { background-color: rgba(59, 130, 246, 0.9); }
-        
-        .nav-shadow {
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .nav-item-active {
-            color: #3B82F6;
-            transform: scale(1.1);
-        }
-        
-        /* Hide on desktop */
-        @media (min-width: 768px) {
-            .md\:hidden {
-                display: none;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-shadow {
-                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            }
-            .nav-item-active {
-                color: #3B82F6;
-                transform: scale(1.1);
-            }
-        }
-        
-        /* Custom styles for new sections */
-        .video-embed, .teacher-course-info, .course-standards, .additional-videos {
-            padding: 60px 0;
-        }
-        
-        .video-embed:nth-child(even),
-        .teacher-course-info:nth-child(even),
-        .course-standards:nth-child(even),
-        .additional-videos:nth-child(even) {
-            background-color: #fff;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-        
-        .social-link {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
-            color: white;
-            text-decoration: none;
-        }
-        
-        .payment-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background: linear-gradient(135deg, rgb(252,185,0) 0%, rgb(255,0,61) 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 16px;
-            margin-top: 20px;
-        }
-        
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            margin-bottom: 15px;
-        }
-        
-        .video-container video,
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .video-description {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .two-column {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .column {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .course-info {
-            margin-top: 20px;
-        }
-        
-        .highlight {
-            color: red;
-        }
-        
-        .centered-button {
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .btn-gradient {
-            display: inline-block;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-weight: bold;
-        }
-        
-        @media (max-width: 768px) {
-            .two-column {
-                flex-direction: column;
-            }
-            
-            .column {
-                min-width: 100%;
-            }
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
 
-/* 容器样式，使用 Flexbox 实现并排 */
-.two-column-row {
-    display: flex;
-    /* 确保容器内的子项（column）在一行内 */
-    flex-wrap: wrap; 
-    /* 可以在视频之间添加一些间距 */
-    gap: 20px; 
-    margin-bottom: 30px; /* 在行之间添加一些垂直间距 */
-    justify-content: space-between; /* 在列之间平均分配空间 */
-}
+    /* 页脚样式 */
+    footer {
+      background-color: hsl(210, 40%, 40%);
+      color: hsl(0, 0%, 1%);
+      padding: 30px 20px;
+      margin-top: 50px;
+    }
 
-/* 单个视频列的样式 */
-.column {
-    /* 设置宽度为 50% 减去 gap 的一半，以确保两个可以并排 */
-    flex: 1 1 calc(50% - 10px); 
-    /* 确保宽度不超过容器的一半 */
-    min-width: 300px; /* 最小宽度，防止在小屏幕上过于拥挤 */
-}
+    .footer {
+      text-align: center;
+      font-size: 14px;
+    }
 
-/* 视频容器和视频本身的样式，确保它们充满其列 */
-.video-container {
-    /* 确保 video-container 内部的视频也正确显示 */
-    width: 100%; 
-    /* 保持纵横比，例如 16:9 */
-    padding-bottom: 56.25%; 
-    position: relative;
-    height: 0;
-}
+    .footer p {
+      margin: 10px 0;
+    }
 
-.video-container video {
-    /* 视频本身占据 video-container 的全部空间 */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* 确保视频内容填满，但可能会裁剪边缘 */
-}
+    .footer a {
+      color: hsl(0, 0%, 100%);
+      text-decoration: none;
+    }
 
-/* 响应式设计：在小屏幕上，让视频堆叠 */
-@media (max-width: 768px) {
-    .two-column-row {
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* 移动端底部导航栏 */
+    .mobile-nav {
+      display: none;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: white;
         flex-direction: column;
-        gap: 0; /* 在小屏幕上不需要水平间距 */
+        width: 200px;
+        border-radius: 0 0 0 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+        gap: 0;
+      }
+
+      .nav-menu.show {
+        display: flex;
+      }
+
+      .nav-item {
+        text-align: center;
+        margin: 0;
+        padding: 10px 0;
+      }
+
+      .nav-link {
+        display: block;
+        padding: 10px 15px;
+      }
+
+      .main-content {
+        padding: 100px 15px 100px;
+      }
+
+      /* 显示移动端底部导航 */
+      .mobile-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+        justify-content: space-around;
+        align-items: center;
+        padding: 12px 0;
+      }
+
+      .mobile-nav a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #666;
+        transition: all 0.3s ease;
+        font-size: 12px;
+      }
+
+      .mobile-nav a i {
+        font-size: 20px;
+        margin-bottom: 4px;
+      }
+
+      .mobile-nav a.active,
+      .mobile-nav a:hover {
+        color: #3498db;
+        transform: scale(1.05);
+      }
+
+      .mobile-nav .highlight {
+        position: relative;
+        margin-top: -24px;
+      }
+
+      .mobile-nav .highlight-btn {
+        background-color: #3498db;
+        color: white;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+      }
+
+      .mobile-nav .highlight i {
+        font-size: 24px;
+        margin-bottom: 0;
+      }
+
+      .mobile-nav .highlight span {
+        color: #3498db;
+        margin-top: 4px;
+      }
     }
 
-    .column {
-        flex: 1 1 100%; /* 占据 100% 宽度 */
-        margin-bottom: 20px; /* 在堆叠的视频之间增加间距 */
+    @media (max-width: 480px) {
+      .main-content {
+        padding: 100px 15px 100px;
+      }
     }
+    /* ==================== Pagefind 搜索样式（搜索框水平居中版） ==================== */
+.search-container {
+    position: relative;
+    margin: 0 auto;                    /* 水平居中 */
+    z-index: 1001;
+    min-width: 200px;
+    max-width: 380px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+#pagefind-search .pagefind-ui__search-input {
+    padding: 10px 16px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    width: 300px;                      /* 固定宽度，避免 focus 时晃动 */
+    max-width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    color: #333;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#pagefind-search .pagefind-ui__search-input:focus {
+    border-color: #4a6fa5;
+    box-shadow: 0 0 0 4px rgba(74, 111, 165, 0.2);
+}
+
+#pagefind-search .pagefind-ui__results {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);       /* 关键：实现下拉菜单居中 */
+    width: 380px;
+    max-height: 70vh;
+    overflow-y: auto;
+    margin-top: 8px;
+    z-index: 1000;
+    padding: 8px 0;
+}
+
+#pagefind-search .pagefind-ui__result { padding: 12px 16px; border-bottom: 1px solid #eee; transition: background-color 0.2s; }
+#pagefind-search .pagefind-ui__result:last-child { border-bottom: none; }
+#pagefind-search .pagefind-ui__result:hover { background-color: #f8f9ff; }
+#pagefind-search .pagefind-ui__result-title { font-size: 15px; font-weight: 600; color: #1f2937; margin-bottom: 4px; }
+#pagefind-search .pagefind-ui__result-link { color: #3B82F6; text-decoration: none; }
+#pagefind-search .pagefind-ui__result-link:hover { text-decoration: underline; }
+#pagefind-search .pagefind-ui__result-excerpt { font-size: 13.5px; color: #666; line-height: 1.5; margin-top: 4px; }
+.pagefind-ui__result-excerpt mark { background: #dbeafe; color: #1e40af; padding: 1px 3px; border-radius: 3px; }
+#pagefind-search .pagefind-ui__message { padding: 20px; text-align: center; color: #666; font-size: 14px; }
     </style>
 </head>
 <body>
- <header>
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="nav-brand">
-        <a href="https://aibochinese.com/" target="_blank">
-          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/1-on-1%20logo%20126%2050.png" alt="网站Logo">
-        </a>
+      <header>
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <a href="https://aibochinese.com/" target="_blank">
+            <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/1-on-1%20logo%20126%2050.png" alt="网站Logo">
+          </a>
+        </div>
+
+        <button class="nav-toggle" id="nav-toggle">☰</button>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li class="nav-item"><a href="library.html" class="nav-link">Library</a></li>
+          <li class="nav-item"><a href="groups.html" class="nav-link">Join Groups</a></li>
+          <li class="nav-item"><a href="payments.html" class="nav-link">Payments</a></li>
+          <li class="nav-item"><a href="client.html" class="nav-link">Client Download</a></li>
+        </ul>
       </div>
-
-      <div class="nav-toggle" id="nav-toggle">
-        ☰
-      </div>
-
-      <ul class="nav-menu" id="nav-menu">
-        <li class="nav-item"><a href="library.html" class="nav-link active">Library</a></li>
-        <li class="nav-item"><a href="groups.html" class="nav-link">Join Groups</a></li>
-        <li class="nav-item"><a href="payments.html" class="nav-link">Payments</a></li>
-        <li class="nav-item"><a href="client.html" class="nav-link">Client Download</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
-
-    <main>
-
-        <!-- Two Column Layout: Video and Course Info -->
-        <section class="teacher-course-info">
-            <div class="container">
-                <div class="two-column">
-                    <!-- Left Column: Teacher Introduction Video -->
-                    <div class="column">
-                        <div class="video-container">
-                            <video controls>
-                                <source src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/%E8%AF%BE%E5%A0%82%E7%89%87%E6%AE%B5/Abel%20Zou%20self-introduction.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                    </div>
-                    
-                    <!-- Right Column: Course Information -->
-                    <div class="column">
-                        <h2>1-on-1 Live Lesson</h2>
-                        <p>Abel Zou,with 6 years of full-time experience in teaching, I specialize in improving oral proficiency and providing intensive training for HSK Tests preparation</p>
-                        <p><strong>30-mins, Zoom</strong>, <span class="highlight"><strong>free trial</strong></span>, and if you enjoy it, continue learning.</p>
-                        
-                        <p>👉Qualified teacher from🐼中国📚7K+ hours teaching</p>
-                        
-                        <!-- Payment Button -->
-                        <div>
-                            <a href="https://aibochinese.com/payments/" class="payment-button">
-                                👉 Pay Now 「receive tuition fee from 150+ countries」
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Course Standards -->
-        <section class="course-standards">
-            <div class="container">
-                <h2>Course Standards</h2>
-                <div style="text-align: left; max-width: 800px; margin: 0 auto;">
-                    <p><strong><em>Customized learning: </em></strong>Tailored content that is relevant to work and daily life. Students can also provide materials.<strong><em>Pre-class materials</em></strong> sent for preview. Start each class with a <strong><em>3-minute review</em></strong> of the previous lesson's vocabulary. <strong><em>End each class with a brief review</em></strong> of new content. After class, the teacher organizes the lesson content (especially new words, with example sentences), <strong><em>assigns homework</em></strong>, and answers questions post-class.</p>
-                    
-                    <p>Recommendation:2 lessons per week, <strong><span class="highlight">$82.5</span></strong>,<strong><span class="highlight">15 Lessons</span></strong>「2100 000VND/70.5EUR/61GBP」,  <strong><span class="highlight">$126</span></strong>, <strong><span class="highlight">30 Lessons</span></strong>「3300 000VND/108EUR/93GBP」. <strong><em>For children</em></strong> aged 5-8, one lesson per week is recommended.</p>
-                </div>
-            </div>
-        </section>
-
-<section class="additional-videos">
+    </nav>
+  </header>
     <div class="container">
-        <h2>Classroom Clips</h2>
-
-        <div class="two-column-row">
-            <div class="column">
-                <div class="video-container">
-                    <video controls>
-                        <source src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/%E8%AF%BE%E5%A0%82%E7%89%87%E6%AE%B5/%E5%96%84%E8%89%AF%E7%9A%84%E5%A5%B3%E5%AD%A9%EF%BC%8C%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90%20Learn%20Chinese%20%E5%AD%A6%E4%B8%AD%E6%96%87.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+        <p><!-- 搜索框容器（建议放在导航栏或页面顶部） -->
+<div class="search-container">
+    <div id="pagefind-search"></div>
+</div></p>
+        
+        <div class="sections-grid">
+            <section class="section">
+                <div class="teacher-section">
+                    <a href="https://aibochinese.com/1-on-1%20live" target="_blank"><img src="https://cf.aibochinese.com/%E6%95%99%E5%B8%88%E7%85%A7%E7%89%87/Abelzou%20tutor.png" 
+alt="名称" 
+style="max-width: 70%; height: auto;" /></a>
+                    <div class="teacher-info">
+                        <h3><a href="https://aibochinese.com/1-on-1%20live" class="teacher-link">1-on-1 Live, Free Trial</a></h3>
+                        <p>Abel Zou 👉Qualified teacher from🐼中国📚7K+ hours teaching</p>
+                    </div>
                 </div>
-                <p>善良的女孩，生日快乐</p>
-            </div>
+            </section>
             
-            <div class="column">
-                <div class="video-container">
-                    <video controls>
-                        <source src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/%E8%AF%BE%E5%A0%82%E7%89%87%E6%AE%B5/%E6%9D%A5%E7%9C%8B%E4%B8%8B%EF%BC%8C%E8%BF%99%E4%BD%8D%E6%9D%A5%E8%87%AA%E8%B6%8A%E5%8D%976%E5%B2%81%E5%B0%8F%E6%9C%8B%E5%8F%8B%E7%9A%84%E6%B1%89%E8%AF%AD%EF%BC%8C%E8%AF%B4%E5%BE%97%E5%A4%9A%E5%A5%BD%20Learn%20Chinese%20%E5%AD%A6%E4%B8%AD%E6%96%87%20H%E1%BB%8Dc%20ti%E1%BA%BFng%20trung.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+            <section class="section">
+                <h2>Premium Free Video Courses</h2>
+                <div class="courses-grid">
+                    <a href="Hanzi.html" class="course-btn hanzi-btn">Hanzi</a>
+                    <a href="Spoken.html" class="course-btn spoken-btn">Spoken</a>
+                    <a href="Grammar.html" class="course-btn grammar-btn">Grammar</a>
+                    <a href="Entertaiment.html" class="course-btn entertainment-btn">Entertainment</a>
                 </div>
-                <p>这位6岁的越南小男孩非常优秀</p>
-            </div>
-        </div> 
-
-        <div class="two-column-row">
-            <div class="column">
-                <div class="video-container">
-                    <video controls>
-                        <source src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/%E8%AF%BE%E5%A0%82%E7%89%87%E6%AE%B5/%E8%BF%99%E4%B8%AA%E6%84%8F%E5%A4%A7%E5%88%A9%E5%A6%88%E5%A6%88%EF%BC%8C%E5%BE%88%E6%9C%89%E6%84%8F%E6%80%9D%EF%BC%8C%E4%B9%B0%E5%BE%88%E5%A4%9A%E4%B8%AD%E5%9B%BD%E9%A3%9F%E5%93%81%20Learn%20Chinese%20%E5%AD%A6%E4%B8%AD%E6%96%87.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <p>这个意大利妈妈，很有意思，买很多中国食品</p>
-            </div>
+            </section>
             
-            <div class="column">
-                <div class="video-container">
-                    <video controls>
-                        <source src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/%E8%AF%BE%E5%A0%82%E7%89%87%E6%AE%B5/%E4%BD%A0%E7%9F%A5%E9%81%93%E8%B6%8A%E5%8D%97%E7%9A%84%E2%80%9D%E5%A5%A5%E9%BB%9B%E2%80%9C%E5%90%97%EF%BC%9F%20Learn%20Chinese%20%E5%AD%A6%E4%B8%AD%E6%96%87.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <p>你知道越南的"奥雷"吗？</p>
-            </div>
+            <section class="section">
+                <a href="https://aibochinese.com/library" class="library-btn">Online Library</a>
+            </section>
+            
+            <section class="section">
+                <a href="https://aibochinese.com/groups" class="groups-btn">Join Groups</a>
+            </section>
         </div>
-
-        <div class="more-videos-button">
-            <a href="https://www.youtube.com/playlist?list=PLTUVbDMl06n0dfmi4mfIL8hkNDPQuOtdw" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="btn">
-                More videos
-            </a>
-        </div>
-
     </div>
-</section>
-
-    </main>
-
-<footer>
-        <div class="footer">
-            <p style="margin-bottom: 10px;">🙏Follow us:<a href="https://www.youtube.com/@AiboChinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/i/communities/1988587472637554689" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.facebook.com/site.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="t.me/abelzou" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-%E7%94%B5%E6%8A%A5%E5%BA%94%E7%94%A8-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.tiktok.com/@mr.abelzou" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.instagram.com/aibochinese/" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-instagram-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>
-            </p>
-           <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:white" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留【<a href="https://blog.aibochinese.com/education/tutor%20guide" style="color:white" target="_blank" rel="noopener noreferrer">教师入驻指南</a>】</p>
-        <p>_</p>
-        </div>
-    </footer>
-    <script>
-document.getElementById('nav-toggle').addEventListener('click', function() {
-  document.getElementById('nav-menu').classList.toggle('show');
-});
-</script>
     
-    <!-- 移动端底部导航按钮 - 仅在移动端显示 -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white nav-shadow z-50 md:hidden">
-        <div class="flex justify-around items-center py-3">
-            <!-- 首页按钮 -->
-            <a href="https://aibochinese.com/" class="flex flex-col items-center nav-item-active transition-all duration-300">
-                <i class="fa fa-home text-xl mb-1"></i>
-                <span class="text-xs">首页</span>
-            </a>
-            
-            <!-- 资源按钮 -->
-            <a href="https://aibochinese.com/library" class="flex flex-col items-center nav-item-active transition-all duration-300">
-                <i class="fa fa-book text-xl mb-1"></i>
-                <span class="text-xs">Library</span>
-            </a>
-
-            <!-- New - 突出显示 -->
-            <a href="https://x.com/i/communities/1988587472637554689" class="flex flex-col items-center">
-                <div class="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg hover:bg-primary/90 transition-all duration-300" style="display: flex; align-items: center; justify-content: center;">
-                    <i class="fa fa-video-camera text-xl" style="display: block; line-height: 1;"></i>
-                </div>
-                <span class="text-xs text-primary mt-1">Newest</span>
-            </a>
-
-            <!-- 社区按钮 -->
-            <a href="https://aibochinese.com/groups" class="flex flex-col items-center nav-item-active transition-all duration-300">
-                <i class="fa fa-users text-xl mb-1"></i>
-                <span class="text-xs">Groups</span>
-            </a>
-
-            <!-- 支付按钮 -->
-            <a href="https://www.aibochinese.com/payments" class="flex flex-col items-center nav-item-active transition-all duration-300">
-                <i class="fa fa-credit-card text-xl mb-1"></i>
-                <span class="text-xs">To Pay</span>
-            </a>
-        </div>
+  <footer>
+    <div class="footer">
+      <p style="margin-bottom: 10px;">
+        🙏Follow us:
+        <a href="https://www.youtube.com/@AiboChinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://x.com/i/communities/1988587472637554689" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://www.facebook.com/site.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="t.me/abelzou" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-%E7%94%B5%E6%8A%A5%E5%BA%94%E7%94%A8-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://www.tiktok.com/@mr.abelzou" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://www.instagram.com/aibochinese/" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-instagram-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+      </p>
+      <p style="font-size: 12px; color: hwb(0 100% 0%);">
+        © 2025 <a href="https://blog.aibochinese.com/" style="color:white" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留【<a href="https://blog.aibochinese.com/education/tutor%20guide" style="color:white" target="_blank" rel="noopener noreferrer">教师入驻指南</a>】
+      </p>
     </div>
-     <div class="floating-contact">
+  </footer>
 
-        <!-- Telegram（推荐两种方式任选其一） -->
-        <!-- 方式1：直接跳转到 tg:// 手机会自动打开Telegram -->
-        <a href="https://t.me/abelzou" class="telegram" target="_blank" title="Telegram">
-            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-%E7%94%B5%E6%8A%A5%E5%BA%94%E7%94%A8-60.png" alt="Telegram">
-        </a>
-        <!-- 方式2：网页端通用（手机也会自动唤起） -->
-        <!-- <a href="https://t.me/你的用户名" class="telegram" target="_blank" title="Telegram">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/telegram.svg" alt="Telegram">
-        </a> -->
+  <!-- 移动端底部导航栏 -->
+  <div class="mobile-nav">
+    <a href="index.html">
+      <i class="fa fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="library.html">
+      <i class="fa fa-book"></i>
+      <span>Library</span>
+    </a>
+    <a href="https://x.com/i/communities/1988587472637554689" class="highlight">
+      <div class="highlight-btn">
+        <i class="fa fa-video-camera"></i>
+      </div>
+      <span>Newest</span>
+    </a>
+    <a href="groups.html">
+      <i class="fa fa-users"></i>
+      <span>Groups</span>
+    </a>
+    <a href="payments.html" class="active">
+      <i class="fa fa-credit-card"></i>
+      <span>To Pay</span>
+    </a>
+  </div>
 
-        <!-- WhatsApp -->
-        <a href="https://wa.me/message/QXYAFEGTDWIBE1?text=Hello! I came from the website and would like to consult about..." 
-           class="whatsapp" target="_blank" title="WhatsApp 联系我">
-            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-whatsapp-60.png" alt="WhatsApp">
-        </a>
+  <!-- 右侧悬浮客服组 -->
+  <div class="floating-contact">
+    <!-- Telegram（推荐两种方式任选其一） -->
+    <!-- 方式1：直接跳转到 tg:// 手机会自动打开Telegram -->
+    <a href="https://t.me/abelzou" class="telegram" target="_blank" title="Telegram">
+        <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-%E7%94%B5%E6%8A%A5%E5%BA%94%E7%94%A8-60.png" alt="Telegram">
+    </a>
+    <!-- 方式2：网页端通用（手机也会自动唤起） -->
+    <!-- <a href="https://t.me/你的用户名" class="telegram" target="_blank" title="Telegram">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/telegram.svg" alt="Telegram">
+    </a> -->
 
-        <!-- Facebook Messenger -->
-        <!-- 方式1：m.me 短链接（推荐） -->
-        <a href="https://m.me/abelzouhuanglin" 
-           class="messenger" target="_blank" title="Messenger 联系我">
-            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-facebook%E7%9A%84%E4%BF%A1%E4%BB%B6-60.png" alt="Messenger">
-        </a>
+    <!-- WhatsApp -->
+    <a href="https://wa.me/message/QXYAFEGTDWIBE1?text=Hello! I came from the website and would like to consult about..." 
+       class="whatsapp" target="_blank" title="WhatsApp 联系我">
+        <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-whatsapp-60.png" alt="WhatsApp">
+    </a>
 
-        <!-- 方式2：如果你有个人Facebook账号（不推荐用于商业） -->
-        <!-- <a href="https://m.me/你的Facebook个人数字ID" class="messenger" target="_blank">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/messenger.svg" alt="Messenger">
-        </a> -->
+    <!-- Facebook Messenger -->
+    <!-- 方式1：m.me 短链接（推荐） -->
+    <a href="https://m.me/abelzouhuanglin" 
+       class="messenger" target="_blank" title="Messenger 联系我">
+        <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-facebook%E7%9A%84%E4%BF%A1%E4%BB%B6-60.png" alt="Messenger">
+    </a>
 
-    </div>
+    <!-- 方式2：如果你有个人Facebook账号（不推荐用于商业） -->
+    <!-- <a href="https://m.me/你的Facebook个人数字ID" class="messenger" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/messenger.svg" alt="Messenger">
+    </a> -->
+  </div>
+
+  <script>
+    // 汉堡菜单和导航功能
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.getElementById('nav-toggle');
+      const navMenu = document.getElementById('nav-menu');
+      
+      if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function(e) {
+          // 移除preventDefault()和stopPropagation()，因为按钮没有默认行为需要阻止
+          navMenu.classList.toggle('show');
+        });
+
+        // 点击页面其他地方关闭菜单
+        document.addEventListener('click', function(e) {
+          if (!navToggle.contains(e.target) && !navMenu.contains(e.target) && navMenu.classList.contains('show')) {
+            navMenu.classList.remove('show');
+          }
+        });
+        
+        // 确保点击菜单内部不会关闭菜单
+        navMenu.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
+      }
+      
+      // 移动端底部导航栏交互
+      const mobileNavItems = document.querySelectorAll('.mobile-nav a');
+      mobileNavItems.forEach(item => {
+        item.addEventListener('click', function() {
+          mobileNavItems.forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+    });
+  </script>
+  <!-- Pagefind 搜索脚本 -->
+<script src="/post/pagefind/pagefind-ui.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        console.log("Initializing Pagefind search...");
+        try {
+            new PagefindUI({
+                element: "#pagefind-search",
+                showImages: false,
+                showSubResults: true,
+                resetStyles: false,
+                translations: {
+                    placeholder: "搜索资源、教程、工具..."
+                }
+            });
+            console.log("Pagefind search initialized successfully");
+        } catch (error) {
+            console.error("Pagefind search initialization failed:", error);
+        }
+    });
+</script>
 </body>
 </html>
