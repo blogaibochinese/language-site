@@ -187,16 +187,31 @@
             max-width: 1200px;
             margin: 0 auto;
             background: white;
-            border-radius: 16px;
+            border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
+            padding: 50px;
+            margin-bottom: 30px;
         }
 
         h1 {
             text-align: center;
-            color: #667eea;
-            margin-bottom: 10px;
             font-size: 2.5em;
+            margin-bottom: 50px;
+            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s linear infinite;
+            border-bottom: 4px solid;
+            border-image: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff) 1;
+            padding-bottom: 20px;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .subtitle {
@@ -295,12 +310,12 @@
             background: rgba(0, 0, 0, 0.7);
             z-index: 10000;
             animation: fadeIn 0.3s ease;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal.active {
             display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         @keyframes fadeIn {
@@ -312,7 +327,7 @@
             background: white;
             border-radius: 20px;
             padding: 40px;
-            max-width: 600px;
+            max-width: 500px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
@@ -342,9 +357,16 @@
         }
 
         .modal-title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             color: #2d3748;
+            margin: 0;
+            text-align: center;
+            flex: 1;
+        }
+        
+        .modal-body {
+            text-align: center;
         }
 
         .close-btn {
@@ -518,9 +540,81 @@
             margin-top: 4px;
         }
 
+        /* 内容布局 */
+        .content-wrapper {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .image-section {
+            flex: 0 0 70%;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-section {
+            flex: 0 0 calc(30% - 30px);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* 支付按钮 */
+        .payment-btn {
+            padding: 25px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        .alipay-btn {
+            background: linear-gradient(135deg, #1677ff, #00a0e9);
+        }
+
+        .alipay-btn:hover {
+            background: linear-gradient(135deg, #0d5fd8, #0088cc);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(22, 119, 255, 0.4);
+        }
+
+        .wechat-btn {
+            background: linear-gradient(135deg, #09bb07, #00d100);
+        }
+
+        .wechat-btn:hover {
+            background: linear-gradient(135deg, #079806, #00b800);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(9, 187, 7, 0.4);
+        }
+
+        /* 二维码样式 */
+        .qr-code {
+            width: 250px;
+            height: 250px;
+            margin: 20px auto;
+            background: #f0f0f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #999;
+        }
+
         @media (max-width: 768px) {
             .container {
-                padding: 20px;
+                padding: 30px 20px;
                 margin-bottom: 80px;
             }
 
@@ -552,6 +646,21 @@
 
             .mobile-bottom-nav {
                 display: block;
+            }
+
+            .content-wrapper {
+                flex-direction: column;
+            }
+
+            .image-section,
+            .button-section {
+                flex: 0 0 100%;
+                width: 100%;
+            }
+
+            .payment-btn {
+                padding: 20px;
+                font-size: 1.1em;
             }
         }
     </style>
@@ -637,7 +746,51 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <h1>Alipay|Wechat Pay + Credit Card</h1>
+        
+        <div class="content-wrapper">
+            <div class="image-section">
+                <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/wechat%20alipay-creditcard.png" alt="支付图片">
+            </div>
+            
+            <div class="button-section">
+                <button class="payment-btn alipay-btn" onclick="showQRCode('alipay')">
+                    Alipay QR
+                </button>
+                <button class="payment-btn wechat-btn" onclick="showQRCode('wechat')">
+                    WeChat Pay QR
+                </button>
+            </div>
+        </div>
+    </div>
 
+ <!-- 支付宝弹窗 -->
+<div id="alipayModal" class="modal" onclick="closeModal('alipayModal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <h2 class="modal-title">支付宝支付</h2>
+            <button class="close-btn" onclick="closeModal('alipayModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/alipay%20b-qr1.jpg" alt="支付宝二维码" class="qr-code">
+        </div>
+    </div>
+</div>
+
+<!-- 微信弹窗 -->
+<div id="wechatModal" class="modal" onclick="closeModal('wechatModal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <h2 class="modal-title">微信支付</h2>
+            <button class="close-btn" onclick="closeModal('wechatModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/wechatpay%20b-qr1.jpg" alt="微信二维码" class="qr-code">
+        </div>
+    </div>
+</div>
+    
     <!-- 弹窗 -->
     <div class="modal" id="accountModal">
         <div class="modal-content">
@@ -928,22 +1081,37 @@
             }, 300);
         }
 
-        // 关闭弹窗
-        closeBtn.addEventListener('click', closeModal);
+        // 显示二维码弹窗
+        function showQRCode(type) {
+            const modalId = type === 'alipay' ? 'alipayModal' : 'wechatModal';
+            const modal = document.getElementById(modalId);
+            modal.classList.add('active');
+        }
+
+        // 关闭弹窗函数
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        // 绑定关闭按钮事件
+        closeBtn.addEventListener('click', function() {
+            closeModal('accountModal');
+        });
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
-                closeModal();
+                closeModal('accountModal');
             }
         });
 
-        function closeModal() {
-            modal.classList.remove('active');
-        }
-
-        // ESC键关闭弹窗
+        // ESC键关闭所有弹窗
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                closeModal();
+            if (e.key === 'Escape') {
+                closeModal('alipayModal');
+                closeModal('wechatModal');
+                closeModal('accountModal');
             }
         });
     </script>
