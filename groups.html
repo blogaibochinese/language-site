@@ -79,54 +79,50 @@
         }
         
         /* 响应式导航菜单 */
-        @media (max-width: 768px) {
-            .nav-container {
-                justify-content: center;
-            }
-            
-            .nav-brand {
-                position: relative;
-                left: 0;
-                transform: none;
-            }
-            
-            .nav-brand img {
-                height: 45px;
-            }
-            
-            .nav-toggle {
-                display: block;
-                z-index: 1001;
-            }
-            
-            .nav-menu {
-                display: none;
-                position: absolute;
-                top: 70px;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                width: 200px;
-                border-radius: 10px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                padding: 15px 0;
-                z-index: 1000;
-            }
-            
-            .nav-menu.show {
-                display: flex;
-            }
-            
-            .nav-item {
-                text-align: center;
-                margin: 10px 0;
-            }
-            
-            .nav-link {
-                display: block;
-                padding: 10px 15px;
-            }
-        }
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+        z-index: 1001;
+    }
+    
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        width: 200px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        padding: 12px 0;
+        z-index: 1000;
+    }
+    
+    .nav-menu.show {
+        display: flex;
+    }
+    
+    .nav-item {
+        margin: 0;
+    }
+    
+    .nav-link {
+        display: block;
+        padding: 14px 20px;
+        font-size: 15px;
+        color: #333;
+        transition: all 0.2s ease;
+    }
+    
+    .nav-link:hover,
+    .nav-link.active {
+        background-color: #3b82f6;
+        color: white !important;
+        border-radius: 8px;
+        margin: 0 8px;
+    }
+}
         
         /* Hide on desktop */
         @media (min-width: 768px) {

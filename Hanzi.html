@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>示例页面 - Sample Page</title>
+  <title>常用汉字学习</title>
   <!-- 引入 Font Awesome 图标 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -19,6 +19,156 @@
       line-height: 1.6;
       color: #333;
       background-color: #f8f9fa;
+    }
+
+    /* 主容器样式 */
+    .main-content {
+      padding: 120px 20px 100px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* 搜索框样式 */
+    .search-section {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-section h1 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #333;
+    }
+
+    #search-input {
+      width: 100%;
+      max-width: 500px;
+      padding: 15px 20px;
+      font-size: 18px;
+      border: 2px solid #ddd;
+      border-radius: 30px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    #search-input:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+    }
+
+    /* 汉字分组样式 */
+    .hanzi-group {
+      margin-bottom: 40px;
+    }
+
+    .hanzi-group h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 汉字网格样式 */
+    .hanzi-grid {
+      display: grid;
+      grid-template-columns: repeat(15, 1fr);
+      gap: 15px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 汉字按钮样式 */
+    .hanzi-btn {
+      width: 80px;
+      height: 80px;
+      font-size: 48px;
+      font-family: 'KaiTi', '楷体', serif;
+      background-color: #f0f0f0;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+
+    .hanzi-btn:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      background-color: #e8f4f8;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 1200px) {
+      .hanzi-grid {
+        grid-template-columns: repeat(12, 1fr);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hanzi-grid {
+        grid-template-columns: repeat(10, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hanzi-grid {
+        grid-template-columns: repeat(8, 1fr);
+      }
+      
+      .hanzi-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 36px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hanzi-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        padding: 15px;
+      }
+      
+      .hanzi-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 30px;
+      }
+      
+      .search-section h1 {
+        font-size: 24px;
+      }
+      
+      #search-input {
+        font-size: 16px;
+        padding: 12px 18px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .hanzi-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    /* 隐藏类，用于搜索过滤 */
+    .hidden {
+      display: none;
     }
 
     /* 导航栏样式 */
@@ -142,18 +292,6 @@
         }
     }
 
-    /* 主容器样式（通用示例） */
-    .main-content {
-      padding: 120px 20px 100px;
-      width: 100%;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-    }
-
     /* 页脚样式 */
     footer {
       background-color: hsl(210, 40%, 40%);
@@ -220,10 +358,6 @@
         padding: 10px 15px;
       }
 
-      .main-content {
-        padding: 100px 15px 100px;
-      }
-
       /* 显示移动端底部导航 */
       .mobile-nav {
         display: flex;
@@ -287,104 +421,6 @@
         margin-top: 4px;
       }
     }
-
-    @media (max-width: 480px) {
-      .main-content {
-        padding: 100px 15px 100px;
-      }
-    }
-            .article-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 电脑端一行三个 */
-            gap: 20px; /* 间距 */
-            max-width: 1200px; /* 最大宽度 */
-            margin: 0 auto; /* 居中 */
-            padding: 20px;
-        }
-        .article-item {
-            text-align: center;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            transition: background-color 0.3s;
-        }
-        .article-item:hover {
-            background-color: #f9f9f9;
-        }
-        .article-link {
-            text-decoration: none;
-            color: #333;
-            font-size: 16px;
-            font-weight: bold;
-            display: block;
-        }
-        .article-link:hover {
-            color: #007bff;
-        }
-        /* 响应式：移动端一行一个 */
-        @media (max-width: 768px) {
-            .article-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-            /* ==================== Pagefind 搜索样式（搜索框水平居中版） ==================== */
-.search-container {
-    position: relative;
-    margin: 0 auto;                    /* 水平居中 */
-    z-index: 1001;
-    min-width: 200px;
-    max-width: 380px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#pagefind-search .pagefind-ui__search-input {
-    padding: 10px 16px;
-    border: 2px solid #ddd;
-    border-radius: 25px;
-    font-size: 16px;
-    width: 300px;                      /* 固定宽度，避免 focus 时晃动 */
-    max-width: 100%;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    background: white;
-    color: #333;
-    box-sizing: border-box;
-    outline: none;
-}
-
-#pagefind-search .pagefind-ui__search-input:focus {
-    border-color: #4a6fa5;
-    box-shadow: 0 0 0 4px rgba(74, 111, 165, 0.2);
-}
-
-#pagefind-search .pagefind-ui__results {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);       /* 关键：实现下拉菜单居中 */
-    width: 380px;
-    max-height: 70vh;
-    overflow-y: auto;
-    margin-top: 8px;
-    z-index: 1000;
-    padding: 8px 0;
-}
-
-#pagefind-search .pagefind-ui__result { padding: 12px 16px; border-bottom: 1px solid #eee; transition: background-color 0.2s; }
-#pagefind-search .pagefind-ui__result:last-child { border-bottom: none; }
-#pagefind-search .pagefind-ui__result:hover { background-color: #f8f9ff; }
-#pagefind-search .pagefind-ui__result-title { font-size: 15px; font-weight: 600; color: #1f2937; margin-bottom: 4px; }
-#pagefind-search .pagefind-ui__result-link { color: #3B82F6; text-decoration: none; }
-#pagefind-search .pagefind-ui__result-link:hover { text-decoration: underline; }
-#pagefind-search .pagefind-ui__result-excerpt { font-size: 13.5px; color: #666; line-height: 1.5; margin-top: 4px; }
-.pagefind-ui__result-excerpt mark { background: #dbeafe; color: #1e40af; padding: 1px 3px; border-radius: 3px; }
-#pagefind-search .pagefind-ui__message { padding: 20px; text-align: center; color: #666; font-size: 14px; }
   </style>
 </head>
 <body>
@@ -408,91 +444,402 @@
       </div>
     </nav>
   </header>
-  <main>
-        <p>_</p>
-        <p>_</p>
-        <p><!-- 搜索框容器（建议放在导航栏或页面顶部） -->
-<div class="search-container">
-    <div id="pagefind-search"></div>
-</div></p>
-    <div class="article-grid">
-        <!-- 前9个文章（3行 x 3列 = 9个） -->
-        <div class="article-item">
-            <a href="https://blog.aibochinese.com/post/search%20frame" class="article-link">给静态网站配置内容搜索🔍功能</a>
-        </div>
-        <div class="article-item">
-            <a href="https://blog.aibochinese.com/education/tutor%20guide" class="article-link">国际中文教师从业指南</a>
-        </div>
-        <div class="article-item">
-            <a href="https://blog.aibochinese.com/payment/roogoo" class="article-link">Roogoo联名万事达卡，免开卡费0年费</a>
-        </div>
-        <div class="article-item">
-            <a href="https://blog.aibochinese.com/tools/capcut" class="article-link">免费使用剪映9.0.0会员功能</a>
-        </div>
-        <div class="article-item">
-            <a href="https://blog.aibochinese.com/tools/photoshop" class="article-link">Photoshop 2025中文破解版 下载⏬使用</a>
-        </div>
-        <div class="article-item">
-            <a href="https://blog.aibochinese.com/sitesbuild" class="article-link">Cloudflare搭建永久免费网站</a>
-        </div>
+  <div class="main-content">
+    <!-- 搜索区域 -->
+    <div class="search-section">
+      <h1>常用汉字学习</h1>
+      <input type="text" id="search-input" placeholder="搜索汉字...">
     </div>
-</main>
-   <footer>
-    <div class="footer">
-      <p style="margin-bottom: 10px;">
-        🙏Follow us:
-        <a href="https://www.youtube.com/@AiboChinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
-          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" style="width: 30px; height: 30px; display:block;" />
-        </a>
-        <a href="https://x.com/i/communities/1988587472637554689" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
-          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" style="width: 30px; height: 30px; display:block;" />
-        </a>
-        <a href="https://www.facebook.com/site.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
-          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" style="width: 30px; height: 30px; display:block;" />
-        </a>
-        <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
-          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" style="width: 30px; height: 30px; display:block;" />
-        </a>
-        <a href="https://www.tiktok.com/@mr.abelzou" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
-          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" style="width: 30px; height: 30px; display:block;" />
-        </a>
-        <a href="https://www.instagram.com/aibochinese/" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
-          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-instagram-30.png" style="width: 30px; height: 30px; display:block;" />
-        </a>
-      </p>
-      <p style="font-size: 12px; color: lab(1.98% 0.26 0.09);">
-        © 2025 <a href="https://blog.aibochinese.com/" style="color:hsl(271, 96%, 41%)" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留【<a href="https://blog.aibochinese.com/education/tutor%20guide" style="color:rgb(236, 8, 8)" target="_blank" rel="noopener noreferrer">教师入驻指南</a>】
-      </p>
-      <p>_</p>
-    </div>
-  </footer>
 
-  <!-- 移动端底部导航栏 -->
-  <div class="mobile-nav">
-    <a href="index.html">
-      <i class="fa fa-home"></i>
-      <span>Home</span>
-    </a>
-    <a href="library.html">
-      <i class="fa fa-book"></i>
-      <span>Library</span>
-    </a>
-    <a href="https://x.com/i/communities/1988587472637554689" class="highlight">
-      <div class="highlight-btn">
-        <i class="fa fa-video-camera"></i>
+    <!-- 第一组：独体字 -->
+    <div class="hanzi-group">
+      <h2>第一组：独体字</h2>
+      <div class="hanzi-grid">
+        <button class="hanzi-btn" data-hanzi="一" data-pinyin="yī" data-meaning="数字1">一</button>
+        <button class="hanzi-btn" data-hanzi="二" data-pinyin="èr" data-meaning="数字2">二</button>
+        <button class="hanzi-btn" data-hanzi="三" data-pinyin="sān" data-meaning="数字3">三</button>
+        <button class="hanzi-btn" data-hanzi="人" data-pinyin="rén" data-meaning="人类">人</button>
+        <button class="hanzi-btn" data-hanzi="大" data-pinyin="dà" data-meaning="大小">大</button>
+        <button class="hanzi-btn" data-hanzi="天" data-pinyin="tiān" data-meaning="天空">天</button>
+        <button class="hanzi-btn" data-hanzi="日" data-pinyin="rì" data-meaning="太阳">日</button>
+        <button class="hanzi-btn" data-hanzi="月" data-pinyin="yuè" data-meaning="月亮">月</button>
+        <button class="hanzi-btn" data-hanzi="山" data-pinyin="shān" data-meaning="山峰">山</button>
+        <button class="hanzi-btn" data-hanzi="水" data-pinyin="shuǐ" data-meaning="水流">水</button>
+        <button class="hanzi-btn" data-hanzi="火" data-pinyin="huǒ" data-meaning="火焰">火</button>
+        <button class="hanzi-btn" data-hanzi="木" data-pinyin="mù" data-meaning="树木">木</button>
+        <button class="hanzi-btn" data-hanzi="口" data-pinyin="kǒu" data-meaning="嘴巴">口</button>
+        <button class="hanzi-btn" data-hanzi="心" data-pinyin="xīn" data-meaning="心脏">心</button>
+        <button class="hanzi-btn" data-hanzi="手" data-pinyin="shǒu" data-meaning="手掌">手</button>
+        <button class="hanzi-btn" data-hanzi="目" data-pinyin="mù" data-meaning="眼睛">目</button>
+        <button class="hanzi-btn" data-hanzi="田" data-pinyin="tián" data-meaning="田地">田</button>
+        <button class="hanzi-btn" data-hanzi="土" data-pinyin="tǔ" data-meaning="土地">土</button>
+        <button class="hanzi-btn" data-hanzi="石" data-pinyin="shí" data-meaning="石头">石</button>
+        <button class="hanzi-btn" data-hanzi="金" data-pinyin="jīn" data-meaning="金属">金</button>
+        <button class="hanzi-btn" data-hanzi="玉" data-pinyin="yù" data-meaning="玉石">玉</button>
+        <button class="hanzi-btn" data-hanzi="贝" data-pinyin="bèi" data-meaning="贝壳">贝</button>
+        <button class="hanzi-btn" data-hanzi="虫" data-pinyin="chóng" data-meaning="虫子">虫</button>
+        <button class="hanzi-btn" data-hanzi="鱼" data-pinyin="yú" data-meaning="鱼类">鱼</button>
+        <button class="hanzi-btn" data-hanzi="鸟" data-pinyin="niǎo" data-meaning="鸟类">鸟</button>
+        <button class="hanzi-btn" data-hanzi="马" data-pinyin="mǎ" data-meaning="马匹">马</button>
+        <button class="hanzi-btn" data-hanzi="牛" data-pinyin="niú" data-meaning="牛">牛</button>
+        <button class="hanzi-btn" data-hanzi="羊" data-pinyin="yáng" data-meaning="羊">羊</button>
+        <button class="hanzi-btn" data-hanzi="犬" data-pinyin="quǎn" data-meaning="狗">犬</button>
+        <button class="hanzi-btn" data-hanzi="豕" data-pinyin="shǐ" data-meaning="猪">豕</button>
+        <button class="hanzi-btn" data-hanzi="刀" data-pinyin="dāo" data-meaning="刀具">刀</button>
+        <button class="hanzi-btn" data-hanzi="戈" data-pinyin="gē" data-meaning="兵器">戈</button>
+        <button class="hanzi-btn" data-hanzi="弓" data-pinyin="gōng" data-meaning="弓箭">弓</button>
+        <button class="hanzi-btn" data-hanzi="矢" data-pinyin="shǐ" data-meaning="箭">矢</button>
+        <button class="hanzi-btn" data-hanzi="车" data-pinyin="chē" data-meaning="车辆">车</button>
+        <button class="hanzi-btn" data-hanzi="舟" data-pinyin="zhōu" data-meaning="船只">舟</button>
+        <button class="hanzi-btn" data-hanzi="止" data-pinyin="zhǐ" data-meaning="停止">止</button>
+        <button class="hanzi-btn" data-hanzi="走" data-pinyin="zǒu" data-meaning="行走">走</button>
+        <button class="hanzi-btn" data-hanzi="行" data-pinyin="xíng" data-meaning="行走">行</button>
+        <button class="hanzi-btn" data-hanzi="立" data-pinyin="lì" data-meaning="站立">立</button>
+        <button class="hanzi-btn" data-hanzi="坐" data-pinyin="zuò" data-meaning="坐下">坐</button>
+        <button class="hanzi-btn" data-hanzi="卧" data-pinyin="wò" data-meaning="躺下">卧</button>
+        <button class="hanzi-btn" data-hanzi="尸" data-pinyin="shī" data-meaning="尸体">尸</button>
+        <button class="hanzi-btn" data-hanzi="身" data-pinyin="shēn" data-meaning="身体">身</button>
+        <button class="hanzi-btn" data-hanzi="首" data-pinyin="shǒu" data-meaning="头部">首</button>
+        <button class="hanzi-btn" data-hanzi="面" data-pinyin="miàn" data-meaning="面部">面</button>
+        <button class="hanzi-btn" data-hanzi="耳" data-pinyin="ěr" data-meaning="耳朵">耳</button>
+        <button class="hanzi-btn" data-hanzi="鼻" data-pinyin="bí" data-meaning="鼻子">鼻</button>
+        <button class="hanzi-btn" data-hanzi="舌" data-pinyin="shé" data-meaning="舌头">舌</button>
       </div>
-      <span>Newest</span>
-    </a>
-    <a href="groups.html">
-      <i class="fa fa-users"></i>
-      <span>Groups</span>
-    </a>
-    <a href="payments.html" class="active">
-      <i class="fa fa-credit-card"></i>
-      <span>To Pay</span>
-    </a>
+    </div>
+
+    <!-- 第二组：简单合体字 -->
+    <div class="hanzi-group">
+      <h2>第二组：简单合体字</h2>
+      <div class="hanzi-grid">
+        <button class="hanzi-btn" data-hanzi="好" data-pinyin="hǎo" data-meaning="美好">好</button>
+        <button class="hanzi-btn" data-hanzi="明" data-pinyin="míng" data-meaning="明亮">明</button>
+        <button class="hanzi-btn" data-hanzi="林" data-pinyin="lín" data-meaning="树林">林</button>
+        <button class="hanzi-btn" data-hanzi="森" data-pinyin="sēn" data-meaning="森林">森</button>
+        <button class="hanzi-btn" data-hanzi="亮" data-pinyin="liàng" data-meaning="光亮">亮</button>
+        <button class="hanzi-btn" data-hanzi="休" data-pinyin="xiū" data-meaning="休息">休</button>
+        <button class="hanzi-btn" data-hanzi="妈" data-pinyin="mā" data-meaning="妈妈">妈</button>
+        <button class="hanzi-btn" data-hanzi="爸" data-pinyin="bà" data-meaning="爸爸">爸</button>
+        <button class="hanzi-btn" data-hanzi="哥" data-pinyin="gē" data-meaning="哥哥">哥</button>
+        <button class="hanzi-btn" data-hanzi="姐" data-pinyin="jiě" data-meaning="姐姐">姐</button>
+        <button class="hanzi-btn" data-hanzi="弟" data-pinyin="dì" data-meaning="弟弟">弟</button>
+        <button class="hanzi-btn" data-hanzi="妹" data-pinyin="mèi" data-meaning="妹妹">妹</button>
+        <button class="hanzi-btn" data-hanzi="爷" data-pinyin="yé" data-meaning="爷爷">爷</button>
+        <button class="hanzi-btn" data-hanzi="奶" data-pinyin="nǎi" data-meaning="奶奶">奶</button>
+        <button class="hanzi-btn" data-hanzi="家" data-pinyin="jiā" data-meaning="家庭">家</button>
+        <button class="hanzi-btn" data-hanzi="国" data-pinyin="guó" data-meaning="国家">国</button>
+        <button class="hanzi-btn" data-hanzi="校" data-pinyin="xiào" data-meaning="学校">校</button>
+        <button class="hanzi-btn" data-hanzi="学" data-pinyin="xué" data-meaning="学习">学</button>
+        <button class="hanzi-btn" data-hanzi="生" data-pinyin="shēng" data-meaning="学生">生</button>
+        <button class="hanzi-btn" data-hanzi="师" data-pinyin="shī" data-meaning="老师">师</button>
+        <button class="hanzi-btn" data-hanzi="教" data-pinyin="jiào" data-meaning="教育">教</button>
+        <button class="hanzi-btn" data-hanzi="室" data-pinyin="shì" data-meaning="教室">室</button>
+        <button class="hanzi-btn" data-hanzi="书" data-pinyin="shū" data-meaning="书本">书</button>
+        <button class="hanzi-btn" data-hanzi="本" data-pinyin="běn" data-meaning="本子">本</button>
+        <button class="hanzi-btn" data-hanzi="笔" data-pinyin="bǐ" data-meaning="笔">笔</button>
+        <button class="hanzi-btn" data-hanzi="纸" data-pinyin="zhǐ" data-meaning="纸张">纸</button>
+        <button class="hanzi-btn" data-hanzi="墨" data-pinyin="mò" data-meaning="墨水">墨</button>
+        <button class="hanzi-btn" data-hanzi="砚" data-pinyin="yàn" data-meaning="砚台">砚</button>
+        <button class="hanzi-btn" data-hanzi="文" data-pinyin="wén" data-meaning="文化">文</button>
+        <button class="hanzi-btn" data-hanzi="字" data-pinyin="zì" data-meaning="汉字">字</button>
+        <button class="hanzi-btn" data-hanzi="词" data-pinyin="cí" data-meaning="词语">词</button>
+        <button class="hanzi-btn" data-hanzi="句" data-pinyin="jù" data-meaning="句子">句</button>
+        <button class="hanzi-btn" data-hanzi="章" data-pinyin="zhāng" data-meaning="章节">章</button>
+        <button class="hanzi-btn" data-hanzi="语" data-pinyin="yǔ" data-meaning="语言">语</button>
+        <button class="hanzi-btn" data-hanzi="言" data-pinyin="yán" data-meaning="言语">言</button>
+        <button class="hanzi-btn" data-hanzi="听" data-pinyin="tīng" data-meaning="听见">听</button>
+        <button class="hanzi-btn" data-hanzi="说" data-pinyin="shuō" data-meaning="说话">说</button>
+        <button class="hanzi-btn" data-hanzi="读" data-pinyin="dú" data-meaning="阅读">读</button>
+        <button class="hanzi-btn" data-hanzi="写" data-pinyin="xiě" data-meaning="书写">写</button>
+        <button class="hanzi-btn" data-hanzi="看" data-pinyin="kàn" data-meaning="看见">看</button>
+        <button class="hanzi-btn" data-hanzi="见" data-pinyin="jiàn" data-meaning="见面">见</button>
+        <button class="hanzi-btn" data-hanzi="想" data-pinyin="xiǎng" data-meaning="思考">想</button>
+        <button class="hanzi-btn" data-hanzi="思" data-pinyin="sī" data-meaning="思念">思</button>
+        <button class="hanzi-btn" data-hanzi="念" data-pinyin="niàn" data-meaning="想念">念</button>
+        <button class="hanzi-btn" data-hanzi="爱" data-pinyin="ài" data-meaning="爱情">爱</button>
+        <button class="hanzi-btn" data-hanzi="情" data-pinyin="qíng" data-meaning="感情">情</button>
+        <button class="hanzi-btn" data-hanzi="感" data-pinyin="gǎn" data-meaning="感觉">感</button>
+      </div>
+    </div>
+
+    <!-- 第三组：常用高频字 -->
+    <div class="hanzi-group">
+      <h2>第三组：常用高频字</h2>
+      <div class="hanzi-grid">
+        <button class="hanzi-btn" data-hanzi="我" data-pinyin="wǒ" data-meaning="自己">我</button>
+        <button class="hanzi-btn" data-hanzi="你" data-pinyin="nǐ" data-meaning="你">你</button>
+        <button class="hanzi-btn" data-hanzi="他" data-pinyin="tā" data-meaning="他">他</button>
+        <button class="hanzi-btn" data-hanzi="她" data-pinyin="tā" data-meaning="她">她</button>
+        <button class="hanzi-btn" data-hanzi="它" data-pinyin="tā" data-meaning="它">它</button>
+        <button class="hanzi-btn" data-hanzi="们" data-pinyin="men" data-meaning="们">们</button>
+        <button class="hanzi-btn" data-hanzi="这" data-pinyin="zhè" data-meaning="这个">这</button>
+        <button class="hanzi-btn" data-hanzi="那" data-pinyin="nà" data-meaning="那个">那</button>
+        <button class="hanzi-btn" data-hanzi="里" data-pinyin="lǐ" data-meaning="里面">里</button>
+        <button class="hanzi-btn" data-hanzi="外" data-pinyin="wài" data-meaning="外面">外</button>
+        <button class="hanzi-btn" data-hanzi="上" data-pinyin="shàng" data-meaning="上面">上</button>
+        <button class="hanzi-btn" data-hanzi="下" data-pinyin="xià" data-meaning="下面">下</button>
+        <button class="hanzi-btn" data-hanzi="左" data-pinyin="zuǒ" data-meaning="左边">左</button>
+        <button class="hanzi-btn" data-hanzi="右" data-pinyin="yòu" data-meaning="右边">右</button>
+        <button class="hanzi-btn" data-hanzi="前" data-pinyin="qián" data-meaning="前面">前</button>
+        <button class="hanzi-btn" data-hanzi="后" data-pinyin="hòu" data-meaning="后面">后</button>
+        <button class="hanzi-btn" data-hanzi="中" data-pinyin="zhōng" data-meaning="中间">中</button>
+        <button class="hanzi-btn" data-hanzi="间" data-pinyin="jiān" data-meaning="中间">间</button>
+        <button class="hanzi-btn" data-hanzi="日" data-pinyin="rì" data-meaning="日子">日</button>
+        <button class="hanzi-btn" data-hanzi="月" data-pinyin="yuè" data-meaning="月份">月</button>
+        <button class="hanzi-btn" data-hanzi="年" data-pinyin="nián" data-meaning="年份">年</button>
+        <button class="hanzi-btn" data-hanzi="天" data-pinyin="tiān" data-meaning="天气">天</button>
+        <button class="hanzi-btn" data-hanzi="地" data-pinyin="dì" data-meaning="土地">地</button>
+        <button class="hanzi-btn" data-hanzi="风" data-pinyin="fēng" data-meaning="风">风</button>
+        <button class="hanzi-btn" data-hanzi="雨" data-pinyin="yǔ" data-meaning="雨">雨</button>
+        <button class="hanzi-btn" data-hanzi="雷" data-pinyin="léi" data-meaning="雷电">雷</button>
+        <button class="hanzi-btn" data-hanzi="电" data-pinyin="diàn" data-meaning="电">电</button>
+        <button class="hanzi-btn" data-hanzi="雪" data-pinyin="xuě" data-meaning="雪">雪</button>
+        <button class="hanzi-btn" data-hanzi="霜" data-pinyin="shuāng" data-meaning="霜">霜</button>
+        <button class="hanzi-btn" data-hanzi="雾" data-pinyin="wù" data-meaning="雾">雾</button>
+        <button class="hanzi-btn" data-hanzi="晴" data-pinyin="qíng" data-meaning="晴天">晴</button>
+        <button class="hanzi-btn" data-hanzi="阴" data-pinyin="yīn" data-meaning="阴天">阴</button>
+        <button class="hanzi-btn" data-hanzi="云" data-pinyin="yún" data-meaning="云彩">云</button>
+        <button class="hanzi-btn" data-hanzi="水" data-pinyin="shuǐ" data-meaning="水">水</button>
+        <button class="hanzi-btn" data-hanzi="火" data-pinyin="huǒ" data-meaning="火">火</button>
+        <button class="hanzi-btn" data-hanzi="光" data-pinyin="guāng" data-meaning="光明">光</button>
+        <button class="hanzi-btn" data-hanzi="热" data-pinyin="rè" data-meaning="热">热</button>
+        <button class="hanzi-btn" data-hanzi="冷" data-pinyin="lěng" data-meaning="冷">冷</button>
+        <button class="hanzi-btn" data-hanzi="温" data-pinyin="wēn" data-meaning="温暖">温</button>
+        <button class="hanzi-btn" data-hanzi="凉" data-pinyin="liáng" data-meaning="凉爽">凉</button>
+        <button class="hanzi-btn" data-hanzi="开" data-pinyin="kāi" data-meaning="打开">开</button>
+        <button class="hanzi-btn" data-hanzi="关" data-pinyin="guān" data-meaning="关闭">关</button>
+        <button class="hanzi-btn" data-hanzi="进" data-pinyin="jìn" data-meaning="进入">进</button>
+        <button class="hanzi-btn" data-hanzi="出" data-pinyin="chū" data-meaning="出去">出</button>
+        <button class="hanzi-btn" data-hanzi="来" data-pinyin="lái" data-meaning="来">来</button>
+        <button class="hanzi-btn" data-hanzi="去" data-pinyin="qù" data-meaning="去">去</button>
+        <button class="hanzi-btn" data-hanzi="回" data-pinyin="huí" data-meaning="回来">回</button>
+        <button class="hanzi-btn" data-hanzi="起" data-pinyin="qǐ" data-meaning="起来">起</button>
+        <button class="hanzi-btn" data-hanzi="坐" data-pinyin="zuò" data-meaning="坐下">坐</button>
+      </div>
+    </div>
   </div>
 
+  <script>
+    // 汉字数据
+    const hanziData = {
+      "一": { pinyin: "yī", meaning: "数字1" },
+      "二": { pinyin: "èr", meaning: "数字2" },
+      "三": { pinyin: "sān", meaning: "数字3" },
+      "人": { pinyin: "rén", meaning: "人类" },
+      "大": { pinyin: "dà", meaning: "大小" },
+      "天": { pinyin: "tiān", meaning: "天空" },
+      "日": { pinyin: "rì", meaning: "太阳" },
+      "月": { pinyin: "yuè", meaning: "月亮" },
+      "山": { pinyin: "shān", meaning: "山峰" },
+      "水": { pinyin: "shuǐ", meaning: "水流" },
+      "火": { pinyin: "huǒ", meaning: "火焰" },
+      "木": { pinyin: "mù", meaning: "树木" },
+      "口": { pinyin: "kǒu", meaning: "嘴巴" },
+      "心": { pinyin: "xīn", meaning: "心脏" },
+      "手": { pinyin: "shǒu", meaning: "手掌" },
+      "目": { pinyin: "mù", meaning: "眼睛" },
+      "田": { pinyin: "tián", meaning: "田地" },
+      "土": { pinyin: "tǔ", meaning: "土地" },
+      "石": { pinyin: "shí", meaning: "石头" },
+      "金": { pinyin: "jīn", meaning: "金属" },
+      "玉": { pinyin: "yù", meaning: "玉石" },
+      "贝": { pinyin: "bèi", meaning: "贝壳" },
+      "虫": { pinyin: "chóng", meaning: "虫子" },
+      "鱼": { pinyin: "yú", meaning: "鱼类" },
+      "鸟": { pinyin: "niǎo", meaning: "鸟类" },
+      "马": { pinyin: "mǎ", meaning: "马匹" },
+      "牛": { pinyin: "niú", meaning: "牛" },
+      "羊": { pinyin: "yáng", meaning: "羊" },
+      "犬": { pinyin: "quǎn", meaning: "狗" },
+      "豕": { pinyin: "shǐ", meaning: "猪" },
+      "刀": { pinyin: "dāo", meaning: "刀具" },
+      "戈": { pinyin: "gē", meaning: "兵器" },
+      "弓": { pinyin: "gōng", meaning: "弓箭" },
+      "矢": { pinyin: "shǐ", meaning: "箭" },
+      "车": { pinyin: "chē", meaning: "车辆" },
+      "舟": { pinyin: "zhōu", meaning: "船只" },
+      "止": { pinyin: "zhǐ", meaning: "停止" },
+      "走": { pinyin: "zǒu", meaning: "行走" },
+      "行": { pinyin: "xíng", meaning: "行走" },
+      "立": { pinyin: "lì", meaning: "站立" },
+      "坐": { pinyin: "zuò", meaning: "坐下" },
+      "卧": { pinyin: "wò", meaning: "躺下" },
+      "尸": { pinyin: "shī", meaning: "尸体" },
+      "身": { pinyin: "shēn", meaning: "身体" },
+      "首": { pinyin: "shǒu", meaning: "头部" },
+      "面": { pinyin: "miàn", meaning: "面部" },
+      "耳": { pinyin: "ěr", meaning: "耳朵" },
+      "鼻": { pinyin: "bí", meaning: "鼻子" },
+      "舌": { pinyin: "shé", meaning: "舌头" },
+      "好": { pinyin: "hǎo", meaning: "美好" },
+      "明": { pinyin: "míng", meaning: "明亮" },
+      "林": { pinyin: "lín", meaning: "树林" },
+      "森": { pinyin: "sēn", meaning: "森林" },
+      "亮": { pinyin: "liàng", meaning: "光亮" },
+      "休": { pinyin: "xiū", meaning: "休息" },
+      "妈": { pinyin: "mā", meaning: "妈妈" },
+      "爸": { pinyin: "bà", meaning: "爸爸" },
+      "哥": { pinyin: "gē", meaning: "哥哥" },
+      "姐": { pinyin: "jiě", meaning: "姐姐" },
+      "弟": { pinyin: "dì", meaning: "弟弟" },
+      "妹": { pinyin: "mèi", meaning: "妹妹" },
+      "爷": { pinyin: "yé", meaning: "爷爷" },
+      "奶": { pinyin: "nǎi", meaning: "奶奶" },
+      "家": { pinyin: "jiā", meaning: "家庭" },
+      "国": { pinyin: "guó", meaning: "国家" },
+      "校": { pinyin: "xiào", meaning: "学校" },
+      "学": { pinyin: "xué", meaning: "学习" },
+      "生": { pinyin: "shēng", meaning: "学生" },
+      "师": { pinyin: "shī", meaning: "老师" },
+      "教": { pinyin: "jiào", meaning: "教育" },
+      "室": { pinyin: "shì", meaning: "教室" },
+      "书": { pinyin: "shū", meaning: "书本" },
+      "本": { pinyin: "běn", meaning: "本子" },
+      "笔": { pinyin: "bǐ", meaning: "笔" },
+      "纸": { pinyin: "zhǐ", meaning: "纸张" },
+      "墨": { pinyin: "mò", meaning: "墨水" },
+      "砚": { pinyin: "yàn", meaning: "砚台" },
+      "文": { pinyin: "wén", meaning: "文化" },
+      "字": { pinyin: "zì", meaning: "汉字" },
+      "词": { pinyin: "cí", meaning: "词语" },
+      "句": { pinyin: "jù", meaning: "句子" },
+      "章": { pinyin: "zhāng", meaning: "章节" },
+      "语": { pinyin: "yǔ", meaning: "语言" },
+      "言": { pinyin: "yán", meaning: "言语" },
+      "听": { pinyin: "tīng", meaning: "听见" },
+      "说": { pinyin: "shuō", meaning: "说话" },
+      "读": { pinyin: "dú", meaning: "阅读" },
+      "写": { pinyin: "xiě", meaning: "书写" },
+      "看": { pinyin: "kàn", meaning: "看见" },
+      "见": { pinyin: "jiàn", meaning: "见面" },
+      "想": { pinyin: "xiǎng", meaning: "思考" },
+      "思": { pinyin: "sī", meaning: "思念" },
+      "念": { pinyin: "niàn", meaning: "想念" },
+      "爱": { pinyin: "ài", meaning: "爱情" },
+      "情": { pinyin: "qíng", meaning: "感情" },
+      "感": { pinyin: "gǎn", meaning: "感觉" },
+      "我": { pinyin: "wǒ", meaning: "自己" },
+      "你": { pinyin: "nǐ", meaning: "你" },
+      "他": { pinyin: "tā", meaning: "他" },
+      "她": { pinyin: "tā", meaning: "她" },
+      "它": { pinyin: "tā", meaning: "它" },
+      "们": { pinyin: "men", meaning: "们" },
+      "这": { pinyin: "zhè", meaning: "这个" },
+      "那": { pinyin: "nà", meaning: "那个" },
+      "里": { pinyin: "lǐ", meaning: "里面" },
+      "外": { pinyin: "wài", meaning: "外面" },
+      "上": { pinyin: "shàng", meaning: "上面" },
+      "下": { pinyin: "xià", meaning: "下面" },
+      "左": { pinyin: "zuǒ", meaning: "左边" },
+      "右": { pinyin: "yòu", meaning: "右边" },
+      "前": { pinyin: "qián", meaning: "前面" },
+      "后": { pinyin: "hòu", meaning: "后面" },
+      "中": { pinyin: "zhōng", meaning: "中间" },
+      "间": { pinyin: "jiān", meaning: "中间" },
+      "日": { pinyin: "rì", meaning: "日子" },
+      "月": { pinyin: "yuè", meaning: "月份" },
+      "年": { pinyin: "nián", meaning: "年份" },
+      "天": { pinyin: "tiān", meaning: "天气" },
+      "地": { pinyin: "dì", meaning: "土地" },
+      "风": { pinyin: "fēng", meaning: "风" },
+      "雨": { pinyin: "yǔ", meaning: "雨" },
+      "雷": { pinyin: "léi", meaning: "雷电" },
+      "电": { pinyin: "diàn", meaning: "电" },
+      "雪": { pinyin: "xuě", meaning: "雪" },
+      "霜": { pinyin: "shuāng", meaning: "霜" },
+      "雾": { pinyin: "wù", meaning: "雾" },
+      "晴": { pinyin: "qíng", meaning: "晴天" },
+      "阴": { pinyin: "yīn", meaning: "阴天" },
+      "云": { pinyin: "yún", meaning: "云彩" },
+      "水": { pinyin: "shuǐ", meaning: "水" },
+      "火": { pinyin: "huǒ", meaning: "火" },
+      "光": { pinyin: "guāng", meaning: "光明" },
+      "热": { pinyin: "rè", meaning: "热" },
+      "冷": { pinyin: "lěng", meaning: "冷" },
+      "温": { pinyin: "wēn", meaning: "温暖" },
+      "凉": { pinyin: "liáng", meaning: "凉爽" },
+      "开": { pinyin: "kāi", meaning: "打开" },
+      "关": { pinyin: "guān", meaning: "关闭" },
+      "进": { pinyin: "jìn", meaning: "进入" },
+      "出": { pinyin: "chū", meaning: "出去" },
+      "来": { pinyin: "lái", meaning: "来" },
+      "去": { pinyin: "qù", meaning: "去" },
+      "回": { pinyin: "huí", meaning: "回来" },
+      "起": { pinyin: "qǐ", meaning: "起来" },
+      "坐": { pinyin: "zuò", meaning: "坐下" }
+    };
+
+    // 页面加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取所有汉字按钮
+      const hanziBtns = document.querySelectorAll('.hanzi-btn');
+      // 获取搜索输入框
+      const searchInput = document.getElementById('search-input');
+
+      // 为每个按钮添加点击事件
+      hanziBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const hanzi = this.getAttribute('data-hanzi');
+          const pinyin = this.getAttribute('data-pinyin');
+          const meaning = this.getAttribute('data-meaning');
+          
+          // 显示alert
+          alert(`汉字：${hanzi}\n拼音：${pinyin || '未知'}\n解释：${meaning || '暂无解释'}`);
+        });
+      });
+
+      // 搜索功能
+      searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        
+        hanziBtns.forEach(btn => {
+          const hanzi = btn.getAttribute('data-hanzi').toLowerCase();
+          const pinyin = btn.getAttribute('data-pinyin').toLowerCase();
+          const meaning = (btn.getAttribute('data-meaning') || '').toLowerCase();
+          
+          // 检查汉字、拼音或解释是否包含搜索词
+          if (hanzi.includes(searchTerm) || pinyin.includes(searchTerm) || meaning.includes(searchTerm)) {
+            btn.classList.remove('hidden');
+          } else {
+            btn.classList.add('hidden');
+          }
+        });
+      });
+  });
+
+  // 汉堡菜单和导航功能
+  document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', function(e) {
+        // 移除preventDefault()和stopPropagation()，因为按钮没有默认行为需要阻止
+        navMenu.classList.toggle('show');
+      });
+
+      // 点击页面其他地方关闭菜单
+      document.addEventListener('click', function(e) {
+        if (!navToggle.contains(e.target) && !navMenu.contains(e.target) && navMenu.classList.contains('show')) {
+          navMenu.classList.remove('show');
+        }
+      });
+      
+      // 确保点击菜单内部不会关闭菜单
+      navMenu.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    }
+    
+    // 移动端底部导航栏交互
+    const mobileNavItems = document.querySelectorAll('.mobile-nav a');
+    mobileNavItems.forEach(item => {
+      item.addEventListener('click', function() {
+        mobileNavItems.forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  });
+  </script>
   <!-- 右侧悬浮客服组 -->
   <div class="floating-contact">
     <!-- Telegram（推荐两种方式任选其一） -->
@@ -523,62 +870,59 @@
         <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/messenger.svg" alt="Messenger">
     </a> -->
   </div>
-
-  <script>
-    // 汉堡菜单和导航功能
-    document.addEventListener('DOMContentLoaded', function() {
-      const navToggle = document.getElementById('nav-toggle');
-      const navMenu = document.getElementById('nav-menu');
-      
-      if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function(e) {
-          // 移除preventDefault()和stopPropagation()，因为按钮没有默认行为需要阻止
-          navMenu.classList.toggle('show');
-        });
-
-        // 点击页面其他地方关闭菜单
-        document.addEventListener('click', function(e) {
-          if (!navToggle.contains(e.target) && !navMenu.contains(e.target) && navMenu.classList.contains('show')) {
-            navMenu.classList.remove('show');
-          }
-        });
-        
-        // 确保点击菜单内部不会关闭菜单
-        navMenu.addEventListener('click', function(e) {
-          e.stopPropagation();
-        });
-      }
-      
-      // 移动端底部导航栏交互
-      const mobileNavItems = document.querySelectorAll('.mobile-nav a');
-      mobileNavItems.forEach(item => {
-        item.addEventListener('click', function() {
-          mobileNavItems.forEach(i => i.classList.remove('active'));
-          this.classList.add('active');
-        });
-      });
-    });
-  </script>
-    <!-- Pagefind 搜索脚本 -->
-<script src="/post/pagefind/pagefind-ui.js"></script>
-<script>
-    window.addEventListener('DOMContentLoaded', function () {
-        console.log("Initializing Pagefind search...");
-        try {
-            new PagefindUI({
-                element: "#pagefind-search",
-                showImages: false,
-                showSubResults: true,
-                resetStyles: false,
-                translations: {
-                    placeholder: "🔍Words、sentence..."
-                }
-            });
-            console.log("Pagefind search initialized successfully");
-        } catch (error) {
-            console.error("Pagefind search initialization failed:", error);
-        }
-    });
-</script>
+  <!-- 移动端底部导航栏 -->
+  <div class="mobile-nav">
+    <a href="index.html">
+      <i class="fa fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="library.html">
+      <i class="fa fa-book"></i>
+      <span>Library</span>
+    </a>
+    <a href="https://x.com/i/communities/1988587472637554689" class="highlight">
+      <div class="highlight-btn">
+        <i class="fa fa-video-camera"></i>
+      </div>
+      <span>Newest</span>
+    </a>
+    <a href="groups.html">
+      <i class="fa fa-users"></i>
+      <span>Groups</span>
+    </a>
+    <a href="payments.html" class="active">
+      <i class="fa fa-credit-card"></i>
+      <span>To Pay</span>
+    </a>
+  </div>
+  <footer>
+    <div class="footer">
+      <p style="margin-bottom: 10px;">
+        🙏Follow us:
+        <a href="https://www.youtube.com/@AiboChinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://x.com/i/communities/1988587472637554689" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://www.facebook.com/site.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://www.tiktok.com/@mr.abelzou" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+        <a href="https://www.instagram.com/aibochinese/" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer">
+          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-instagram-30.png" style="width: 30px; height: 30px; display:block;" />
+        </a>
+      </p>
+      <p style="font-size: 12px; color: lab(1.98% 0.26 0.09);">
+        © 2025 <a href="https://blog.aibochinese.com/" style="color:hsl(271, 96%, 41%)" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留【<a href="https://blog.aibochinese.com/education/tutor%20guide" style="color:rgb(236, 8, 8)" target="_blank" rel="noopener noreferrer">教师入驻指南</a>】
+      </p>
+      <p>_</p>
+    </div>
+  </footer>
 </body>
 </html>
