@@ -577,7 +577,15 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             color: white;
         }
+        .E-CNY-btn {
+            background: linear-gradient(135deg, hwb(310 9% 0%), hsl(56, 100%, 46%));
+        }
 
+        .E-CNY-btn:hover {
+            background: linear-gradient(135deg, hsl(335, 67%, 53%), hsl(56, 100%, 40%));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(22, 119, 255, 0.4);
+        }
         .alipay-btn {
             background: linear-gradient(135deg, #1677ff, #00a0e9);
         }
@@ -747,14 +755,17 @@
         </div>
     </div>
     <div class="container">
-        <h1>Alipay|Wechat Pay + Credit Card</h1>
+        <h1>E_CNY|Alipay|Wechat Pay + Credit Card</h1>
         
         <div class="content-wrapper">
             <div class="image-section">
-                <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/wechat%20alipay-creditcard.png" alt="支付图片">
+                <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/ECNYwechat%20alipay-creditcard.png" alt="支付图片">
             </div>
             
             <div class="button-section">
+               <button class="payment-btn E-CNY-btn" onclick="showQRCode('E-CNY')">
+                    E-CNY QR
+                </button>
                 <button class="payment-btn alipay-btn" onclick="showQRCode('alipay')">
                     Alipay QR
                 </button>
@@ -764,6 +775,19 @@
             </div>
         </div>
     </div>
+
+     <!-- E-CNY弹窗 -->
+<div id="E-CNYModal" class="modal" onclick="closeModal('E-CNYModal')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <h2 class="modal-title">E-CNY支付</h2>
+            <button class="close-btn" onclick="closeModal('E-CNYModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/ECNYcreditcard.png" alt="E_CNY二维码" class="qr-code">
+        </div>
+    </div>
+</div>
 
  <!-- 支付宝弹窗 -->
 <div id="alipayModal" class="modal" onclick="closeModal('alipayModal')">
@@ -1083,7 +1107,14 @@
 
         // 显示二维码弹窗
         function showQRCode(type) {
-            const modalId = type === 'alipay' ? 'alipayModal' : 'wechatModal';
+            let modalId;
+            if (type === 'alipay') {
+                modalId = 'alipayModal';
+            } else if (type === 'wechat') {
+                modalId = 'wechatModal';
+            } else if (type === 'E-CNY') {
+                modalId = 'E-CNYModal';
+            }
             const modal = document.getElementById(modalId);
             modal.classList.add('active');
         }
@@ -1111,6 +1142,7 @@
             if (e.key === 'Escape') {
                 closeModal('alipayModal');
                 closeModal('wechatModal');
+                closeModal('E-CNYModal');
                 closeModal('accountModal');
             }
         });
