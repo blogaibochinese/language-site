@@ -393,16 +393,40 @@
             gap: 15px;
         }
 
-        .binance-pay-btn:hover {
+        .pay-buttons-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .binance-pay-btn,
+        .krak-pay-btn {
+            flex: 1;
+            background: linear-gradient(135deg, hsl(45, 15%, 90%) 0%, #dad3bb 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .binance-pay-btn:hover,
+        .krak-pay-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(240, 185, 11, 0.3);
         }
 
-        .binance-pay-btn img {
+        .binance-pay-btn img,
+        .krak-pay-btn img {
             height: 40px;
         }
 
-        .binance-pay-btn span {
+        .binance-pay-btn span,
+        .krak-pay-btn span {
             font-size: 20px;
             font-weight: bold;
             color: #1e2329;
@@ -655,13 +679,19 @@
     <div class="container">
         <p>_</p>  
         <p>_</p>             
-         <!-- Binance Pay Section -->
+         <!-- App Scan-to-Transfer Section -->
         <div class="payment-section">
             <div class="section-title">🔸 App Scan-to-Transfer |<a href="https://accounts.maxweb.red/zh-CN/register?ref=569491541" style="color:red" target="_blank" rel="noopener noreferrer"> Open Account</a></div>
-           <button class="binance-pay-btn" onclick="showBinancePay()">
-            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/crypto%20pay/binance%20logo.png" alt="Binance Logo" width="40" height="40">
-                <span>Binance Pay</span>
-            </button>
+            <div class="pay-buttons-container">
+                <button class="binance-pay-btn" onclick="showBinancePay()">
+                    <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/crypto%20pay/binance%20logo.png" alt="Binance Logo" width="40" height="40">
+                    <span>Binance Pay</span>
+                </button>
+                <button class="krak-pay-btn" onclick="showKrakPay()">
+                    <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/Krak%20Logo.png" alt="Krak Logo" width="40" height="40">
+                    <span>Krak Pay</span>
+                </button>
+            </div>
         </div>
 
         <!-- Crypto Selection Section -->
@@ -732,6 +762,25 @@
             </div>
             <div class="qr-code" style="margin-top: 20px;">
              <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/crypto%20pay/binancepay-qr.png" 
+         style="max-width: 100%; height: auto;" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Krak Pay Modal -->
+    <div class="modal" id="krakModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeKrakPay()">&times;</span>
+            <h2 style="margin-bottom: 20px; text-align: center;">Krak Pay</h2>
+            <div class="address-box">
+                <div class="address-label">Krak ID</div>
+                <div class="address-content">
+                    <div class="address-text" id="krakAddress">HUANGLINZOU</div>
+                    <button class="copy-btn" onclick="copyKrakAddress()">复制</button>
+                </div>
+            </div>
+            <div class="qr-code" style="margin-top: 20px;">
+             <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/Krak%20code.jpg" 
          style="max-width: 100%; height: auto;" />
             </div>
         </div>
@@ -877,11 +926,35 @@
             });
         }
 
+        function showKrakPay() {
+            document.getElementById('krakModal').classList.add('active');
+        }
+
+        function closeKrakPay() {
+            document.getElementById('krakModal').classList.remove('active');
+        }
+
+        function copyKrakAddress() {
+            const addressText = document.getElementById('krakAddress').textContent;
+            navigator.clipboard.writeText(addressText).then(() => {
+                const btn = event.target;
+                btn.textContent = '已复制!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '复制';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
         // 点击模态框外部关闭
         window.onclick = function(event) {
-            const modal = document.getElementById('binanceModal');
-            if (event.target == modal) {
+            const binanceModal = document.getElementById('binanceModal');
+            const krakModal = document.getElementById('krakModal');
+            if (event.target == binanceModal) {
                 closeBinancePay();
+            } else if (event.target == krakModal) {
+                closeKrakPay();
             }
         }
     </script>
