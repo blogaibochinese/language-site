@@ -117,7 +117,7 @@
                 margin-bottom: 10px;
             }
             .courses-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
@@ -393,25 +393,110 @@
         padding: 100px 15px 100px;
       }
     }
-    /* ==================== Pagefind 搜索样式（搜索框水平居中版） ==================== */
+        /* 悬浮搜索按钮 */
+        .search-float {
+            position: fixed;
+            right: 20px;
+            top: calc(50% + 120px); /* 放在客服组下方 */
+            width: 60px;
+            height: 60px;
+            background-color: #3B82F6; /* 蓝色 */
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            z-index: 9999;
+        }
+
+        .search-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* 搜索弹出窗 */
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-popup {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .search-popup h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .wechat-popup {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            width: 90%;
+        }
+
+        .wechat-qr {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 10px;
+            display: block; /* 二维码图片，用户替换src */
+        }
+
+        .close-btn {
+            background-color: #ff4d4f;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .close-btn:hover {
+            background-color: #ff7875;
+        }
+
+        /* ==================== 全新 Pagefind 搜索样式（搜索框水平居中版） ==================== */
 .search-container {
     position: relative;
-    margin: 0 auto;                    /* 水平居中 */
+    /* 删除 margin-right，改为自动左右 margin 实现居中 */
+    margin: 0 auto;           /* 关键：水平居中 */
     z-index: 1001;
     min-width: 200px;
-    max-width: 380px;
+    max-width: 380px;         /* 建议加上最大宽度，和下拉结果保持一致 */
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: center;  /* 内部元素水平居中 */
     align-items: center;
 }
 
+/* 输入框：去掉宽度 100% + focus 扩展的左右晃动问题 */
 #pagefind-search .pagefind-ui__search-input {
     padding: 10px 16px;
     border: 2px solid #ddd;
     border-radius: 25px;
     font-size: 16px;
-    width: 300px;                      /* 固定宽度，避免 focus 时晃动 */
+    /* 固定宽度，或者使用 min-width + max-width 防止晃动 */
+    width: 300px;                     /* 固定一个舒适的宽度 */
     max-width: 100%;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     background: white;
@@ -423,8 +508,10 @@
 #pagefind-search .pagefind-ui__search-input:focus {
     border-color: #4a6fa5;
     box-shadow: 0 0 0 4px rgba(74, 111, 165, 0.2);
+    /* focus 时不再改变宽度，避免整个搜索框左右晃动 */
 }
 
+/* 下拉结果：从右对齐改为居中对齐 */
 #pagefind-search .pagefind-ui__results {
     background: white;
     border: 1px solid #ddd;
@@ -432,8 +519,9 @@
     box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translateX(-50%);       /* 关键：实现下拉菜单居中 */
+    left: 50%;                        /* 关键：左边 50% */
+    transform: translateX(-50%);      /* 关键：向左偏移自身宽度的一半 → 完全居中 */
+    right: auto;                      /* 取消原来的 right: 0 */
     width: 380px;
     max-height: 70vh;
     overflow-y: auto;
@@ -442,15 +530,28 @@
     padding: 8px 0;
 }
 
-#pagefind-search .pagefind-ui__result { padding: 12px 16px; border-bottom: 1px solid #eee; transition: background-color 0.2s; }
+/* 其余样式保持不变 */
+#pagefind-search .pagefind-ui__result {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
 #pagefind-search .pagefind-ui__result:last-child { border-bottom: none; }
 #pagefind-search .pagefind-ui__result:hover { background-color: #f8f9ff; }
 #pagefind-search .pagefind-ui__result-title { font-size: 15px; font-weight: 600; color: #1f2937; margin-bottom: 4px; }
-#pagefind-search .pagefind-ui__result-link { color: #3B82F6; text-decoration: none; }
+#pagefind-search .pagefind-ui__result-link { 
+    color: #3B82F6; 
+    text-decoration: none; 
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
 #pagefind-search .pagefind-ui__result-link:hover { text-decoration: underline; }
 #pagefind-search .pagefind-ui__result-excerpt { font-size: 13.5px; color: #666; line-height: 1.5; margin-top: 4px; }
 .pagefind-ui__result-excerpt mark { background: #dbeafe; color: #1e40af; padding: 1px 3px; border-radius: 3px; }
 #pagefind-search .pagefind-ui__message { padding: 20px; text-align: center; color: #666; font-size: 14px; }
+
     </style>
 </head>
 <body>
@@ -462,10 +563,13 @@
             <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/1-on-1%20logo%20126%2050.png" alt="网站Logo">
           </a>
         </div>
+    
 
         <button class="nav-toggle" id="nav-toggle">☰</button>
 
         <ul class="nav-menu" id="nav-menu">
+          <li class="nav-item"><a href="top-tutors.html" class="nav-link">Top Tutors</a></li>
+          <li class="nav-item"><a href="HSK-quick.html" class="nav-link">Premium Courses</a></li>
           <li class="nav-item"><a href="library.html" class="nav-link">Library</a></li>
           <li class="nav-item"><a href="groups.html" class="nav-link">Join Groups</a></li>
           <li class="nav-item"><a href="payments.html" class="nav-link">Payments</a></li>
@@ -477,24 +581,60 @@
       <p>_</p>
     <div class="container">
         <div class="sections-grid">
-            <section class="section">
-                <div class="teacher-section">
-                    <a href="https://aibochinese.com/1-on-1%20live" target="_blank"><img src="https://cf.aibochinese.com/%E6%95%99%E5%B8%88%E7%85%A7%E7%89%87/Abelzou%20tutor.png" 
-alt="名称" 
-style="max-width: 70%; height: auto;" /></a>
-                    <div class="teacher-info">
-                        <h3><a href="https://aibochinese.com/1-on-1%20live" class="teacher-link">1-on-1 Live, Free Trial</a></h3>
-                        <p>Abel Zou 👉Qualified teacher from🐼中国📚7K+ hours teaching</p>
-                    </div>
-                </div>
-            </section>
+ <section class="section">
+    <div class="teacher-section">
+        <a href="https://aibochinese.com/top-tutors" target="_blank">
+            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/Toptutor%20team.png" 
+                 alt="Top tutors" 
+                 class="teacher-img" />
+        </a>
+        
+        <div class="teacher-info">
+            <h3><a href="https://aibochinese.com/top-tutors" class="teacher-link">1-on-1 Live, Free Trial</a></h3>
+            <p>Qualified teachers from China 7K+ hours teaching</p>
+        </div>
+    </div>
+</section>
+
+<!-- 推荐的 CSS（可以内联也可以放外部样式表） -->
+<style>
+.teacher-section {
+    display: flex;
+    flex-direction: column;    /* 垂直排列：图片在上，文字在下 */
+    align-items: center;       /* 水平居中 */
+    justify-content: center;   /* 垂直居中（如果有固定高度时更明显） */
+    text-align: center;        /* 文字本身也居中 */
+    padding: 20px 10px;        /* 可选：给点内边距更好看 */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.teacher-img {
+    max-width: 70%;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto;   /* 下方留点空隙 */
+}
+
+/* 可选：让 h3 和 p 的文字也更好看 */
+.teacher-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.4rem;
+}
+
+.teacher-info p {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+</style>
             
             <section class="section">
-                <h2>Premium Free Video Courses</h2>
+                <h2>Premium Video Courses</h2>
                 <div class="courses-grid">
+                    <a href="HSK-quick.html" class="course-btn grammar-btn">HSK Quick</a>
                     <a href="Hanzi.html" class="course-btn hanzi-btn">Hanzi</a>
                     <a href="spoken.html" class="course-btn spoken-btn">Spoken</a>
-                    <a href="grammar.html" class="course-btn grammar-btn">Grammar</a>
                     <a href="Entertainment.html" class="course-btn entertainment-btn">Entertainment</a>
                 </div>
             </section>
@@ -508,10 +648,6 @@ style="max-width: 70%; height: auto;" /></a>
             </section>
         </div>
     </div>
-                <!-- 搜索框容器（建议放在导航栏或页面顶部） -->
-<div class="search-container">
-    <div id="pagefind-search"></div>
-</div>
   <footer>
     <div class="footer">
       <p style="margin-bottom: 10px;">
@@ -598,7 +734,19 @@ style="max-width: 70%; height: auto;" /></a>
         <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/messenger.svg" alt="Messenger">
     </a> -->
   </div>
+        <!-- 悬浮搜索按钮 -->
+        <div class="search-float" onclick="toggleSearchModal()">
+            <i class="fa fa-search" style="color: white; font-size: 24px;"></i>
+        </div>
 
+    <!-- 搜索弹出窗 -->
+    <div id="searchModal" class="search-modal" onclick="closeSearchModal(event)">
+        <div class="search-popup" onclick="event.stopPropagation()">
+            <h3>Your searched content</h3>
+            <div id="pagefind-search-popup"></div>
+            <button class="close-btn" onclick="closeSearchModal()">Close</button>
+        </div>
+    </div>
   <script>
     // 汉堡菜单和导航功能
     document.addEventListener('DOMContentLoaded', function() {
@@ -634,27 +782,8 @@ style="max-width: 70%; height: auto;" /></a>
       });
     });
   </script>
-  <!-- Pagefind 搜索脚本 -->
-<script src="/post/pagefind/pagefind-ui.js"></script>
-<script>
-    window.addEventListener('DOMContentLoaded', function () {
-        console.log("Initializing Pagefind search...");
-        try {
-            new PagefindUI({
-                element: "#pagefind-search",
-                showImages: false,
-                showSubResults: true,
-                resetStyles: false,
-                translations: {
-                    placeholder: "🔍Words、sentence..."
-                }
-            });
-            console.log("Pagefind search initialized successfully");
-        } catch (error) {
-            console.error("Pagefind search initialization failed:", error);
-        }
-    });
-</script>
+  
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -674,5 +803,73 @@ style="max-width: 70%; height: auto;" /></a>
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6203499194676961"
      crossorigin="anonymous"></script>
+
+       <script>
+        // 搜索弹窗控制函数
+        function toggleSearchModal() {
+            const modal = document.getElementById('searchModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function closeSearchModal(event) {
+            document.getElementById('searchModal').style.display = 'none';
+        }
+
+        // 微信弹窗控制函数
+        function toggleWechatModal() {
+            const modal = document.getElementById('wechatModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function closeWechatModal(event) {
+            document.getElementById('wechatModal').style.display = 'none';
+        }
+
+        // 点击模态背景关闭
+        window.onclick = function(event) {
+            const searchModal = document.getElementById('searchModal');
+            const wechatModal = document.getElementById('wechatModal');
+            
+            if (event.target === searchModal) {
+                closeSearchModal();
+            } else if (event.target === wechatModal) {
+                closeWechatModal();
+            }
+        };
+    </script>
+       <!-- Pagefind 搜索（已完美修复） -->
+    <script src="/post/pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log("Initializing Pagefind search...");
+            try {
+                // 初始化页面顶部搜索框
+                new PagefindUI({
+                    element: "#pagefind-search",
+                    showImages: false,
+                    showSubResults: true,
+                    resetStyles: false,
+                    translations: {
+                        placeholder: "🔍new words,teacher's name,books..."
+                    }
+                });
+                
+                // 初始化右侧悬浮搜索弹窗
+                new PagefindUI({
+                    element: "#pagefind-search-popup",
+                    showImages: false,
+                    showSubResults: true,
+                    resetStyles: false,
+                    translations: {
+                        placeholder: "🔍new words,teacher's name,books..."
+                    }
+                });
+                
+                console.log("Pagefind search initialized successfully");
+            } catch (error) {
+                console.error("Pagefind search initialization failed:", error);
+            }
+        });
+    </script>
 </body>
 </html>

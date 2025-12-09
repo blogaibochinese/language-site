@@ -144,7 +144,7 @@
 
     /* 主容器样式（通用示例） */
     .main-content {
-      padding: 120px 20px 100px;
+      padding: 100px 20px 100px;
       width: 100%;
     }
 
@@ -420,6 +420,201 @@
         padding: 100px 15px 100px;
       }
     }
+            .video-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            border: 3px solid #2196F3;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 80vh;
+        }
+
+        .video-section {
+            width: 70%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 3px solid #2196F3;
+        }
+
+        .video-title {
+            color: #2196F3;
+            font-size: 15px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .video-player-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .video-player {
+            width: 100%;
+            flex: 1;
+            max-height: calc(100% - 60px);
+            background-color: #000;
+            border: 2px solid #2196F3;
+            border-radius: 4px;
+            object-fit: contain;
+        }
+
+        .document-button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            align-self: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .document-button:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .playlist-section {
+            width: 30%;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .playlist-section::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .playlist-section::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .playlist-section::-webkit-scrollbar-thumb {
+            background: #2196F3;
+            border-radius: 4px;
+        }
+
+        .playlist-header {
+            color: #2196F3;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            border-bottom: 2px solid #2196F3;
+            padding-bottom: 10px;
+        }
+
+        .video-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border: 2px solid #e3f2fd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-item:hover {
+            background-color: #e3f2fd;
+            border-color: #2196F3;
+            transform: translateX(5px);
+        }
+
+        .video-item.active {
+            background-color: #2196F3;
+            color: white;
+            border-color: #2196F3;
+        }
+
+        .video-item-title {
+            font-size: 10px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .video-item-duration {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .video-item.active .video-item-duration {
+            color: #e3f2fd;
+        }
+
+        .chapter-title {
+            color: #2196F3;
+            font-size: 15px;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+            padding: 8px 10px;
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            border-radius: 4px;
+        }
+
+        /* 密码弹窗样式 */
+        .password-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .password-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            width: 320px;
+            text-align: center;
+        }
+
+        .password-box h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .password-box input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .password-box button {
+            padding: 10px 20px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .password-box button:hover {
+            background: #1976D2;
+        }
+
+        .password-tip {
+            font-size: 12px;
+            color: #666;
+            margin-top: 15px;
+        }
   </style>
 </head>
 <body>
@@ -435,6 +630,8 @@
         <button class="nav-toggle" id="nav-toggle">☰</button>
 
         <ul class="nav-menu" id="nav-menu">
+          <li class="nav-item"><a href="top-tutors.html" class="nav-link active">Top Tutors</a></li>
+          <li class="nav-item"><a href="HSK-quick.html" class="nav-link">Premium Courses</a></li>
           <li class="nav-item"><a href="library.html" class="nav-link">Library</a></li>
           <li class="nav-item"><a href="groups.html" class="nav-link">Join Groups</a></li>
           <li class="nav-item"><a href="payments.html" class="nav-link">Payments</a></li>
@@ -443,7 +640,32 @@
       </div>
     </nav>
   </header>
+    <div class="video-container">
+        <div class="video-section">
+            <div class="video-title" id="currentTitle">Chinese pop songs, 牵手 holding your hands</div>
+            <div class="video-player-container">
+                <video class="video-player" id="videoPlayer" controls>
+                    <source src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/%E8%A7%86%E9%A2%91%E7%BB%88%E7%A8%BF/Chinese%20pop%20songs%2C%20%E7%89%B5%E6%89%8B%20holding%20your%20hands/Chinese%20pop%20songs%2C%20%E7%89%B5%E6%89%8B%20holding%20your%20hands.mp4" type="video/mp4">
+                </video>
+                <button class="document-button">Related document description</button>
+            </div>
+        </div>
 
+        <div class="playlist-section">
+            <div class="playlist-header">Video list</div>
+            <div id="playlist"></div>
+        </div>
+    </div>
+
+    <!-- 密码输入弹窗 -->
+    <div class="password-modal" id="passwordModal">
+        <div class="password-box">
+            <h3>Enter viewing password</h3>
+            <input type="password" id="passwordInput" placeholder="input passwords">
+            <button id="submitPassword">Confirm</button>
+            <div class="password-tip">Please purchase full-site course viewing password <a href="https://aibochinese.com/payments" style="color:red" target="_blank" rel="noopener noreferrer">£9.9</a></div>
+        </div>
+    </div>
   <!-- 歌曲主要内容区域 -->
   <div class="main-content">
     <div class="container">
@@ -648,5 +870,124 @@
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6203499194676961"
      crossorigin="anonymous"></script>
+        <script>
+        // 请在此修改统一密码
+        const CORRECT_PASSWORD = "aibo998";
+
+        const videos = [
+            {
+                chapter: "句子 Sentences",
+                title: "1.Chinese pop songs, 牵手 holding your hands",
+                url: "https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/%E8%A7%86%E9%A2%91%E7%BB%88%E7%A8%BF/Chinese%20pop%20songs%2C%20%E7%89%B5%E6%89%8B%20holding%20your%20hands/Chinese%20pop%20songs%2C%20%E7%89%B5%E6%89%8B%20holding%20your%20hands.mp4",
+                duration: "3:34",
+                document: "https://aibochinese.com/post/holding-hands"
+            },
+            {
+                chapter: "汉字 Characters",
+                title: "1.###",
+                url: "#",
+                duration: "10:20",
+                document: "https://aibochinese.com/post/holding-hands"
+            }
+        ];
+
+        const playlist = document.getElementById('playlist');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const currentTitle = document.getElementById('currentTitle');
+        const passwordModal = document.getElementById('passwordModal');
+        const passwordInput = document.getElementById('passwordInput');
+        const submitPassword = document.getElementById('submitPassword');
+
+        let currentVideoDocument = '';
+        let pendingVideo = null; // 暂存等待密码验证后要播放的视频
+
+        // 关键修改：每次加载页面都不记住密码验证状态
+        let passwordVerified = false;
+
+        if (videos.length > 0) {
+            currentVideoDocument = videos[0].document;
+        }
+
+        // 按章节分组并渲染播放列表
+        const videosByChapter = videos.reduce((acc, video) => {
+            if (!acc[video.chapter]) acc[video.chapter] = [];
+            acc[video.chapter].push(video);
+            return acc;
+        }, {});
+
+        Object.entries(videosByChapter).forEach(([chapter, chapterVideos]) => {
+            const chapterTitle = document.createElement('div');
+            chapterTitle.className = 'chapter-title';
+            chapterTitle.textContent = chapter;
+            playlist.appendChild(chapterTitle);
+
+            chapterVideos.forEach(video => {
+                const item = document.createElement('div');
+                item.className = 'video-item';
+                item.innerHTML = `
+                    <div class="video-item-title">${video.title}</div>
+                    <div class="video-item-duration">时长: ${video.duration}</div>
+                `;
+
+                item.addEventListener('click', () => {
+                    if (passwordVerified) {
+                        // 已验证，直接播放
+                        playVideo(video, item);
+                    } else {
+                        // 未验证，弹出密码框
+                        pendingVideo = { video, item };
+                        passwordModal.style.display = 'flex';
+                        passwordInput.focus();
+                    }
+                });
+
+                playlist.appendChild(item);
+            });
+        });
+
+        // 播放视频的核心函数
+        function playVideo(video, itemElement) {
+            document.querySelectorAll('.video-item').forEach(el => el.classList.remove('active'));
+            itemElement.classList.add('active');
+
+            videoPlayer.querySelector('source').src = video.url;
+            videoPlayer.load();  // 重要：更换源后需要 load
+            currentTitle.textContent = video.title;
+            currentVideoDocument = video.document;
+            videoPlayer.play();
+        }
+
+        // 密码提交处理
+        submitPassword.addEventListener('click', checkPassword);
+        passwordInput.addEventListener('keypress', e => {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        function checkPassword() {
+            const input = passwordInput.value.trim();
+            if (input === CORRECT_PASSWORD) {
+                passwordVerified = true;  // 本次会话内有效
+                passwordModal.style.display = 'none';
+                passwordInput.value = '';
+                if (pendingVideo) {
+                    playVideo(pendingVideo.video, pendingVideo.item);
+                    pendingVideo = null;
+                }
+            } else {
+                alert('密码错误，请重新输入！');
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
+        // 查看文档按钮
+        document.querySelector('.document-button').addEventListener('click', () => {
+            if (currentVideoDocument) {
+                window.open(currentVideoDocument, '_blank');
+            } else {
+                alert('当前视频暂无相关文档');
+            }
+        });
+    </script>
 </body>
 </html>
