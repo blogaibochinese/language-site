@@ -72,29 +72,29 @@ header {
 }
 
 .nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  justify-content: center; /* 修改：整体居中，brand 和 menu 居中对齐 */
-  align-items: center;
-  height: 70px;
-  position: relative;
-}
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between; /* 修改：两端对齐，避免logo和菜单重叠 */
+      align-items: center;
+      height: 70px;
+      position: relative;
+    }
 
-.nav-brand img {
-  height: 50px;
-  width: auto;
-}
+    .nav-brand img {
+      height: 50px;
+      width: auto;
+    }
 
-.nav-menu {
-  list-style: none;
-  display: flex;
-  gap: 40px;
-  margin: 0;
-  padding: 0;
-  margin-left: 80px; /* 调整间距，避免 brand 和 menu 紧挨或交错；可根据实际微调 */
-}
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      margin: 0;
+      margin-left: auto;
+      padding: 0;
+    }
 
 .nav-item {
   display: inline-block;
@@ -121,6 +121,7 @@ header {
       border: none;
       color: #333;
       padding: 5px 10px;
+      margin-left: auto;
     }
 
     /* 右侧垂直居中悬浮按钮组 */
