@@ -356,6 +356,12 @@ header {
             gap: 16px 32px;
         }
 
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px 32px;
+        }
+
         .resource-group {
             background: #f9fafb;
             border: 1px solid #e5e7eb;
@@ -589,10 +595,6 @@ header {
     <div class="main-content">
         <div class="container">
             <div class="content">
-                <!-- 搜索框容器 -->
-                <div class="search-container">
-                    <div id="pagefind-search"></div>
-                </div>
 
                 <!-- Easy Peasy -->
                 <div class="section">
@@ -607,7 +609,7 @@ header {
                 <!-- HSK Materials -->
                 <div class="section">
                     <h2 class="section-title">📝 HSK 标准教程 <span class="badge">Standard Course</span></h2>
-                    <div class="grid-2">
+                    <div class="grid-3">
                         <div class="resource-group">
                             <span class="resource-label">HSK 1</span>
                             <div class="links">
