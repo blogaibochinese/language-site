@@ -403,6 +403,163 @@ header {
             flex-wrap: wrap;
             gap: 10px;
         }
+                /* 悬浮搜索按钮 */
+        .search-float {
+            position: fixed;
+            right: 20px;
+            top: calc(50% + 120px); /* 放在客服组下方 */
+            width: 60px;
+            height: 60px;
+            background-color: #3B82F6; /* 蓝色 */
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            z-index: 9999;
+        }
+
+        .search-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* 搜索弹出窗 */
+        .search-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-popup {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .search-popup h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+               .wechat-popup {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            width: 90%;
+        }
+
+        .wechat-qr {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 10px;
+            display: block; /* 二维码图片，用户替换src */
+        }
+
+        .close-btn {
+            background-color: #ff4d4f;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .close-btn:hover {
+            background-color: #ff7875;
+        }
+               /* ==================== 全新 Pagefind 搜索样式（搜索框水平居中版） ==================== */
+.search-container {
+    position: relative;
+    /* 删除 margin-right，改为自动左右 margin 实现居中 */
+    margin: 0 auto;           /* 关键：水平居中 */
+    z-index: 1001;
+    min-width: 200px;
+    max-width: 380px;         /* 建议加上最大宽度，和下拉结果保持一致 */
+    width: 100%;
+    display: flex;
+    justify-content: center;  /* 内部元素水平居中 */
+    align-items: center;
+}
+
+/* 输入框：去掉宽度 100% + focus 扩展的左右晃动问题 */
+#pagefind-search .pagefind-ui__search-input {
+    padding: 10px 16px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    /* 固定宽度，或者使用 min-width + max-width 防止晃动 */
+    width: 300px;                     /* 固定一个舒适的宽度 */
+    max-width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    color: #333;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#pagefind-search .pagefind-ui__search-input:focus {
+    border-color: #4a6fa5;
+    box-shadow: 0 0 0 4px rgba(74, 111, 165, 0.2);
+    /* focus 时不再改变宽度，避免整个搜索框左右晃动 */
+}
+
+/* 下拉结果：从右对齐改为居中对齐 */
+#pagefind-search .pagefind-ui__results {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    position: absolute;
+    top: 100%;
+    left: 50%;                        /* 关键：左边 50% */
+    transform: translateX(-50%);      /* 关键：向左偏移自身宽度的一半 → 完全居中 */
+    right: auto;                      /* 取消原来的 right: 0 */
+    width: 380px;
+    max-height: 70vh;
+    overflow-y: auto;
+    margin-top: 8px;
+    z-index: 1000;
+    padding: 8px 0;
+}
+
+/* 其余样式保持不变 */
+#pagefind-search .pagefind-ui__result {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+#pagefind-search .pagefind-ui__result:last-child { border-bottom: none; }
+#pagefind-search .pagefind-ui__result:hover { background-color: #f8f9ff; }
+#pagefind-search .pagefind-ui__result-title { font-size: 15px; font-weight: 600; color: #1f2937; margin-bottom: 4px; }
+#pagefind-search .pagefind-ui__result-link { 
+    color: #3B82F6; 
+    text-decoration: none; 
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+#pagefind-search .pagefind-ui__result-link:hover { text-decoration: underline; }
+#pagefind-search .pagefind-ui__result-excerpt { font-size: 13.5px; color: #666; line-height: 1.5; margin-top: 4px; }
+.pagefind-ui__result-excerpt mark { background: #dbeafe; color: #1e40af; padding: 1px 3px; border-radius: 3px; }
+#pagefind-search .pagefind-ui__message { padding: 20px; text-align: center; color: #666; font-size: 14px; }
+
   </style>
 </head>
 <body>
@@ -574,10 +731,68 @@ header {
                     </div>
 
                     <div class="subsection">
-                        <div class="subsection-title">HSK 3-6</div>
-                        <p style="color: #666; padding: 10px;">Similar test paper structure available for HSK 3, 4, 5, and 6...</p>
+                        <div class="subsection-title">HSK 3</div>
+                        <div class="links">
+                            <a href="https://drive.google.com/uc?export=download&id=1hlblTBPF1ikSgt4A4uzTBAvJY2UT0PKD">卷1 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1G8HAy2O81W6yJPf_eF7OhKEq7QI_z08f">卷1 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1SQvfQitARgryz2UoSKhwA2cHD73zOaXn">卷2 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=109nZtfXUxEd2dkzEb6PvJ9U6ew68Tj2x">卷2 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1ju8EF29s2mBmZC_OYnPq2AokilN44EMV">卷3 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1vjUaD-rKap3sYWTSQTdKwrQGGngSlY1s">卷3 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1Hkq-mnxHWZoRMzGMh-lqWaGxyyCCRz_3">卷4 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=13USsqcbYvLeYQwd-65pWju4FfiEgO54K">卷4 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1QMvLYL32gxN9szyTvRfEbXGwIPSap_cY">卷5 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1e4YxPLZ_pFpwyV3_kui1S5XLpNfToahE">卷5 MP3</a>
+                        </div>
                     </div>
-                </div>
+
+                      <div class="subsection">
+                        <div class="subsection-title">HSK 4</div>
+                        <div class="links">
+                            <a href="https://drive.google.com/uc?export=download&id=1qS7pjUFsDxBh5kcj8Jd-lO0VthL-gez9">卷1 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1JYjM1P070cXPDYFwM-fdfqhhjBKKEzh6">卷1 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=17hPQ0DUcvcMfOGGifcibmNUJTlxIXzB0">卷2 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1e5DnE3lgiV-HC7hJp82ryaVvIe4ksI4B">卷2 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1w1lXzyNt3TQX4qfVj8YS6dhBfGvPTH7P">卷3 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=14UZBlQMx2VbgHSiwl74FVPElqhkHjxqR">卷3 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1pWqWrE4tAU7bzTybVYtl7o_7a9X2tT9j">卷4 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1yOWUVW7tr7V2GCPbs0SnA96nJNJXVrul">卷4 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=14u0FgK5V1ovB9adKIWA_25zf-nRNyeHK">卷5 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1u4ZkQD17CUCvso2gQN3vJhF9_Ldj646Q">卷5 MP3</a>
+                        </div>
+                    </div>                  
+
+                      <div class="subsection">
+                        <div class="subsection-title">HSK 5</div>
+                        <div class="links">
+                            <a href="https://drive.google.com/uc?export=download&id=1iwu-0EIDn1892m4pPIuBDby3r-Gw3wO_">卷1 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1W73NbTl3_h1kpd37h6cxZEeGyTChLOkM">卷1 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1jPkNtyfS1na1o0WXw5dZCGnZ_5P0kw1C">卷2 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1FxsCk3hiLmQuNOCvT3SJ1E-K4Ylomqxo">卷2 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1CBOAyggWyuWlWSKYYUTZOUcr26pQWrGw">卷3 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1BTEIrDVaPNLAcOuH9q_-bIhDckI4Lf-u">卷3 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=16VwS9HKHxp6gepvgAzpHIDcuMKbXmS2i">卷4 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1hGUhtdrHD8lqBBUKx_YYceJjYhITdqJy">卷4 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1p22_4bJuigSz2If4fhzP6KNINB6YBnr9">卷5 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1h47TOeyXIKQuUC3ws8JuiQFCm6vkTyCc">卷5 MP3</a>
+                        </div>
+                    </div>  
+                    
+                       <div class="subsection">
+                        <div class="subsection-title">HSK 6</div>
+                        <div class="links">
+                            <a href="https://drive.google.com/uc?export=download&id=1RuyqX0mWWITlDV0w8cMPL1K6Fbmp5FG_">卷1 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1cFrApbCoDerzc_ifv9dgXClZW-FuAWHt">卷1 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1n4AHFe51-QtwyqpmPgkHhLoYXMNi2kmw">卷2 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1YM_WwBnhEOwlF2FTZXNj3qdv3rkT_3Kr">卷2 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1lHsKsPfDB0RDZj7zIRr15-pfYz0ZMgir">卷3 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=143y5MHq44iXJX8BAB0gaE8utsWrhYDQK">卷3 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1Rx5cJt9jziXTNneYvX5mCpr9mVBXrp51">卷4 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1UQ-c1QpAs-LVk1OL2b356LAX5etRKXEz">卷4 MP3</a>
+                            <a href="https://drive.google.com/uc?export=download&id=1YW79dLRYv0qppIkFxPsViMj9FtJtyaeh">卷5 PDF</a>
+                            <a href="https://drive.google.com/uc?export=download&id=18yamvJVVFL-uILHVEqw-jz7F8wBrSSIX">卷5 MP3</a>
+                        </div>
+                    </div>                   
 
                 <!-- YCT -->
                 <div class="section">
@@ -693,7 +908,7 @@ header {
           <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-instagram-30.png" style="width: 30px; height: 30px; display:block;" />
         </a>
       </p>
-      <p style="font-size: 12px; color: lab(1.98% 0.26 0.09);">
+      <p style="font-size: 14px; color: lab(1.98% 0.26 0.09);">
         © 2025 <a href="https://blog.aibochinese.com/" style="color:hsl(271, 96%, 41%)" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留【<a href="https://blog.aibochinese.com/education/tutor%20guide" style="color:rgb(236, 8, 8)" target="_blank" rel="noopener noreferrer">教师入驻指南</a>】
       </p>
       <p>_</p>
@@ -756,7 +971,19 @@ header {
         <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/messenger.svg" alt="Messenger">
     </a> -->
   </div>
+        <!-- 悬浮搜索按钮 -->
+        <div class="search-float" onclick="toggleSearchModal()">
+            <i class="fa fa-search" style="color: white; font-size: 24px;"></i>
+        </div>
 
+    <!-- 搜索弹出窗 -->
+    <div id="searchModal" class="search-modal" onclick="closeSearchModal(event)">
+        <div class="search-popup" onclick="event.stopPropagation()">
+            <h3>Your searched content</h3>
+            <div id="pagefind-search-popup"></div>
+            <button class="close-btn" onclick="closeSearchModal()">Close</button>
+        </div>
+    </div>
   <script>
     // 汉堡菜单和导航功能
     document.addEventListener('DOMContentLoaded', function() {
@@ -791,7 +1018,51 @@ header {
         });
       });
     });
+           // 搜索弹窗控制函数
+        function toggleSearchModal() {
+            const modal = document.getElementById('searchModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function closeSearchModal(event) {
+            document.getElementById('searchModal').style.display = 'none';
+        }
+                // 点击模态背景关闭
+        window.onclick = function(event) {
+            const searchModal = document.getElementById('searchModal');
+            const wechatModal = document.getElementById('wechatModal');
+            
+            if (event.target === searchModal) {
+                closeSearchModal();
+            } else if (event.target === wechatModal) {
+                closeWechatModal();
+            }
+        };
   </script>
+      <!-- Pagefind 搜索（已完美修复） -->
+    <script src="/post/pagefind/pagefind-ui.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            console.log("Initializing Pagefind search...");
+            try {
+                
+                // 初始化右侧悬浮搜索弹窗
+                new PagefindUI({
+                    element: "#pagefind-search-popup",
+                    showImages: false,
+                    showSubResults: true,
+                    resetStyles: false,
+                    translations: {
+                        placeholder: "🔍new words,teacher's name,books..."
+                    }
+                });
+                
+                console.log("Pagefind search initialized successfully");
+            } catch (error) {
+                console.error("Pagefind search initialization failed:", error);
+            }
+        });
+    </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6203499194676961"
      crossorigin="anonymous"></script>
 </body>
