@@ -42,14 +42,13 @@ header {
   padding: 10px 20px;
   display: flex;
   align-items: center;
-  justify-content: center; /* 菜单整体居中 */
+  justify-content: space-between;
   position: relative;
 }
 
-/* logo 靠近菜单 */
+/* logo 靠左 */
 .nav-brand {
-  position: absolute;
-  left: calc(50% - 350px); /* 控制 logo 靠近菜单中心 */
+  /* 移除绝对定位，使其自然排列在左侧 */
 }
 
 .nav-brand img {
