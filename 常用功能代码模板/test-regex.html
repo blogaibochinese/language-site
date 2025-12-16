@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Regex Test</title>
+</head>
+<body>
+    <h1>YouTube Video ID Extraction Test</h1>
+    <div id="results"></div>
+    
+    <script>
+        function getYouTubeVideoId(url) {
+            const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+        
+        // Test URLs
+        const testUrls = [
+            "https://youtu.be/q45GBLoA6Vw?si=ORGxg0fpNKM_6mWy",
+            "https://www.youtube.com/watch?v=3JZ_D3ELwOQ",
+            "https://youtu.be/3JZ_D3ELwOQ",
+            "https://www.youtube.com/embed/dQw4w9WgXcQ"
+        ];
+        
+        const resultsDiv = document.getElementById('results');
+        let results = "<h2>Test Results:</h2>";
+        
+        testUrls.forEach(url => {
+            const videoId = getYouTubeVideoId(url);
+            results += `<p><strong>URL:</strong> ${url}<br>
+                      <strong>Video ID:</strong> ${videoId}<br>
+                      <strong>Embed URL:</strong> https://www.youtube.com/embed/${videoId}</p>`;
+        });
+        
+        resultsDiv.innerHTML = results;
+    </script>
+</body>
+</html>
