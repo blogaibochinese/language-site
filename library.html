@@ -103,15 +103,21 @@ header {
 
 .nav-link {
   text-decoration: none;
-  color: #333;
+  color: white;
   font-weight: 500;
-  transition: color 0.3s ease;
-  padding: 5px 0;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin: 0 5px;
+  background-color: #3498db;
+  display: inline-block;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: #3498db;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
     /* 汉堡菜单按钮 */
     .nav-toggle {
@@ -122,7 +128,34 @@ header {
       border: none;
       color: #333;
       padding: 5px 10px;
-      margin-left: auto;
+    }
+
+    /* 不同颜色的导航链接 */
+    .nav-link-red { background-color: #e74c3c; color: white; }
+    .nav-link-blue { background-color: #3498db; color: white; }
+    .nav-link-green { background-color: #2ecc71; color: white; }
+    .nav-link-purple { background-color: #9b59b6; color: white; }
+    .nav-link-orange { background-color: #f39c12; color: white; }
+    .nav-link-teal { background-color: #1abc9c; color: white; }
+
+    /* 悬停效果 */
+    .nav-link-red:hover,
+    .nav-link-red.active { background-color: #c0392b; }
+    .nav-link-blue:hover,
+    .nav-link-blue.active { background-color: #2980b9; }
+    .nav-link-green:hover,
+    .nav-link-green.active { background-color: #27ae60; }
+    .nav-link-purple:hover,
+    .nav-link-purple.active { background-color: #8e44ad; }
+    .nav-link-orange:hover,
+    .nav-link-orange.active { background-color: #e67e22; }
+    .nav-link-teal:hover,
+    .nav-link-teal.active { background-color: #16a085; }
+
+    .nav-link:hover,
+    .nav-link.active {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     /* 右侧垂直居中悬浮按钮组 */
@@ -248,13 +281,15 @@ header {
 
       .nav-item {
         text-align: center;
-        margin: 0;
-        padding: 10px 0;
+        margin: 8px 20px;
+        padding: 0;
       }
 
       .nav-link {
-        display: block;
-        padding: 10px 15px;
+        display: inline-block;
+        padding: 8px 16px;
+        width: auto;
+        margin: 0;
       }
 
       .main-content {
@@ -398,6 +433,72 @@ header {
             font-weight: bold;
             margin-bottom: 10px;
             color: #333;
+        }
+
+        /* 移动端紧凑排版 - 增强版 */
+        @media (max-width: 768px) {
+            /* 减小section间距和内边距 */
+            body .section {
+                padding: 15px 10px !important;
+                margin-bottom: 5px !important;
+            }
+            
+            /* 减小标题大小和间距 */
+            body .section-title {
+                font-size: 1.3em !important;
+                margin-bottom: 12px !important;
+                line-height: 1.3 !important;
+            }
+            
+            /* 调整网格布局 */
+            body .grid-2,
+            body .grid-3 {
+                gap: 8px !important;
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* 减小资源组间距和内边距 */
+            body .resource-group {
+                padding: 10px 12px !important;
+                margin-bottom: 8px !important;
+                border-radius: 8px !important;
+            }
+            
+            /* 减小资源标签间距 */
+            body .resource-label {
+                margin-bottom: 5px !important;
+                font-size: 0.9em !important;
+            }
+            
+            /* 减小子节间距 */
+            body .subsection {
+                margin-bottom: 10px !important;
+            }
+            
+            /* 减小子节标题大小和间距 */
+            body .subsection-title {
+                font-size: 1.05em !important;
+                margin-bottom: 6px !important;
+            }
+            
+            /* 优化链接样式 */
+            body .links a {
+                margin-right: 6px !important;
+                margin-bottom: 4px !important;
+                font-size: 0.9em !important;
+                line-height: 1.4 !important;
+            }
+            
+            /* 减小测试试卷链接间距 */
+            body .test-papers .links {
+                gap: 6px !important;
+            }
+            
+            /* 减小主内容区上下内边距 */
+            body .main-content {
+                padding-top: 100px !important;
+                padding-bottom: 80px !important;
+            }
         }
 
         .highlight-red {
@@ -582,12 +683,12 @@ header {
         <button class="nav-toggle" id="nav-toggle">☰</button>
 
         <ul class="nav-menu" id="nav-menu">
-          <li class="nav-item"><a href="top-tutors.html" class="nav-link active">Top Tutors</a></li>
-          <li class="nav-item"><a href="hskexpress.html" class="nav-link">Premium Courses</a></li>
-          <li class="nav-item"><a href="library.html" class="nav-link">Library</a></li>
-          <li class="nav-item"><a href="groups.html" class="nav-link">Join Groups</a></li>
-          <li class="nav-item"><a href="payments.html" class="nav-link">Payments</a></li>
-          <li class="nav-item"><a href="client.html" class="nav-link">Client Download</a></li>
+          <li class="nav-item"><a href="top-tutors.html" class="nav-link nav-link-red">Top Tutors</a></li>
+          <li class="nav-item"><a href="hskexpress.html" class="nav-link nav-link-blue">Premium Courses</a></li>
+          <li class="nav-item"><a href="library.html" class="nav-link nav-link-green active">Library</a></li>
+          <li class="nav-item"><a href="groups.html" class="nav-link nav-link-purple">Join Groups</a></li>
+          <li class="nav-item"><a href="payments.html" class="nav-link nav-link-orange">Payments</a></li>
+          <li class="nav-item"><a href="client.html" class="nav-link nav-link-teal">Client Download</a></li>
         </ul>
       </div>
     </nav>
@@ -1270,7 +1371,7 @@ header {
       <i class="fa fa-home"></i>
       <span>Home</span>
     </a>
-    <a href="library.html">
+    <a href="library.html" class="active">
       <i class="fa fa-book"></i>
       <span>Library</span>
     </a>
@@ -1284,7 +1385,7 @@ header {
       <i class="fa fa-users"></i>
       <span>Groups</span>
     </a>
-    <a href="payments.html" class="active">
+    <a href="payments.html">
       <i class="fa fa-credit-card"></i>
       <span>To Pay</span>
     </a>
