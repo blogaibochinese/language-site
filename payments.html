@@ -27,106 +27,252 @@
         }
 
         /* 导航栏样式 */
-        .navbar {
-            background: linear-gradient(135deg, #dfe1e9 0%, #764ba2 100%);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
+    .navbar {
+      width: 100%;
+    }
 
-        .nav-brand img {
-            height: 50px;
-            width: auto;
-        }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+      position: relative;
+    }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-            align-items: center;
-        }
+    .nav-brand img {
+      height: 50px;
+      width: auto;
+    }
 
-        .nav-item {
-            margin: 0;
-        }
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+    }
 
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
+    .nav-item {
+      display: inline-block;
+    }
 
-        .nav-link:hover,
-        .nav-link.active {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
+    .nav-link {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin: 0 5px;
+      background-color: #3498db;
+      display: inline-block;
+    }
 
-        .nav-toggle {
-            display: none;
-            font-size: 28px;
-            color: white;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 5px 10px;
-        }
+    /* 不同颜色的导航链接 */
+    .nav-link-red { background-color: #e74c3c; color: white; }
+    .nav-link-blue { background-color: #3498db; color: white; }
+    .nav-link-green { background-color: #2ecc71; color: white; }
+    .nav-link-purple { background-color: #9b59b6; color: white; }
+    .nav-link-orange { background-color: #f39c12; color: white; }
+    .nav-link-teal { background-color: #1abc9c; color: white; }
 
-        /* 移动端导航栏样式 */
-        @media (max-width: 768px) {
-            body {
-                padding-bottom: 100px;
-            }
+    /* 悬停效果 */
+    .nav-link-red:hover,
+    .nav-link-red.active { background-color: #c0392b; }
+    .nav-link-blue:hover,
+    .nav-link-blue.active { background-color: #2980b9; }
+    .nav-link-green:hover,
+    .nav-link-green.active { background-color: #27ae60; }
+    .nav-link-purple:hover,
+    .nav-link-purple.active { background-color: #8e44ad; }
+    .nav-link-orange:hover,
+    .nav-link-orange.active { background-color: #e67e22; }
+    .nav-link-teal:hover,
+    .nav-link-teal.active { background-color: #16a085; }
 
-            .nav-toggle {
-                display: block;
-            }
+    .nav-link:hover,
+    .nav-link.active {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
 
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 70px;
-                flex-direction: column;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                width: 100%;
-                text-align: center;
-                transition: left 0.3s ease;
-                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-                padding: 20px 0;
-                gap: 0;
-            }
+    /* 汉堡菜单按钮 */
+    .nav-toggle {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #333;
+      padding: 5px 10px;
+    }
 
-            .nav-menu.active {
-                left: 0;
-            }
+    /* 主容器样式（通用示例） */
+    .main-content {
+      padding: 120px 20px 100px;
+      width: 100%;
+    }
 
-            .nav-item {
-                width: 100%;
-                padding: 15px 0;
-            }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
 
-            .nav-link {
-                display: block;
-                width: 100%;
-            }
-        }
+    /* 页脚样式 */
+    footer {
+      background-color: lch(87.42% 78.48 94.38);
+      color: hsl(0, 0%, 1%);
+      padding: 30px 20px;
+      margin-top: 50px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .footer p {
+      margin: 10px 0;
+    }
+
+    .footer a {
+      color: hsl(0, 0%, 100%);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* 移动端底部导航栏 */
+    .mobile-nav {
+      display: none;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        width: 200px;
+        border-radius: 0 0 0 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+        gap: 0;
+      }
+
+      .nav-menu.show {
+        display: flex;
+      }
+
+      .nav-item {
+        text-align: center;
+        margin: 8px 20px;
+        padding: 0;
+      }
+
+      .nav-link {
+        display: inline-block;
+        padding: 8px 16px;
+        width: auto;
+        margin: 0;
+      }
+
+      .main-content {
+        padding: 100px 15px 100px;
+      }
+
+      /* 显示移动端底部导航 */
+      .mobile-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+        justify-content: space-around;
+        align-items: center;
+        padding: 12px 0;
+      }
+
+      .mobile-nav a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #666;
+        transition: all 0.3s ease;
+        font-size: 12px;
+      }
+
+      .mobile-nav a i {
+        font-size: 20px;
+        margin-bottom: 4px;
+      }
+
+      .mobile-nav a.active,
+      .mobile-nav a:hover {
+        color: #3498db;
+        transform: scale(1.05);
+      }
+
+      .mobile-nav .highlight {
+        position: relative;
+        margin-top: -24px;
+      }
+
+      .mobile-nav .highlight-btn {
+        background-color: #3498db;
+        color: white;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+      }
+
+      .mobile-nav .highlight i {
+        font-size: 24px;
+        margin-bottom: 0;
+      }
+
+      .mobile-nav .highlight span {
+        color: #3498db;
+        margin-top: 4px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-content {
+        padding: 100px 15px 100px;
+      }
+    }
 
         /* 客服按钮样式 */
    /* 右侧垂直居中悬浮按钮组 */
@@ -456,11 +602,11 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             padding: 20px;
-            color: white;
+            color: #0f0505;
         }
 
         .footer a {
-            color: white;
+            color: #070101;
             text-decoration: none;
         }
 
@@ -687,12 +833,12 @@
                 <div class="nav-toggle" id="nav-toggle">☰</div>
 
                 <ul class="nav-menu" id="nav-menu">
-          <li class="nav-item"><a href="top-tutors.html" class="nav-link active">Top Tutors</a></li>
-          <li class="nav-item"><a href="hskexpress.html" class="nav-link">Premium Courses</a></li>
-                    <li class="nav-item"><a href="library.html" class="nav-link">Library</a></li>
-                    <li class="nav-item"><a href="groups.html" class="nav-link">Join Groups</a></li>
-                    <li class="nav-item"><a href="payments.html" class="nav-link active">Payments</a></li>
-                    <li class="nav-item"><a href="client.html" class="nav-link">Client Download</a></li>
+          <li class="nav-item"><a href="top-tutors.html" class="nav-link nav-link-red">Top Tutors</a></li>
+          <li class="nav-item"><a href="hskexpress.html" class="nav-link nav-link-blue">Premium Courses</a></li>
+                    <li class="nav-item"><a href="library.html" class="nav-link nav-link-green">Library</a></li>
+                    <li class="nav-item"><a href="groups.html" class="nav-link nav-link-purple">Join Groups</a></li>
+                    <li class="nav-item"><a href="payments.html" class="nav-link nav-link-orange active">Payments</a></li>
+                    <li class="nav-item"><a href="client.html" class="nav-link nav-link-teal">Client Download</a></li>
                 </ul>
             </div>
         </nav>
@@ -854,7 +1000,7 @@
           <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-instagram-30.png" style="width: 30px; height: 30px; display:block;" />
         </a>
       </p>
-      <p style="font-size: 14px; color: lch(95.6% 2.13 19.25);">
+      <p style="font-size: 14px; color: oklab(0% 0 0);">
         © 2025 <a href="https://blog.aibochinese.com/" style="color:hsl(0, 88%, 51%)" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留【<a href="https://blog.aibochinese.com/education/tutor%20guide" style="color:rgb(236, 8, 8)" target="_blank" rel="noopener noreferrer">教师入驻指南</a>】
       </p>
     </div>
@@ -898,21 +1044,21 @@
         const navMenu = document.getElementById('nav-menu');
 
         navToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
+            navMenu.classList.toggle('show');
         });
 
         // 点击导航链接后关闭菜单
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
-                navMenu.classList.remove('active');
+                navMenu.classList.remove('show');
             });
         });
 
         // 点击页面其他地方关闭菜单
         document.addEventListener('click', function(e) {
             if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('active');
+                navMenu.classList.remove('show');
             }
         });
 
