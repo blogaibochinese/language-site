@@ -145,15 +145,42 @@
 
     .nav-link {
       text-decoration: none;
-      color: #333;
+      color: white;
       font-weight: 500;
-      transition: color 0.3s ease;
-      padding: 5px 0;
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 20px;
+      margin: 0 5px;
+      background-color: #3498db;
+      display: inline-block;
     }
+
+    /* 不同颜色的导航链接 */
+    .nav-link-red { background-color: #e74c3c; color: white; }
+    .nav-link-blue { background-color: #3498db; color: white; }
+    .nav-link-green { background-color: #2ecc71; color: white; }
+    .nav-link-purple { background-color: #9b59b6; color: white; }
+    .nav-link-orange { background-color: #f39c12; color: white; }
+    .nav-link-teal { background-color: #1abc9c; color: white; }
+
+    /* 悬停效果 */
+    .nav-link-red:hover,
+    .nav-link-red.active { background-color: #c0392b; }
+    .nav-link-blue:hover,
+    .nav-link-blue.active { background-color: #2980b9; }
+    .nav-link-green:hover,
+    .nav-link-green.active { background-color: #27ae60; }
+    .nav-link-purple:hover,
+    .nav-link-purple.active { background-color: #8e44ad; }
+    .nav-link-orange:hover,
+    .nav-link-orange.active { background-color: #e67e22; }
+    .nav-link-teal:hover,
+    .nav-link-teal.active { background-color: #16a085; }
 
     .nav-link:hover,
     .nav-link.active {
-      color: #3498db;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     /* 汉堡菜单按钮 */
@@ -278,13 +305,15 @@
 
       .nav-item {
         text-align: center;
-        margin: 0;
-        padding: 10px 0;
+        margin: 8px 20px;
+        padding: 0;
       }
 
       .nav-link {
-        display: block;
-        padding: 10px 15px;
+        display: inline-block;
+        padding: 8px 16px;
+        width: auto;
+        margin: 0;
       }
 
       .main-content {
@@ -376,12 +405,12 @@
         <button class="nav-toggle" id="nav-toggle">☰</button>
 
         <ul class="nav-menu" id="nav-menu">
-          <li class="nav-item"><a href="top-tutors.html" class="nav-link active">Top Tutors</a></li>
-          <li class="nav-item"><a href="hskexpress.html" class="nav-link">Premium Courses</a></li>
-          <li class="nav-item"><a href="library.html" class="nav-link">Library</a></li>
-          <li class="nav-item"><a href="groups.html" class="nav-link">Join Groups</a></li>
-          <li class="nav-item"><a href="payments.html" class="nav-link">Payments</a></li>
-          <li class="nav-item"><a href="client.html" class="nav-link">Client Download</a></li>
+          <li class="nav-item"><a href="top-tutors.html" class="nav-link nav-link-red active">Top Tutors</a></li>
+          <li class="nav-item"><a href="hskexpress.html" class="nav-link nav-link-blue">Premium Courses</a></li>
+          <li class="nav-item"><a href="library.html" class="nav-link nav-link-green">Library</a></li>
+          <li class="nav-item"><a href="groups.html" class="nav-link nav-link-purple">Join Groups</a></li>
+          <li class="nav-item"><a href="payments.html" class="nav-link nav-link-orange">Payments</a></li>
+          <li class="nav-item"><a href="client.html" class="nav-link nav-link-teal">Client Download</a></li>
         </ul>
       </div>
     </nav>
