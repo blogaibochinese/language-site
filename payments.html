@@ -559,6 +559,31 @@
             word-break: break-all;
         }
 
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
         .loading {
             text-align: center;
             padding: 40px;
@@ -899,6 +924,7 @@
                 <a href="#" class="country-link" data-country="singapore">🇸🇬 Singapore</a>
                 <a href="#" class="country-link" data-country="thailand">🇹🇭 Thailand</a>
                 <a href="#" class="country-link" data-country="hungary">🇭🇺 Hungary</a>
+                <a href="#" class="country-link" data-country="Switzerland">🇨🇭 Switzerland</a>
                 <a href="#" class="country-link" data-country="russia">🇷🇺 Russia</a>
             </div>
         </div>
@@ -1199,6 +1225,15 @@
                     { label: "银行名称", value: "OTP Bank" }
                 ]
             },
+             Switzerland: {
+                title: "🇨🇭 Switzerland 银行账户",
+                accounts: [
+                    { label: "账户名称", value: "Zou Huanglin" },
+                    { label: "IBAN", value: "CH6683051000000495926" },
+                    { label: "SWIFT代码", value: "SAHHCHZ2" },
+                    { label: "银行名称", value: "SR Saphirstein AG" }
+                ]
+            },
             russia: {
                 title: "🇷🇺 Russia 银行账户",
                 accounts: [
@@ -1234,14 +1269,19 @@
                 const accountData = bankAccounts[country];
                 
                 if (accountData) {
-                    modalTitle.textContent = accountData.title;
+                    modalTitle.innerHTML = accountData.title;
                     let html = '<div class="account-info">';
                     
                     accountData.accounts.forEach(item => {
                         html += `
-                            <div class="info-item">
-                                <div class="info-label">${item.label}</div>
-                                <div class="info-value">${item.value}</div>
+                            <div class="info-item" style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="flex: 1;">
+                                    <div class="info-label">${item.label}</div>
+                                    <div class="info-value">${item.value}</div>
+                                </div>
+                                <button class="copy-btn" onclick="copyToClipboard('${item.value.replace(/'/g, "\\'")}')" title="复制">
+                                    <i class="fa fa-copy"></i>
+                                </button>
                             </div>
                         `;
                     });
@@ -1252,6 +1292,33 @@
                     modalBody.innerHTML = '<div class="error">暂无该国家的银行账户信息</div>';
                 }
             }, 300);
+        }
+
+        // 复制到剪贴板功能
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // 显示复制成功提示
+                const tempAlert = document.createElement('div');
+                tempAlert.textContent = '已复制到剪贴板';
+                tempAlert.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(0, 0, 0, 0.8);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 8px;
+                    z-index: 99999;
+                    font-size: 14px;
+                `;
+                document.body.appendChild(tempAlert);
+                setTimeout(() => {
+                    tempAlert.remove();
+                }, 1500);
+            }).catch(err => {
+                console.error('复制失败:', err);
+            });
         }
 
         // 显示二维码弹窗
