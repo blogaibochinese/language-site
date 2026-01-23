@@ -176,7 +176,7 @@
     }
 
     .container {
-      max-width: 1200px;
+
       margin: 0 auto;
       padding: 0 15px;
     }
@@ -380,7 +380,7 @@
 #pagefind-search .pagefind-ui__message { padding: 20px; text-align: center; color: #666; font-size: 14px; }
   
          .container {
-            max-width: 600px;
+            max-width: 720px;
             width: 100%;
             background: white;
             border-radius: 20px;
@@ -750,6 +750,10 @@
                     </svg>
                     <div class="crypto-name">ETH</div>
                 </button>
+                <button class="crypto-btn" onclick="selectCrypto('XMR')">
+                    <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E8%B7%A8%E5%A2%83%E6%94%B6%E4%BB%98%E6%AC%BE/xmr-logo.png" alt="XMR Logo" width="50" height="50">
+                    <div class="crypto-name">XMR</div>
+                </button>
             </div>
 
             <!-- Network Selection -->
@@ -862,6 +866,12 @@
                     address: '0x55c4b388c94febe2b72ad345ff5f25dcac486d5a',
                     qrCode: 'https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/crypto%20pay/ETH-ERC20.png'
                 }
+            },
+            XMR: {
+                Default: {
+                    address: '48PEAHnWkMZECAJYT9WtMT4inCtPQm7iDdGuPZniEVk528x3NsEqpPsaHUTE96As4qWShSaZk3vUe4exTvoxc1DWTyDJYMn',
+                    qrCode: 'https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E8%B7%A8%E5%A2%83%E6%94%B6%E4%BB%98%E6%AC%BE/XMR.jpg'
+                }
             }
         };
 
@@ -875,27 +885,51 @@
             });
             event.target.closest('.crypto-btn').classList.add('active');
 
-            // 获取当前加密货币支持的网络
-            const networks = Object.keys(cryptoConfig[crypto]);
-            
-            // 清空现有的网络按钮
-            const networkButtonsContainer = document.querySelector('.network-buttons');
-            networkButtonsContainer.innerHTML = '';
-            
-            // 动态生成网络按钮
-            networks.forEach(network => {
-                const button = document.createElement('button');
-                button.className = 'network-btn';
-                button.textContent = network;
-                button.onclick = function(e) {
-                    selectNetwork(network, e);
-                };
-                networkButtonsContainer.appendChild(button);
-            });
+            // 特殊处理XMR，直接显示地址和二维码
+            if (crypto === 'XMR') {
+                // 设置默认网络
+                currentNetwork = 'Default';
+                
+                // 获取配置信息
+                const config = cryptoConfig[crypto][currentNetwork];
+                const address = config.address;
+                const qrCodeUrl = config.qrCode;
 
-            // 显示网络选择
-            document.getElementById('networkSelection').classList.add('active');
-            document.getElementById('addressDisplay').classList.remove('active');
+                // 显示地址
+                document.getElementById('addressText').textContent = address;
+                document.getElementById('addressDisplay').classList.add('active');
+
+                // 更新二维码显示
+                const qrCodeElement = document.getElementById('qrCode');
+                qrCodeElement.innerHTML = `<img src="${qrCodeUrl}" alt="${crypto} ${currentNetwork} 二维码" style="max-width: 100%; height: auto; border-radius: 8px;">`;
+
+                // 显示网络选择容器，但隐藏网络按钮
+                document.getElementById('networkSelection').classList.add('active');
+                document.querySelector('.network-buttons').innerHTML = '';
+            } else {
+                // 其他加密货币的常规处理
+                // 获取当前加密货币支持的网络
+                const networks = Object.keys(cryptoConfig[crypto]);
+                
+                // 清空现有的网络按钮
+                const networkButtonsContainer = document.querySelector('.network-buttons');
+                networkButtonsContainer.innerHTML = '';
+                
+                // 动态生成网络按钮
+                networks.forEach(network => {
+                    const button = document.createElement('button');
+                    button.className = 'network-btn';
+                    button.textContent = network;
+                    button.onclick = function(e) {
+                        selectNetwork(network, e);
+                    };
+                    networkButtonsContainer.appendChild(button);
+                });
+
+                // 显示网络选择
+                document.getElementById('networkSelection').classList.add('active');
+                document.getElementById('addressDisplay').classList.remove('active');
+            }
         }
 
         function selectNetwork(network, event) {
